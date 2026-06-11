@@ -1,0 +1,397 @@
+---
+// Static component entry
+---
+
+<section class="apphand-sec">
+    <div class="handholders">
+        <div class="container">
+            <div class="hand-image">
+                <video
+                    src="/videomob.mp4"
+                    class="hand-video"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    preload="metadata"></video>
+
+                <img
+                    src="/hand.webp"
+                    alt="hand-image"
+                    loading="eager"
+                    decoding="async"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-screen">
+        <div class="screen-holders">
+            <img
+                src="/app-1.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-10.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/trans.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-4.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-3.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-14.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-13.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/trans.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-8.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-11.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-5.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-12.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/trans.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-15.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div class="screen-holders">
+            <img
+                src="/app-2.webp"
+                alt="app-image"
+                width="357"
+                height="770"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+    </div>
+</section>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    // Always register the plugin in components that use it
+    gsap.registerPlugin(ScrollTrigger);
+
+    let mm;
+
+    const initGridAnimation = () => {
+        const grid = document.querySelector(".grid-screen");
+        const section = document.querySelector(".apphand-sec");
+
+        if (!grid || !section) return;
+
+        mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1200px)", () => {
+            gsap.set(section, { force3D: true });
+            gsap.set(grid, { force3D: true, willChange: "transform" });
+
+            gsap.to(grid, {
+                y: () => -(grid.scrollHeight - window.innerHeight),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: () => "+=" + (grid.scrollHeight - window.innerHeight),
+                    scrub: 1, 
+                    pin: true,
+                    pinType: "transform", // This works perfectly thanks to the global Lenis!
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            });
+
+            return () => {
+                gsap.set(grid, { clearProps: "transform,willChange" });
+            };
+        });
+    };
+
+    // Run animation on Astro page transitions
+    document.addEventListener("astro:page-load", initGridAnimation);
+
+    // Fallback for standard first load
+    if (document.readyState === "complete") {
+        initGridAnimation();
+    } else {
+        window.addEventListener("load", initGridAnimation, { once: true });
+    }
+
+    // Clean up specifically for this component when leaving the page
+    document.addEventListener("astro:before-swap", () => {
+        // Kill only ScrollTriggers related to this component's DOM elements
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+        mm?.kill();
+    });
+</script>
+
+<style>
+    section.apphand-sec {
+        height: 100vh;
+        overflow: hidden;
+        background: var(--color-black);
+        position: relative;
+        padding-top: 10px;
+    }
+
+    .handholders {
+        position: absolute;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        z-index: 1;
+        transition: 0.5s linear;
+    }
+
+    .hand-image {
+        position: relative;
+        scale: 1.2;
+        transform: translateY(71px);
+    }
+
+    video.hand-video {
+        position: absolute;
+        top: 47px;
+        left: 50%;
+        height: 626px;
+        object-fit: cover;
+        border-radius: 30px;
+        transform: translate(-50%);
+    }
+
+    .screen-holders {
+        max-width: 365px;
+        height: 770px;
+        overflow: hidden;
+        width: 100%;
+        border-radius: 40px;
+    }
+
+    .screen-holders img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        will-change: transform;
+    }
+
+    .grid-screen {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
+        padding: 20px 20px 135px 20px;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* Responsive extraction */
+
+    @media (max-width: 1600px) {
+        .screen-holders {
+            height: 602px;
+            border-radius: 30px;
+        }
+        .handholders {
+            max-width: 1168px;
+        }
+        video.hand-video {
+            top: 30px;
+            height: 461px;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .screen-holders {
+            height: 522px;
+        }
+        .handholders {
+            max-width: 1012px;
+            bottom: 0;
+        }
+        video.hand-video {
+            top: 4%;
+            height: 400px;
+            border-radius: 24px;
+        }
+        .hand-image {
+            transform: translateY(52px);
+        }
+    }
+
+    @media (max-width: 1199px) {
+        .screen-holders {
+            height: 460px;
+        }
+        video.hand-video {
+            top: 4%;
+            height: 377px;
+            border-radius: 19px;
+        }
+        .hand-image {
+            scale: 1.6;
+            transform: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        section.apphand-sec {
+            height: 600px;
+        }
+        .screen-holders {
+            height: 375px;
+        }
+        video.hand-video {
+            top: 4%;
+            height: 62.2%;
+            max-width: 19%;
+            border-radius: 18px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .screen-holders {
+            height: auto;
+            border-radius: 12px;
+        }
+        video.hand-video {
+            top: 4%;
+            height: 209px;
+            border-radius: 12px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        section.apphand-sec {
+            height: 400px;
+        }
+        .handholders {
+            max-width: 400px;
+        }
+        video.hand-video {
+            top: 11px;
+            height: 150px;
+            border-radius: 12px;
+        }
+        .grid-screen {
+            gap: 10px;
+        }
+    }
+</style>

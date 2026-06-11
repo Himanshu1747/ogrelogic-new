@@ -1,0 +1,232 @@
+<div class="rating-holderss">
+    <div class="trust-by">
+        <p>Trusted by</p>
+    </div>
+    <div class="swiper homeSwipertestimonials">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://clutch.co/profile/ogrelogic-solutions#reviews"
+                        title="clutch"
+                        target="_blank"
+                        ><img
+                            src="/clutchrating.webp"
+                            alt="clutch"
+                            title="clutch"
+                            width="103"
+                            height="50"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://www.trustpilot.com/review/ogrelogic.com"
+                        title="trustpilot"
+                        target="_blank"
+                        ><img
+                            src="/trustrating.webp"
+                            alt="trustpilot"
+                            title="trustpilot"
+                            width="126"
+                            height="56"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://www.glassdoor.co.in/Overview/Working-at-Ogrelogic-EI_IE1323306.11,20.htm"
+                        title="glassdoor"
+                        target="_blank"
+                        ><img
+                            src="/glassrating.webp"
+                            alt="glassdoor"
+                            title="glassdoor"
+                            width="153"
+                            height="54"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://goo.gl/maps/uFNtBZgqXkSDEmY39"
+                        title="google"
+                        target="_blank"
+                        ><img
+                            src="/googlerating.webp"
+                            alt="google"
+                            title="google"
+                            width="119"
+                            height="51"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://www.designrush.com/agency/profile/ogrelogic-solutions"
+                        title="DesignRush"
+                        target="_blank"
+                        ><img
+                            src="/verfiedrating.webp"
+                            alt="DesignRush"
+                            title="DesignRush"
+                            width="220"
+                            height="65"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://www.google.com/partners/agency?id=4390038400"
+                        title="Google Partner"
+                        target="_blank"
+                        ><img
+                            src="/gpartnerrating.webp"
+                            alt="Google Partner"
+                            title="Google Partner"
+                            width="95"
+                            height="69"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a href="javascript:void(0)" title="Mail Chimp"
+                        ><img
+                            src="/mailchamprating.webp"
+                            alt="Mail Chimp"
+                            title="Mail Chimp"
+                            width="185"
+                            height="60"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a href="javascript:void(0)" title="Google ADS AI Powered"
+                        ><img
+                            src="/gcertirating.png"
+                            alt="Google ADS AI Powered"
+                            title="Google ADS AI Powered"
+                            width="118"
+                            height="118"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="swiper_items">
+                    <a
+                        href="https://www.pandia.com/us/austin-tx/seo-company"
+                        title="Pandia"
+                        target="_blank"
+                        ><img
+                            src="/pandarating.webp"
+                            alt="Pandia"
+                            title="Pandia"
+                            width="148"
+                            height="151"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .homeSwipertestimonials .swiper-wrapper {
+        align-items: center;
+    }
+    .swiper_items {
+        max-width: 118px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .rating-holderss {
+        display: flex;
+        align-items: center;
+        /* gap: 10px; */
+        max-width: 90%;
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .trust-by {
+        max-width: fit-content;
+        width: 100%;
+        background: linear-gradient(
+            87deg,
+            #f38e1878 0%,
+            rgb(245 245 240) 91.16%
+        );
+        padding: 18px 20px;
+        color: #000;
+        border-radius: 5px;
+    }
+
+    .mySwipertestimonials .swiper-wrapper {
+        transition-timing-function: linear !important;
+    }
+    @media (max-width: 1400px) {
+        .swiper_items {
+            max-width: 90px;
+        }
+    }
+</style>
+
+<script is:inline>
+    var swiper = new Swiper(".homeSwipertestimonials", {
+        slidesPerView: 5,
+        spaceBetween: 20,
+        loop: true,
+
+        speed: 6000,
+
+        autoplay: {
+            delay: 0,
+            // disableOnInteraction: false,
+            // pauseOnMouseEnter: true,
+        },
+
+        allowTouchMove: false,
+        breakpoints: {
+            0: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            576: {
+                slidesPerView: 3,
+                spaceBetween: 15,
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 15,
+            },
+            992: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+            },
+            1401: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+            },
+        },
+
+        // freeMode: true,
+        // freeModeMomentum: false,
+    });
+</script>

@@ -1,0 +1,339 @@
+---
+// Static component entry
+---
+
+<div class="faq-container">
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    What does a typical project timeline look like?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>Project timelines vary depending on scope and complexity, but most website projects take between 2 to 6 weeks. We provide a clear timeline and milestones before starting the project.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    Do you help with AI chatbots or automation?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>Yes, we offer AI-powered chatbot solutions and automation tools that help streamline customer interactions, improve efficiency, and enhance overall user engagement.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    Can you also build mobile apps?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>Yes, we develop high-performance mobile applications for both Android and iOS platforms, ensuring a smooth user experience and alignment with your business objectives.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    Do you offer SEO and Google Ads support?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>Yes, we provide SEO services to help your website rank higher in search engines and also manage Google Ads campaigns to drive targeted traffic and generate quality leads.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    Can you improve my current website instead of rebuilding it?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>Yes, absolutely. We can audit your existing website, fix performance issues, improve design, enhance user experience, and optimize it for better conversions without needing a full rebuild.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-holders">
+        <div class="grid-faq">
+            <div class="title-faq">
+                <div class="icon-imagess">
+                    <img
+                        src="/faqicons.png"
+                        alt=""
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                    />
+                </div>
+                <h6 class="fs-30 p-0">
+                    Do you only work on brand-new websites?
+                </h6>
+            </div>
+            <div class="faq-icon">
+                <span class="faq-symbol"></span>
+            </div>
+        </div>
+
+        <div class="bootm-data">
+            <div
+                class="faqy-deschere"
+                set:html={'<p>No, we work on both brand-new websites and existing ones. Whether you’re starting from scratch or already have a website, we can help design, improve, and optimize it to meet your goals.</p>'}
+            >
+            </div>
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".faq-container");
+
+    if (!container) return;
+
+    let activeHeader = null;
+    let activeContent = null;
+
+    container.addEventListener("click", (e) => {
+        const header = e.target.closest(".grid-faq");
+        if (!header) return;
+
+        const faqHolder = header.closest(".faq-holders");
+        const bottomData = faqHolder.querySelector(".bootm-data");
+
+        const isSame = header === activeHeader;
+
+        // Remove previous active
+        if (activeHeader) activeHeader.classList.remove("active");
+        if (activeContent) activeContent.classList.remove("active");
+
+        // Toggle logic
+        if (!isSame) {
+            header.classList.add("active");
+            bottomData.classList.add("active");
+
+            activeHeader = header;
+            activeContent = bottomData;
+        } else {
+            activeHeader = null;
+            activeContent = null;
+        }
+    });
+});
+</script>
+
+<style>
+    /* FAQ Container Wrapper */
+    .faq-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .faq-holders {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    /* Accordion Header (Question) */
+    .grid-faq {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: var(--color-white);
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 20px 30px;
+    }
+
+    .title-faq {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .icon-imagess {
+        max-width: 40px;
+        width: 100%;
+    }
+
+    .grid-faq .fs-30 {
+        text-transform: capitalize;
+    }
+
+    /* Animated Plus/Minus Symbol */
+    .faq-icon {
+        max-width: fit-content;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    span.faq-symbol {
+        height: 30px;
+        width: 30px;
+        background: var(--color-darkblue);
+        clip-path: polygon(
+            45% 0%,
+            55% 0%,
+            55% 45%,
+            100% 45%,
+            100% 55%,
+            55% 55%,
+            55% 100%,
+            45% 100%,
+            45% 55%,
+            0% 55%,
+            0% 45%,
+            45% 45%
+        );
+        display: block;
+        transition: 0.3s ease-in;
+    }
+
+    /* Toggle States */
+    .grid-faq.active span.faq-symbol {
+        transform: rotate(45deg); /* Turns Plus into an X/Cross */
+    }
+
+    /* Accordion Body (Answer) */
+    .bootm-data {
+        background: #f6f7fa;
+        overflow: hidden;
+        max-height: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition:
+            clip-path 0.5s ease-in-out,
+            max-height 0.5s ease-in-out,
+            opacity 0.5s ease-in-out;
+    }
+
+    .bootm-data.active {
+        max-height: 1000px;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .faqy-deschere {
+        padding: 20px 30px;
+    }
+
+    /* Responsive Styles for FAQ Items */
+    @media (max-width: 1400px) {
+        .grid-faq,
+        .faqy-deschere {
+            padding: 12px 20px;
+        }
+        span.faq-symbol {
+            height: 22px;
+            width: 22px;
+        }
+        .icon-imagess {
+            max-width: 30px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .icon-imagess {
+            display: none;
+        }
+    }
+</style>

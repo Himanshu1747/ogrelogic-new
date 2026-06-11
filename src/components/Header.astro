@@ -1,0 +1,1033 @@
+---
+import { queryWordPress } from "../lib/wordpress";
+
+const COMBINED_QUERY = `
+query HeaderData {
+  popup: menu(id: "popup-menu", idType: SLUG) {
+    menuItems(first: 100) {
+      nodes { id label url uri target }
+    }
+  }
+  main: menu(id: "main-menu", idType: SLUG) {
+    menuItems(first: 100) {
+      nodes { id label cssClasses url uri target }
+    }
+  }
+  siteLogo { sourceUrl }
+  socialMediaWidgets
+  contactPopupWidgets
+  popupLeftSidebarWidgets
+}
+`;
+
+const response = await queryWordPress(COMBINED_QUERY);
+const data = response?.data;
+
+const finalmenupopup = data?.popup?.menuItems?.nodes || [];
+const alldata = data?.main?.menuItems?.nodes || [];
+const logomain = data?.siteLogo?.sourceUrl;
+
+// Pre-compute the combined array on the server to save render time
+const combinedMobileLinks = [...alldata, ...finalmenupopup];
+---
+
+<div class="custom-cursor" aria-hidden="true"></div>
+
+<header class="custom-header">
+    <div class="deskstopheaders">
+        <div class="container-fluid">
+            <div class="grid-headers">
+                <div class="logo-main">
+                    <a href="/" title="ogrelogic">
+                        <img
+                            src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/04/cropped-logo.webp"
+                            alt="ogrelogic"
+                            width="51"
+                            height="51"
+                            loading="eager"
+                            fetchpriority="high"
+                            decoding="async"
+                        />
+                    </a>
+                </div>
+
+                <div class="main-navlinks-holders">
+                    <ul class="nav-linkss">
+                        <li>
+                            <a title="Services" href="#"> Services </a>
+                        </li>
+                        <li>
+                            <a title="Our Work" href="/our-work"> Our Work </a>
+                        </li>
+                        <li>
+                            <a title="About" href="#"> About </a>
+                        </li>
+                        <li>
+                            <a title="Insights" href="#"> Insights </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="gridcontact-query">
+                    <div class="contact-nows">
+                        <a href="#" title="contact-us">
+                            <span class="contact-name">Contact us</span>
+                            <span class="contact-overlays"></span>
+                        </a>
+                    </div>
+
+                    <div
+                        class="menu-icon"
+                        role="button"
+                        aria-label="Toggle Menu"
+                    >
+                        <svg
+                            class="bars"
+                            viewBox="0 0 100 100"
+                            width="40"
+                            height="40"
+                        >
+                            <path
+                                class="line top"
+                                d="m 30,33 h 40 c 13.100415,0 14.380204,31.80258 6.899646,33.421777 -24.612039,5.327373 9.016154,-52.337577 -12.75751,-30.563913 l -28.284272,28.284272"
+                            ></path>
+                            <path
+                                class="line middle"
+                                d="m 70,50 c 0,0 -32.213436,0 -40,0 -7.786564,0 -6.428571,-4.640244 -6.428571,-8.571429 0,-5.895471 6.073743,-11.783399 12.286435,-5.570707 6.212692,6.212692 28.284272,28.284272 28.284272,28.284272"
+                            ></path>
+                            <path
+                                class="line bottom"
+                                d="m 69.575405,67.073826 h -40 c -13.100415,0 -14.380204,-31.80258 -6.899646,-33.421777 24.612039,-5.327373 -9.016154,52.337577 12.75751,30.563913 l 28.284272,-28.284272"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="popup-dataholders" >
+  <div class="gridmobile-popup">
+    
+    <div class="mini-side-bars">
+      <div class="textwidget custom-html-widget">
+        <div class="logo-compnay">
+          <img src="/white-logo.png" alt="ogrelogic" width="51" height="51">
+        </div>
+        <div class="allrevieheader-holders">
+          <div class="review-data">
+            <div class="trust-logo">
+              <a href="#">
+                <img src="/trust.png" alt="" width="161" height="41" loading="lazy">
+              </a>
+            </div>
+            <p>Awesome design for awesome businesses</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-sidevars">
+      <div class="menulists">
+        <div class="navigation-topss">
+          <p>Navigation</p>
+        </div>
+
+        <ul class="popupmenu-links">
+          <li>
+            <a title="Mobile Apps" href="/mobile-app-development/" >
+              <span class="width-lines"></span>
+              <span> Mobile Apps</span>
+            </a>
+          </li>
+          <li>
+            <a title="Websites" href="/web-development/" >
+              <span class="width-lines"></span>
+              <span> Websites</span>
+            </a>
+          </li>
+          <li>
+            <a title="AI Automation" href="#" >
+              <span class="width-lines"></span>
+              <span> AI Automation</span>
+            </a>
+          </li>
+          <li>
+            <a title="Marketing" href="#" >
+              <span class="width-lines"></span>
+              <span> Marketing</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="popupmenu-links mobile-links">
+          <li>
+            <a title="Services" href="#" >
+              <span class="width-lines"></span>
+              <span> Services</span>
+            </a>
+          </li>
+          <li>
+            <a title="Our Work" href="/our-work" >
+              <span class="width-lines"></span>
+              <span> Our Work</span>
+            </a>
+          </li>
+          <li>
+            <a title="About" href="#" >
+              <span class="width-lines"></span>
+              <span> About</span>
+            </a>
+          </li>
+          <li>
+            <a title="Insights" href="#" >
+              <span class="width-lines"></span>
+              <span> Insights</span>
+            </a>
+          </li>
+          <li>
+            <a title="Mobile Apps" href="/mobile-app-development/" >
+              <span class="width-lines"></span>
+              <span> Mobile Apps</span>
+            </a>
+          </li>
+          <li>
+            <a title="Websites" href="/web-development/" >
+              <span class="width-lines"></span>
+              <span> Websites</span>
+            </a>
+          </li>
+          <li>
+            <a title="AI Automation" href="#" >
+              <span class="width-lines"></span>
+              <span> AI Automation</span>
+            </a>
+          </li>
+          <li>
+            <a title="Marketing" href="#" >
+              <span class="width-lines"></span>
+              <span> Marketing</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="socmedia-popup">
+        <div class="conact-detailss">
+          <li id="custom_html-3" class="widget_text widget widget_custom_html">
+            <div class="textwidget custom-html-widget">
+              <div class="alldetail-here">
+                <p class="fs-35">Email</p>
+                <a href="mailto:sales@ogrelogic.com">sales@ogrelogic.com</a>
+              </div>
+              <div class="alldetail-here">
+                <p class="fs-35">Phone No</p>
+                <a href="tel:+1 (512) 861-8471">+1 (512) 861-8471</a>
+              </div>
+              <div class="alldetail-here mb-0">
+                <p class="fs-35">HEAD OFFICE</p>
+                <a href="javascript:void(0)">13809 Research Boulevard, Suite 500, Austin, TX 78750</a>
+              </div>
+            </div>
+          </li>
+        </div>
+
+        <ul class="social-media">
+          <li id="custom_html-2" class="widget_text widget widget_custom_html">
+            <div class="textwidget custom-html-widget"></div>
+          </li>
+          <li>
+            <a href="#"><img src="/instagram.png" alt=""></a>
+          </li>
+          <li>
+            <a href="#"><img src="/ln.png" alt=""></a>
+          </li>
+          <li>
+            <a href="#"><img src="/x.png" alt=""></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+    const initScripts = () => {
+        // --- 1. VANILLA MENU LOGIC ---
+        const menuIcon = document.querySelector(".menu-icon");
+        const popup = document.querySelector(".popup-dataholders");
+        const logoMain = document.querySelector(".logo-main");
+        const navHolders = document.querySelector(".main-navlinks-holders");
+        const header = document.querySelector(".custom-header");
+        const bars = document.querySelector(".bars");
+
+        if (menuIcon && popup) {
+            menuIcon.addEventListener("click", () => {
+                popup.classList.toggle("show-popup");
+                popup.style.display = "block";
+                logoMain?.classList.toggle("hide-opacity");
+                navHolders?.classList.toggle("hide-opacity");
+                bars?.classList.toggle("active");
+            });
+        }
+
+        // --- 2. VANILLA SCROLL LOGIC (THROTTLED) ---
+        if (header) {
+            let ticking = false;
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(() => {
+                            if (window.scrollY > 50) {
+                                header.classList.add("scroll-now");
+                            } else {
+                                header.classList.remove("scroll-now");
+                            }
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                },
+                { passive: true },
+            );
+        }
+
+        // --- 3. VANILLA SMOOTH CURSOR (OPTIMIZED SLEEP STATE) ---
+        const cursor = document.querySelector(".custom-cursor");
+        if (cursor && window.innerWidth > 1200) {
+            let mouseX = 0,
+                mouseY = 0;
+            let posX = 0,
+                posY = 0;
+            let isMoving = false;
+
+            window.addEventListener(
+                "mousemove",
+                (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+
+                    // Only start the loop if it is asleep
+                    if (!isMoving) {
+                        isMoving = true;
+                        requestAnimationFrame(animateCursor);
+                    }
+                },
+                { passive: true },
+            );
+
+            const animateCursor = () => {
+                const distX = mouseX - posX;
+                const distY = mouseY - posY;
+
+                // If distance is significant, animate. Otherwise, go to sleep.
+                if (Math.abs(distX) > 0.1 || Math.abs(distY) > 0.1) {
+                    posX += distX * 0.15;
+                    posY += distY * 0.15;
+                    cursor.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+                    requestAnimationFrame(animateCursor);
+                } else {
+                    isMoving = false; // Sleep state to save CPU
+                }
+            };
+        } else if (cursor) {
+            cursor.style.display = "none";
+        }
+    };
+
+    initScripts();
+    document.addEventListener("astro:after-swap", initScripts);
+</script>
+
+<style is:global>
+    .bars {
+        width: 40px;
+        cursor: pointer;
+    }
+
+    .bars .line {
+        fill: none;
+        stroke: #000;
+        stroke-width: 4;
+        stroke-linecap: square;
+        transition:
+            stroke-dasharray 400ms,
+            stroke-dashoffset 1s;
+    }
+
+    .bars .line.top {
+        stroke-dasharray: 40 172;
+    }
+
+    .bars .line.middle {
+        stroke-dasharray: 40 111;
+    }
+
+    .bars .line.bottom {
+        stroke-dasharray: 40 172;
+    }
+
+    .bars.active .top {
+        stroke-dashoffset: -132px;
+    }
+
+    .bars.active .middle {
+        stroke-dashoffset: -71px;
+    }
+
+    .bars.active .bottom {
+        stroke-dashoffset: -132px;
+    }
+
+    /* MENU ICON ANIMATED END */
+
+    header.custom-header {
+        position: fixed;
+        width: 100%;
+        top: 36px;
+        z-index: 111;
+    }
+    /* .logo-main {
+        max-width: 51px;
+        width: 100%;
+    } */
+    .logo-main {
+        max-width: 51px;
+        width: 100%;
+        justify-self: start; /* Pushes the logo to the far left */
+    }
+
+    /* .grid-headers {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        max-width: 98%;
+        margin: 0 auto;
+    } */
+
+    .grid-headers {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr; /* Creates 3 zones: equal left, auto center, equal right */
+        align-items: center;
+        max-width: 98%;
+        margin: 0 auto;
+        gap: 30px;
+    }
+
+    /* .gridcontact-query {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        max-width: fit-content;
+        width: 100%;
+    } */
+
+    .gridcontact-query {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        width: 100%;
+        max-width: max-content;
+        justify-self: end; /* Pushes the contact elements to the far right */
+    }
+
+    ul.nav-linkss {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        border-radius: 48px;
+        max-width: fit-content;
+        padding: 18px 40px;
+        border-radius: 48px;
+        max-width: fit-content;
+        background: var(--color-orange);
+    }
+
+    ul.nav-linkss li a {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+        color: var(--color-white);
+    }
+
+    .menu-icon {
+        height: 60px;
+        width: 60px;
+        background: var(--color-white);
+        border-radius: 48px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        cursor: pointer;
+    }
+
+    .contact-nows a {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--color-black);
+        padding: 18px 40px;
+        border-radius: 71px;
+        background: var(--color-white);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    .contact-overlays {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--color-blue);
+        width: 0%;
+        content: "";
+        transition: 0.3s ease-in;
+        border-radius: 71px;
+        border: 1px solid var(--color-blue);
+        opacity: 0;
+    }
+
+    /* .contact-nows a:hover .contact-overlays {
+        opacity: 1;
+        width: 100%;
+    } */
+
+    .contact-nows a:hover .contact-overlays {
+        opacity: 1;
+        width: 100%;
+        background: var(--color-blue);
+        color: var(--color-white);
+        border-color: var(--color-white);
+    }
+
+    span.contact-name {
+        position: relative;
+        z-index: 1;
+    }
+    .contact-nows a:hover {
+        border-color: var(--color-blue);
+        color: var(--color-white);
+    }
+    .contact-nows a:hover span.contact-name {
+        color: var(--color-white);
+    }
+    /* .main-navlinks-holders {
+        max-width: fit-content;
+        margin: 0 auto;
+        width: 100%;
+        margin-left: 35%;
+    } */
+    .main-navlinks-holders {
+        max-width: fit-content;
+        width: 100%;
+        margin: 0 auto; /* Keeps it clean */
+        justify-self: center; /* Centers the navigation perfectly on the screen */
+        /* REMOVED: margin-left: 35%; */
+    }
+
+    .gridmobile-popup {
+        display: flex;
+        height: 100vh;
+    }
+
+    .review-data p {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    ul.popupmenu-links li a {
+        font-size: 100px;
+        font-weight: 600;
+        line-height: 110%;
+        text-transform: capitalize;
+    }
+
+    span.width-lines {
+        display: block;
+        width: 100px;
+        height: 10px;
+        background: var(--color-white);
+        width: 0;
+        transition: 0.3s linear;
+    }
+
+    ul.popupmenu-links li a {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    ul.popupmenu-links li a:hover span.width-lines {
+        width: 100px;
+    }
+
+    .socmedia-popup {
+        display: flex;
+        align-items: end;
+        gap: 80px;
+    }
+
+    .alldetail-here .fs-35 {
+        padding-bottom: 5px;
+    }
+
+    .alldetail-here a {
+        color: hsla(0, 0%, 100%, 0.5);
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .conact-detailss {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    ul.social-media {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    ul.social-media li a {
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    ul.social-media li a img {
+        filter: invert(1);
+    }
+
+    .alldetail-here {
+        max-width: 300px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    ul.popupmenu-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .trust-logo img {
+        filter: invert(1);
+    }
+
+    .review-data {
+        max-width: fit-content;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .popup-dataholders {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 99;
+        display: none;
+        visibility: hidden;
+    }
+
+    .popup-dataholders.show-popup {
+        /* display: block; */
+        visibility: visible;
+    }
+    .logo-main,
+    .main-navlinks-holders {
+        transition: 0.2s ease-in;
+    }
+    .logo-main.hide-opacity,
+    .main-navlinks-holders.hide-opacity {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .mini-side-bars {
+        max-width: 20%;
+        width: 100%;
+        background: var(--color-darkblue);
+        color: var(--color-white);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px 30px;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: 0.3s linear;
+    }
+
+    .popup-dataholders.show-popup .mini-side-bars {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        animation: myAnimation 0.7s ease-in;
+    }
+
+    .main-sidevars {
+        max-width: 80%;
+        width: 100%;
+        background: var(--color-blue);
+        color: var(--color-white);
+        display: flex;
+        padding: 20px;
+        align-items: end;
+        padding: 30px 40px 50px 30px;
+        gap: 30px;
+        justify-content: space-between;
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        transition: 0.3s linear;
+    }
+
+    .popup-dataholders.show-popup .main-sidevars {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        animation: myAnimation2 0.7s ease-in;
+    }
+
+    @keyframes myAnimation {
+        from {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        }
+        to {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+    @keyframes myAnimation2 {
+        from {
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        }
+        to {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+
+    header.custom-header.scroll-now .logo-main,
+    header.custom-header.scroll-now .main-navlinks-holders {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    header.custom-header.scroll-now span.contact-overlays {
+        width: 100%;
+        opacity: 1;
+    }
+
+    header.custom-header.scroll-now .contact-nows span.contact-name {
+        color: var(--color-white);
+    }
+    header.custom-header.scroll-now .contact-nows span.contact-overlays {
+        background: var(--color-blue);
+        border-color: var(--color-white);
+    }
+
+    ul.popupmenu-links li {
+        position: relative;
+        padding-right: 20px;
+        max-width: fit-content;
+    }
+
+    span.numberlists {
+        color: hsla(0, 0%, 100%, 0.5);
+        font-size: 18px;
+        font-weight: 500;
+        position: absolute;
+        top: 15px;
+        right: 0;
+    }
+
+    .menulists {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 20px;
+    }
+
+    .navigation-topss p {
+        color: hsla(0, 0%, 100%, 0.7);
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .mini-side-bars .logo-compnay {
+        margin-top: 20px;
+    }
+
+    .navigation-topss {
+        margin-top: 20px;
+    }
+
+    .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        background: var(--color-darkblue); /* blue */
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s ease-out;
+    }
+    .mini-side-bars .textwidget {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        gap: 30px;
+    }
+    .allrevieheader-holders {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    ul.mobile-links {
+        display: none;
+    }
+
+    @media (max-width: 1600px) {
+        ul.nav-linkss,
+        .contact-nows a {
+            padding: 10px 25px;
+        }
+        .menu-icon {
+            height: 40px;
+            width: 40px;
+        }
+        ul.popupmenu-links li a {
+            font-size: 80px;
+        }
+        .alldetail-here .fs-35 {
+            font-size: 25px;
+        }
+        .alldetail-here {
+            max-width: 260px;
+        }
+        .alldetail-here a {
+            font-size: 16px;
+        }
+        /* .main-navlinks-holders {
+            margin-left: 32%;
+        } */
+    }
+    @media (max-width: 1400px) {
+        ul.nav-linkss li a {
+            font-size: 15px;
+        }
+        header.custom-header {
+            top: 20px;
+        }
+        ul.popupmenu-links li a {
+            font-size: 55px;
+        }
+        .alldetail-here {
+            margin-bottom: 10px;
+        }
+        span.numberlists {
+            font-size: 14px;
+            right: -1%;
+        }
+        .alldetail-here .fs-35 {
+            font-size: 20px;
+        }
+        .alldetail-here a {
+            font-size: 14px;
+        }
+        span.width-lines {
+            height: 5px;
+            max-width: 62px;
+        }
+        .mini-side-bars .logo-compnay {
+            margin-top: 6px;
+        }
+    }
+    @media (max-width: 1199px) {
+        .popup-dataholders.show-popup .main-sidevars {
+            margin-top: -3px;
+        }
+        .main-navlinks-holders {
+            display: none;
+        }
+        .grid-mobile-datats {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            width: 100%;
+        }
+        header.custom-header {
+            /* background-color: #f6f5f0;
+            backdrop-filter: blur(10px); */
+            top: 0;
+            padding: 10px 0px;
+        }
+
+        .menu-iconmobiles {
+            height: 40px;
+            width: 40px;
+            background: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        ul.mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-headers {
+            position: fixed;
+            top: 0;
+            left: -140%;
+            width: 100%;
+            /* background-color: rgba(255, 255, 255, 0.7); */
+            background: var(--color-darkblue);
+            backdrop-filter: blur(10px);
+            z-index: 111;
+            height: 100vh;
+            overflow-y: scroll;
+            padding: 20px;
+            transition: 0.5s ease-in-out;
+            border-radius: 0px 40px 40px 0px;
+        }
+
+        .socmedia-popup {
+            display: flex;
+            align-items: end;
+            gap: 80px;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+        }
+
+        .socmedia-popup {
+            display: none;
+        }
+        .alldetail-here .fs-35 {
+            font-weight: 700;
+        }
+
+        .allnavlinks-mobileholders {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            gap: 30px;
+        }
+        .custom-cursor {
+            display: none;
+        }
+        .popup-dataholders {
+            display: none;
+        }
+        .mobile-headers {
+            display: block;
+        }
+        .mobile-headers.active-mobile {
+            left: 0;
+        }
+        .alldetail-here {
+            margin-bottom: 15px;
+        }
+        ul.mobile-links li {
+            width: 100%;
+        }
+
+        ul.popupmenu-links {
+            display: none;
+        }
+        ul.popupmenu-links.mobile-links {
+            display: block;
+        }
+        ul.popupmenu-links.mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+        .menulists {
+            width: 100%;
+            gap: 20px;
+        }
+        span.width-lines {
+            display: none;
+        }
+
+        .main-sidevars {
+            padding: 20px 0px 20px 20px;
+            height: 100vh;
+            overflow-y: scroll;
+            max-width: 70%;
+        }
+
+        .mini-side-bars {
+            max-width: 30%;
+        }
+        .mini-side-bars .logo-compnay {
+            margin: 0;
+        }
+
+        .navigation-topss {
+            margin-top: 0;
+        }
+        .menulists {
+            justify-content: revert;
+        }
+        .grid-headers {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .mobile-headers {
+            width: 425px;
+        }
+        .gridcontact-query {
+            gap: 20px;
+        }
+        ul.popupmenu-links li a {
+            font-size: 45px;
+        }
+
+        .gridmobile-popup {
+            flex-direction: column;
+        }
+        .mini-side-bars,
+        .main-sidevars {
+            max-width: 100%;
+        }
+        .mini-side-bars .logo-compnay {
+            display: none;
+        }
+        .popup-dataholders.show-popup .mini-side-bars {
+            padding-top: 13%;
+        }
+    }
+    @media (max-width: 500px) {
+        .mobile-headers {
+            width: 350px;
+        }
+    }
+</style>

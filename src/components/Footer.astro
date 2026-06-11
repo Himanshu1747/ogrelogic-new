@@ -1,0 +1,573 @@
+---
+import { queryWordPress } from "../lib/wordpress";
+
+const COMBINED_FOOTER_QUERY = `
+query GetFooterData {
+  menu(id: "footer-menu", idType: SLUG) {
+    menuItems(first: 100) {
+      nodes {
+        label
+        uri
+        target
+      }
+    }
+  }
+  ctaFooterWidgets
+  ceoDataWidgets
+  copyrightWidgets
+  locationWidgets
+}
+`;
+
+const response = await queryWordPress(COMBINED_FOOTER_QUERY);
+const data = response?.data || {};
+
+const finalfootermenu = data.menu?.menuItems?.nodes ?? [];
+const ctaHTML = data.ctaFooterWidgets ?? "";
+const ceoHTML = data.ceoDataWidgets ?? "";
+const locationHTML = data.locationWidgets ?? "";
+const copyrightHTML = data.copyrightWidgets ?? "";
+---
+
+<footer class="custom-footer">
+  <div class="ctafooter">
+    <div class="container">
+      <div class="textwidget custom-html-widget">
+        <div class="cta-data">
+          <h6 class="fs-100">
+            Ready to improve your website, marketing, or app idea?
+          </h6>
+          <div class="universal-anchor">
+            <a href="#" class="link-button white">Start a Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="other-datafooter">
+    <div class="container">
+      <div class="grid-footer">
+        <div class="logo-container">
+          <div class="grid-ceo">
+            <div class="textwidget custom-html-widget">
+              <div class="profile-grids">
+                <div class="ceo-image">
+                  <img src="/ceo.png" alt="" />
+                </div>
+                <div class="ceo-name">
+                  <h6 class="fs-30">Gaurav Sharma</h6>
+                  <p>(Founder and CEO)</p>
+                </div>
+              </div>
+              <div class="ceo-say">
+                <p>
+                  Intellectuals Solve Problems, Geniuses Prevent Them said
+                  Albert Einstein. At Ogrelogic, this is exactly the motto that
+                  we follow.
+                </p>
+              </div>
+              <ul class="social-mediafooter">
+                <li>
+                  <a href="#"
+                    ><img
+                      src="/facebook.png"
+                      height="20"
+                      width="11"
+                      loading="lazy"
+                      alt=""
+                    /></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img
+                      src="/linkdin.png"
+                      height="18"
+                      width="20"
+                      loading="lazy"
+                      alt=""
+                    /></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img
+                      src="/instagramf.png"
+                      height="20"
+                      width="20"
+                      loading="lazy"
+                      alt=""
+                    /></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img
+                      src="/youtube.png"
+                      height="16"
+                      width="20"
+                      loading="lazy"
+                      alt=""
+                    /></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="navlinks-footer">
+          <h6 class="fs-20">Quick Links</h6>
+          <ul class="footer-links">
+            <li>
+              <a href="#" target="_self" title="About"> About </a>
+            </li>
+            <li>
+              <a href="#" target="_self" title="Services"> Services </a>
+            </li>
+            <li>
+              <a href="#" target="_self" title="Technology"> Technology </a>
+            </li>
+            <li>
+              <a href="#" target="_self" title="Marketing"> Marketing </a>
+            </li>
+            <li>
+              <a href="#" target="_self" title="Our Work"> Our Work </a>
+            </li>
+            <li>
+              <a href="#" target="_self" title="Contact"> Contact </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="all-location">
+          <div class="textwidget custom-html-widget">
+            <div class="address-footer">
+              <div class="badge-holders">
+                <img
+                  src="/loaction.png"
+                  alt=""
+                  height="32"
+                  width="32"
+                  loading="lazy"
+                />
+                <h6 class="fs-20">HEAD OFFICE</h6>
+              </div>
+              <p>13809 Research Boulevard, Suite 500, Austin, TX 78750</p>
+            </div>
+            <div class="address-footer">
+              <div class="badge-holders">
+                <img
+                  src="/loaction.png"
+                  alt=""
+                  height="32"
+                  width="32"
+                  loading="lazy"
+                />
+                <h6 class="fs-20">TORONTO OFFICE</h6>
+              </div>
+              <p>2080, Deer Run Ave, Burlington ON L7M 2S8, Canada</p>
+            </div>
+            <div class="address-footer">
+              <div class="badge-holders">
+                <img
+                  src="/loaction.png"
+                  alt=""
+                  height="32"
+                  width="32"
+                  loading="lazy"
+                />
+                <h6 class="fs-20">OFFSHORE DELIVERY CENTER</h6>
+              </div>
+              <p>
+                Suite No. G-02, H - 221 Infinity Business Park, Sector 63,
+                Noida, Uttar Pradesh 201301
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="textwidget custom-html-widget">
+          <div class="copyrights-holders">
+            <div class="container">
+              <div class="grid-copyrights">
+                <div class="data-herecopyrights">
+                  <p>Copyright Ogrelogic © 2026. All rights reserved.</p>
+                </div>
+                <div class="logo-only">
+                  <img
+                    src="/logofooter.webp"
+                    alt=""
+                    width="229"
+                    height="48"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="policy">
+                  <p>
+                    <a href="#">Refund Policy</a> | <a href="#"
+                      >Privacy Policy</a
+                    > | <a href="#">Sitemap</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ② Load the widget (nothing else needed) -->
+
+<style is:global>
+  .grid-footer {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+    padding-top: 80px;
+  }
+
+  .logo-container {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .custom-footer p,
+  .navlinks-footer ul li a {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-black);
+  }
+
+  .all-location,
+  .all-location .textwidget {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  footer.custom-footer {
+    background: var(--color-white);
+  }
+
+  .ctafooter {
+    background: var(--color-blue);
+    color: var(--color-white);
+    border-radius: 0px 0px 50px 50px;
+    padding: 50px 0px;
+  }
+
+  .logo-only {
+    max-width: 230px;
+    width: 100%;
+  }
+  .navlinks-footer .fs-20,
+  .address-footer .fs-20 {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .navlinks-footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  footer.custom-footer .universal-anchor {
+    padding-top: 20px;
+  }
+
+  .grid-copyrights {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .copyrights-holders {
+    border-top: 1px solid #000;
+    margin-top: 40px;
+    padding: 30px 0px 30px 0px;
+  }
+
+  .cta-data .fs-100 {
+    padding-bottom: 20px;
+  }
+
+  .ceo-image {
+    max-width: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 200px;
+  }
+
+  .ceo-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .profile-grids {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 10px;
+  }
+
+  .ceo-name {
+    max-width: fit-content;
+    width: 100%;
+  }
+
+  .profile-grids .fs-30 {
+    font-weight: 700;
+    padding-bottom: 5px;
+  }
+  .ctafooter {
+    position: relative;
+    z-index: 2;
+  }
+
+  .other-datafooter {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  ul.social-mediafooter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+  }
+
+  ul.social-mediafooter li a {
+    height: 40px;
+    width: 40px;
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 9px;
+    background: rgb(69 65 241 / 100%);
+    /* border-radius: 16px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .badge-holders {
+    /* background:var(--color-blue); */
+    background: linear-gradient(90deg, #4541f1, #4541f1ab);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    padding: 5px 20px 5px 10px;
+    max-width: fit-content;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .badge-holders .fs-20 {
+    padding-bottom: 0;
+  }
+
+  .badge-holders .fs-20 {
+    font-size: 16px;
+    font-weight: 400 !important;
+    line-height: 136%;
+  }
+
+  .navlinks-footer {
+    max-width: fit-content;
+    width: 100%;
+  }
+  @media (max-width: 1600px) {
+    .ceo-image {
+      max-width: 160px;
+      height: 160px;
+    }
+    .custom-footer p,
+    .navlinks-footer ul li a {
+      font-size: 16px;
+    }
+    .copyrights-holders {
+      margin-top: 40px;
+      padding: 15px 0px;
+    }
+    .logo-only {
+      max-width: 195px;
+    }
+    .grid-footer {
+      padding-top: 60px;
+    }
+  }
+  @media (max-width: 1400px) {
+    .grid-ceo {
+      max-width: 368px;
+      width: 100%;
+    }
+    .all-location,
+    .all-location .textwidget {
+      max-width: 422px;
+      gap: 25px;
+    }
+    .badge-holders .fs-20 {
+      font-size: 14px;
+      font-weight: 400 !important;
+    }
+    .custom-footer p,
+    .navlinks-footer ul li a {
+      font-size: 15px;
+    }
+    .logo-container {
+      max-width: fit-content;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .grid-footer {
+      padding-top: 40px;
+    }
+
+    .profile-grids {
+      flex-direction: column;
+      align-items: start;
+    }
+    .ceo-name {
+      text-align: start;
+    }
+  }
+  @media (max-width: 991px) {
+    .ctafooter {
+      border-radius: 0px 0px 30px 30px;
+      padding: 40px 0px;
+    }
+
+    .ctafooter,
+    .other-datafooter {
+      position: static;
+    }
+  }
+  @media (max-width: 767px) {
+    .grid-footer {
+      flex-wrap: wrap;
+      justify-content: start;
+    }
+    .grid-ceo {
+      max-width: 300px;
+    }
+    .grid-copyrights {
+      gap: 20px;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .logo-only {
+      margin: 0 auto;
+    }
+  }
+</style>
+
+<!-- <script>
+    import Lenis from "lenis";
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ limitCallbacks: true });
+
+    let lenis = null;
+    let mm = null;
+
+    // Use * 1000 to correctly convert GSAP's seconds to milliseconds
+    const update = (time) => {
+        lenis?.raf(time * 1000); 
+    };
+
+    // Wait for the DOM to be fully loaded before initializing
+    document.addEventListener("DOMContentLoaded", () => {
+        mm = gsap.matchMedia();
+        
+        mm.add("(min-width: 1200px)", () => {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                touchMultiplier: 2,
+                lerp: 0.1,
+            });
+
+            lenis.on("scroll", ScrollTrigger.update);
+            gsap.ticker.add(update);
+            gsap.ticker.lagSmoothing(0);
+            
+            return () => {
+                gsap.ticker.remove(update);
+                lenis.destroy();
+                lenis = null;
+            };
+        });
+    });
+</script> -->
+<script>
+  import Lenis from "lenis";
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let lenis;
+
+  const updateLenis = (time) => {
+    lenis?.raf(time * 1000);
+  };
+
+  const initLenis = () => {
+    // Prevent double-initialization
+    if (lenis) return;
+
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+      lerp: 0.1,
+    });
+
+    // Sync Lenis with GSAP ScrollTrigger globally
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(updateLenis);
+    gsap.ticker.lagSmoothing(0);
+  };
+
+  // Initialize on first load
+  if (document.readyState === "complete") {
+    initLenis();
+  } else {
+    window.addEventListener("load", initLenis, { once: true });
+  }
+
+  // Astro page transitions: Re-initialize on new page
+  document.addEventListener("astro:page-load", initLenis);
+
+  // Astro page transitions: Clean up before swapping pages
+  document.addEventListener("astro:before-swap", () => {
+    if (lenis) {
+      gsap.ticker.remove(updateLenis);
+      lenis.destroy();
+      lenis = null;
+    }
+  });
+</script>

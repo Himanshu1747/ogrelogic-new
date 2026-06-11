@@ -1,0 +1,2163 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Faq from "../components/Faq.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { queryWordPress } from "../lib/wordpress.js";
+
+// Set Cache Headers for CDN/Vercel/Netlify performance
+Astro.response.headers.set(
+    "Cache-Control",
+    "public, s-maxage=120, stale-while-revalidate=30",
+);
+
+// 1. Queries (Kept your logic, cleaned up whitespace)
+const MOBILEPAGE_QUERY = `
+query Mobiledevelopment {
+  page(id: "/mobile-app-development", idType: URI) {
+    seo { canonical cornerstone focuskw fullHead }
+    title
+    content
+    featuredImage { node { sourceUrl altText mediaDetails { width height } } }
+    mobileapp {
+      storefrontTitle storefrontContent storefrontLinks { title url }
+      websiteApp { appDoesTitle appLists { applistDetails } websiteappImage { node { mediaItemUrl mediaDetails { height width } } } }
+      growthGrid { growthTitle growthDesc }
+      workTitle workDesc workGrid { workgridImage { node { mediaItemUrl } } workIcon { node { mediaItemUrl } } workSubtitle worksubtitleDes workLists { listWorks } }
+      workwithCta { title url }
+      industryTitle industryDesc industryImage{ node{ sourceUrl } } industryDetails{ industryName industryIntro }
+      weworkTitle weworkDesc weworkGrid{ weworkIcon{ node{ sourceUrl } } weworkMainTitle weworkMainDesc }
+      miniTitle storiesTitle storiesDesc
+      testimonialGrids{ clientName clientReviews clientImage{ node{ sourceUrl } } }
+      faqTitle faqDesc faqGrids{ questionTitile answerFaq }
+          featuredTitle
+      featuredWorkIntro
+    }
+  }
+}`;
+
+const PORTFOLIO_QUERY = `
+query GetPortfolioData {
+  portfolios(first: 20) {
+    nodes {
+      title
+      slug
+      featuredImage { node { sourceUrl altText } }
+      excerpt
+      portfolioCategories { nodes { slug } }
+      portfoliomain {
+        toLive
+        catTypes { typesName }
+        projcetUrl {
+          liveUrl { title url target }
+          techImage { node { sourceUrl } }
+        }
+      }
+    }
+  }
+}`;
+
+// Fetch queries in parallel for speed
+const [pageRes, portfolioRes] = await Promise.all([
+    queryWordPress(MOBILEPAGE_QUERY),
+    queryWordPress(PORTFOLIO_QUERY),
+]);
+
+// 2. Data Mapping (Cleaning up hard-coded "error" fallbacks)
+const finaldata = pageRes?.data?.page;
+const seodata = finaldata?.seo;
+const appData = finaldata?.mobileapp;
+
+const allPortfolios = portfolioRes?.data?.portfolios?.nodes || [];
+
+// Filter and Slice in one pass
+const displayedNodes = allPortfolios
+    .filter((node) =>
+        node.portfolioCategories?.nodes?.some(
+            (cat) => cat.slug === "mobile-app",
+        ),
+    )
+    .slice(0, 3);
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+        {
+            finaldata?.featuredImage?.node?.sourceUrl && (
+                <link
+                    rel="preload"
+                    as="image"
+                    href={finaldata.featuredImage.node.sourceUrl}
+                    fetchpriority="high"
+                />
+            )
+        }
+
+        {/* High Speed: Load Swiper CSS without blocking the main thread */}
+        <link
+            rel="preload"
+            href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+            />
+        </noscript>
+
+        <BaseHead
+            useYoast={true}
+            canonical={seodata?.canonical || ""}
+            focuskw={seodata?.focuskw || ""}
+        />
+        {seodata?.fullHead && <Fragment set:html={seodata.fullHead} />}
+    </head>
+    <body>
+        <Header />
+
+        <section class="banner-sec banner-radius">
+            <div class="banner-space"></div>
+            <div class="container">
+                <div class="tect-holderbanner">
+                    <div>
+                        <p>
+                            <span class="badge-data"
+                                >Trusted by 1000+ people</span
+                            >
+                        </p>
+                        <h1 class="fs-60">
+                            Mobile apps that turn customers into regulars
+                        </h1>
+                        <p>
+                            We design and build iOS, Android, and cross-platform
+                            apps for startups, growing businesses, and
+                            established brands who want a direct line to their
+                            customers — not just another tab in a browser.
+                        </p>
+                        <div class="grid-buttons">
+                            <div class="universal-anchor">
+                                <a class="link-button" href="#"
+                                    >Get Started Today</a
+                                >
+                            </div>
+                            <div class="universal-anchor">
+                                <a class="link-button orange" href="#"
+                                    >Contact Us</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-here mobile">
+                    <img
+                        src="/mobileappbanner.webp"
+                        alt="Mobile apps that turn customers into regulars"
+                        fetchpriority="high"
+                        decoding="async"
+                        width="780"
+                        height="532"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="androisios-sec section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="title-holders">
+                            <h2 class="fs-60">
+                                A website is your storefront. An app is your
+                                living room.
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pargarph-holders">
+                            <div>
+                                <p>
+                                    A website is where customers first discover
+                                    your business. An app is where they return.
+                                    When someone downloads your app, your brand
+                                    becomes part of their daily routine —
+                                    sitting right on their phone. That shift
+                                    builds a stronger, more direct relationship
+                                    than a website ever can.
+                                </p>
+                            </div>
+                            <div class="universal-anchor">
+                                <a
+                                    href="#"
+                                    class="link-button"
+                                    title="Get Started"
+                                >
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diffrence-holders">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="grid-diffrence">
+                                <div class="imagehand-app">
+                                    <img
+                                        src="/pcimage-1.webp"
+                                        alt="What a website does"
+                                        height="337"
+                                        width="408"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </div>
+                                <div class="website-do">
+                                    <h3 class="fs-30">What a website does</h3>
+                                    <ul>
+                                        <li>Found through search</li>
+                                        <li>Visited occasionally</li>
+                                        <li>One-way information</li>
+                                        <li>Hard to reach customers again</li>
+                                        <li>Loads when there's signal</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="grid-diffrence">
+                                <div class="imagehand-app">
+                                    <img
+                                        src="/image-54.webp"
+                                        alt="What an app adds"
+                                        height="320"
+                                        width="160"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </div>
+                                <div class="website-do">
+                                    <h3 class="fs-30">What an app adds</h3>
+                                    <ul>
+                                        <li>Lives on the home screen</li>
+                                        <li>Opened multiple times a week</li>
+                                        <li>
+                                            Two-way conversation via push
+                                            notifications
+                                        </li>
+                                        <li>Uses camera, GPS, biometrics</li>
+                                        <li>A direct channel you own</li>
+                                        <li>Works offline anywhere</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="statics-sec border-section section-padding mt-0">
+            <div class="container">
+                <div class="grid-statics">
+                    <div class="statcics-holders">
+                        <span class="satics-numbers fs-100"> 3× </span>
+                        <div>
+                            <p>
+                                Higher conversion rate. Mobile apps convert at
+                                roughly three times the rate of mobile websites
+                                in e-commerce.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="statcics-holders">
+                        <span class="satics-numbers fs-100"> 88% </span>
+                        <div>
+                            <p>
+                                More engagement. Apps with push notifications
+                                see engagement lift up to 88%, with 65% of users
+                                returning within 30 days.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="statcics-holders">
+                        <span class="satics-numbers fs-100"> 5+ hrs </span>
+                        <div>
+                            <p>
+                                The average smartphone user spends most of that
+                                time inside apps, not in a browser.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wework-sec section-padding">
+            <div class="container">
+                <div class="center-data">
+                    <h3 class="fs-60">
+                        We work with these kinds of businesses.
+                    </h3>
+                    <div>
+                        <p>
+                            Whether you’re just starting out, serving your local
+                            community, or leading in your industry, we build
+                            apps that fit your stage and drive real results.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid-works">
+                    <div class="workholders">
+                        <div class="grid-inside">
+                            <div class="content-data">
+                                <div class="icon-imagess">
+                                    <img
+                                        height="35"
+                                        width="35"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="/startup.png"
+                                        alt="Startups & founders"
+                                    />
+                                </div>
+                                <div class="work-type">
+                                    <h4 class="fs-20">
+                                        Startups &amp; founders
+                                    </h4>
+                                    <div>
+                                        <p>
+                                            The problem you bring us: ‘I have
+                                            idea launch it fast
+                                        </p>
+                                    </div>
+                                    <ul class="list-heres">
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Clickable prototype in weeks
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Focused MVP build
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Fast, scalable execution
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mini-image">
+                                <img
+                                    src="/image-41.webp"
+                                    alt="Startups & founders"
+                                    width="183"
+                                    height="300"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                <span class="circle-design"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workholders">
+                        <div class="grid-inside">
+                            <div class="content-data">
+                                <div class="icon-imagess">
+                                    <img
+                                        height="35"
+                                        width="35"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="/mid.png"
+                                        alt="Small businesses"
+                                    />
+                                </div>
+                                <div class="work-type">
+                                    <h4 class="fs-20">Small businesses</h4>
+                                    <div>
+                                        <p>Customers don’t return.</p>
+                                    </div>
+                                    <ul class="list-heres">
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Build a daily-use branded app.
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Add loyalty, booking, ordering.
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Connect with your systems.
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mini-image">
+                                <img
+                                    src="/image-40.webp"
+                                    alt="Small businesses"
+                                    width="183"
+                                    height="300"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                <span class="circle-design"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workholders">
+                        <div class="grid-inside">
+                            <div class="content-data">
+                                <div class="icon-imagess">
+                                    <img
+                                        height="35"
+                                        width="35"
+                                        loading="lazy"
+                                        decoding="async"
+                                        src="/stable.png"
+                                        alt="Established companies"
+                                    />
+                                </div>
+                                <div class="work-type">
+                                    <h4 class="fs-20">Established companies</h4>
+                                    <div>
+                                        <p>
+                                            Outdated experience, losing ground.
+                                        </p>
+                                    </div>
+                                    <ul class="list-heres">
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Modern app for your business.
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Upgrade without disruption.
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="image-check">
+                                                <img
+                                                    src="/check.png"
+                                                    alt="check"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                    height="12"
+                                                    width="12"
+                                                />
+                                            </span>
+                                            <span class="list-daata">
+                                                Turn customers into advocates.
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mini-image">
+                                <img
+                                    src="/image-39.webp"
+                                    alt="Established companies"
+                                    width="183"
+                                    height="300"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                <span class="circle-design"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="universal-anchor">
+                    <a href="#" class="link-button">Start a Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="oneroof-sec border-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="title-holders">
+                            <h3 class="fs-60">
+                                Apps that pay for themselves, by industry.
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pargarph-holders">
+                            <p>
+                                Some businesses see ROI within months. Here’s
+                                what we build for them, and why each one works.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-onerrof">
+                    <div class="heremobile-image">
+                        <img
+                            src="/image-56.webp"
+                            alt="Apps that pay for themselves, by industry."
+                            width="400"
+                            height="652"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+
+                    <div class="alldetail-roof">
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                01. Healthcare &amp; telehealth
+                            </h5>
+                            <div>
+                                <p>
+                                    From DFW’s hospital networks to telehealth
+                                    startups nationwide — patient portals,
+                                    medication reminders, HIPAA-compliant
+                                    messaging, and remote monitoring that earn
+                                    provider trust and patient loyalty.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                02. Restaurants &amp; food service
+                            </h5>
+                            <div>
+                                <p>
+                                    From Austin’s restaurant scene to
+                                    multi-location chains across the country —
+                                    order-ahead, loyalty rewards, table
+                                    reservations, and delivery tracking that
+                                    turn occasional diners into weekly regulars.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">03. Energy, oil &amp; gas</h5>
+                            <div>
+                                <p>
+                                    Built for Houston’s energy industry and the
+                                    field teams that run it — equipment
+                                    monitoring, safety reporting, geo-tagged
+                                    inspections, and offline-first workflows
+                                    that keep working whe
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                04. Fitness, wellness &amp; coaching
+                            </h5>
+                            <div>
+                                <p>
+                                    Workout tracking, class booking, progress
+                                    dashboards, and live coaching tools that
+                                    keep members engaged between sessions.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">05. Retail &amp; e-commerce</h5>
+                            <div>
+                                <p>
+                                    Mobile shopping with saved carts, biometric
+                                    checkout, push-notification flash sales, and
+                                    AR product previews.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                06. Real estate &amp; property
+                            </h5>
+                            <div>
+                                <p>
+                                    Across Texas’s fast-moving real estate
+                                    markets and beyond — listings with
+                                    location-aware search, virtual tours, agent
+                                    messaging, and document signing in one tap.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                07. Education &amp; e-learning
+                            </h5>
+                            <div>
+                                <p>
+                                    Course delivery, offline lesson access,
+                                    parent-teacher communication, and progress
+                                    tracking that work on any device.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detailholders-data">
+                            <h5 class="fs-30">
+                                08. Field services &amp; logistics
+                            </h5>
+                            <div>
+                                <p>
+                                    Job dispatching, route optimization, photo
+                                    capture, signature capture, and
+                                    offline-first workflows for teams in the
+                                    field.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ourprocess-sec section-padding">
+            <div class="container">
+                <div class="center-data">
+                    <h4 class="fs-60">How we work.</h4>
+                    <div>
+                        <p>
+                            What we build, how we build it, and what we build it
+                            with.
+                        </p>
+                    </div>
+                </div>
+                <div class="work-grids">
+                    <!-- Step 1 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-1.png"
+                                alt="Discovery and strategy"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">Discovery and strategy</h5>
+                        <div>
+                            <p>
+                                Before a single line of code, we map the user
+                                journey, the business case, and the technical
+                                path. Most projects, we save you money in this
+                                phase alone.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-2.png"
+                                alt="UX and UI design"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">UX and UI design</h5>
+                        <div>
+                            <p>
+                                Interfaces that feel obvious to use and look
+                                like they belong in your customer’s life.
+                                Designed in Figma, prototyped clickable,
+                                validated before we build.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-3.png"
+                                alt="iOS app development"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">iOS app development</h5>
+                        <div>
+                            <p>
+                                Native iOS apps built in Swift, optimized for
+                                every iPhone and iPad and ready for App Store
+                                submission.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-4.png"
+                                alt="Android app development"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">Android app development</h5>
+                        <div>
+                            <p>
+                                Native Android apps built in Kotlin, tested
+                                across the wide spectrum of Android devices your
+                                real customers actually use.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-5.png"
+                                alt="Cross-platform development"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">Cross-platform development</h5>
+                        <div>
+                            <p>
+                                One codebase, both stores. Built in React Native
+                                or Flutter when it’s the right call — and we’ll
+                                tell you when it isn’t.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-6.png"
+                                alt="AI features that earn their place"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">AI features that earn their place</h5>
+                        <div>
+                            <p>
+                                Smart search, personalized recommendations,
+                                in-app assistants, image and document
+                                recognition. We add AI when it solves a real
+                                user problem, not because it’s a buzzword.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-7.png"
+                                alt="Quality assurance and testing"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">Quality assurance and testing</h5>
+                        <div>
+                            <p>
+                                Real-device testing, automated test suites, and
+                                beta releases before launch — so the App Store
+                                reviews start at five stars and stay there.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8 -->
+                    <div class="workh-holdersprocess">
+                        <div class="icon-work">
+                            <img
+                                src="/i-8.png"
+                                alt="App store launch and ongoing support"
+                                width="50"
+                                height="50"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h5 class="fs-20">
+                            App store launch and ongoing support
+                        </h5>
+                        <div>
+                            <p>
+                                We handle App Store and Google Play submission,
+                                ASO basics, and the work that keeps your app
+                                secure and compatible as iOS and Android evolve.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+        <section class="featuredwork-sec section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="title-holders">
+                            <h2 class="fs-60">
+                                Apps built for the Mobile Industry.
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pargarph-holders">
+                            <p class="sub-title text-lightgrey">
+                                Featured work
+                            </p>
+                            <p>
+                                Each of these is in the App Store right now. Tap
+                                any one to see how we got from idea to launch
+                                and what happened next.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gridsall-workss">
+                    <!-- Portfolio Item 1: WA OT Association -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-97.webp"
+                                alt="WA OT Association"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">WA OT Association</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Healthcare</li>
+                                    <li>Association Management</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/wa-ot-association/id6468819515"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    The WA OT App helps occupational therapy
+                                    professionals manage memberships, register
+                                    for conferences, explore sessions, and stay
+                                    connected with the Washington OT community.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/wa-ot-association"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study &nbsp; <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 2: Rapagra -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-102.webp"
+                                alt="Rapagra"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">Rapagra</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>AgriTech</li>
+                                    <li>Crop Health</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/rapagra/id6504560528"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.orelogic.rapagraApp&hl=en"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    This smart farming app helps growers reduce
+                                    crop protection costs, detect plant disease
+                                    risks early, and improve yields through
+                                    data-driven crop monitoring and precision
+                                    agriculture technology.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/rapagra"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study &nbsp; <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 3: PowerThinking Corp -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-101.webp"
+                                alt="PowerThinking Corp"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">PowerThinking Corp</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Mental Wellness</li>
+                                    <li>Positive Thinking</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/powerthinkingcorp/id6472655350"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.ogrelogic.powerthinkingcorp&hl=en"
+                                            target="_blank"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    PowerThinking helps improve mental
+                                    well-being through positive thinking,
+                                    resilience tools, and confidence-building
+                                    strategies inspired by positive psychology.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/powerthinking-corp"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study &nbsp; <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="universal-anchor">
+                    <a href="/our-work/" class="link-button">Explore more</a>
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="faq-sec section-padding border-section faq-custom-scope"
+        >
+            <div class="container">
+                <div class="grid-faq-tops">
+                    <div class="faq-holdersmain">
+                        <h4 class="fs-60">Frequently Asked Questions</h4>
+                        <div>
+                            <p>
+                                Find answers to the most common questions about
+                                our services. If you still need help, feel free
+                                to reach out we’re here for you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <faq-wrapper>
+                    <div class="faq-container">
+                        <!-- FAQ 01 -->
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">01</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Do I really need an app, or is a
+                                            website enough?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            A website and an app do different
+                                            jobs. A website is for visitors who
+                                            don’t know you yet. An app is for
+                                            the customers who already do, and
+                                            who you want to come back. If your
+                                            business depends on repeat visits,
+                                            bookings, or a direct relationship
+                                            with your customers, an app pays for
+                                            itself. If you mostly need to be
+                                            found in Google search results, a
+                                            website might be enough. We’ll tell
+                                            you honestly which one you need on
+                                            the first call.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 02 -->
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">02</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            How much does an app cost?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            It depends on what the app does. A
+                                            focused MVP for a startup typically
+                                            lands between $20,000 and $60,000. A
+                                            full production app for an
+                                            established business is usually
+                                            $60,000 to $150,000. Apps with
+                                            complex backends, multiple user
+                                            roles, or heavy AI features can go
+                                            higher. We give you a written,
+                                            fixed-scope quote before any work
+                                            starts — not estimates that creep
+                                            upward.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 03 -->
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">03</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            How long does it take?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            A simple app: 8 to 12 weeks. A
+                                            medium-complexity app: 3 to 6
+                                            months. A complex platform: 6 to 12
+                                            months. We’ll give you a realistic
+                                            timeline on the discovery call.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 04 -->
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">04</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Do I need iOS, Android, or both?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Most of our clients launch on both.
+                                            Cross-platform tools like React
+                                            Native and Flutter let us build one
+                                            codebase that runs on both stores,
+                                            which keeps cost reasonable. If your
+                                            customers are mostly on iPhones
+                                            (US-based, premium audiences) or
+                                            mostly on Android (global,
+                                            value-conscious audiences), starting
+                                            with one is a smart way to validate
+                                            before expanding.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 05 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">05</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Will I own the code?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Yes. Always. Every line of code,
+                                            every design file, every credential
+                                            — yours. We give you a complete
+                                            handoff at launch and the right to
+                                            take everything to another developer
+                                            if you ever choose to.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 06 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">06</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What about updates and maintenance
+                                            after launch?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Apps need updates. iOS and Android
+                                            release new operating systems every
+                                            year, and your app needs to keep up.
+                                            We offer affordable monthly
+                                            maintenance plans that cover OS
+                                            updates, security patches, bug
+                                            fixes, and small improvements. You
+                                            can also bring us in just for major
+                                            changes — no monthly commitment
+                                            required.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 07 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">07</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            I have an idea but I don't know if
+                                            it'll work. Can you help me figure
+                                            that out?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Yes. That’s actually what we love
+                                            most. Our discovery process is
+                                            designed exactly for this — we’ll
+                                            help you pressure-test the idea,
+                                            identify what to build first to
+                                            validate it, and tell you honestly
+                                            if we think it’ll work. Sometimes we
+                                            tell people not to build the app
+                                            they came in for. We’d rather lose a
+                                            project than build something we know
+                                            won’t succeed.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 08 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">08</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            I already have an app that someone
+                                            else built. Can you take it over?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Often, yes. We do code audits to see
+                                            what we’re working with and tell you
+                                            honestly whether it makes sense to
+                                            continue, refactor, or rebuild.
+                                            We’ll never tell you to rebuild for
+                                            the sake of rebuilding.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 09 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">09</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            I'm based in Dallas (or Houston, or
+                                            anywhere in Texas) — does that
+                                            change anything?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            If you’re in Texas, we can do
+                                            in-person meetings whenever they
+                                            help — kickoff workshops in Dallas,
+                                            working sessions in Houston, lunch
+                                            in Austin. It’s part of why having a
+                                            Texas headquarters matters for
+                                            clients who want a local partner. If
+                                            you’re outside Texas or outside the
+                                            US, we work the way most modern
+                                            teams do: video calls, shared docs,
+                                            and weekly demo builds you can
+                                            install on your phone. The outcomes
+                                            are the same either way.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 10 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">10</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What if I want to add AI features?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            We can. AI is a tool, not a product
+                                            — we’ll add it where it solves a
+                                            real user problem (smart search,
+                                            personalized recommendations,
+                                            document recognition, in-app
+                                            assistants) and we’ll talk you out
+                                            of it where it doesn’t. We won’t add
+                                            AI for the sake of saying your app
+                                            has AI.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 11 (Hidden initially) -->
+                        <div class="faq-holders" style="display: none;">
+                            <div class="number-dats">
+                                <p class="faq-no">11</p>
+                            </div>
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            How do I know you're a good fit?
+                                        </h6>
+                                    </div>
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            The discovery call. It’s free, it’s
+                                            an hour, and you’ll come away with a
+                                            clearer picture of what to build and
+                                            what it’ll cost — whether you hire
+                                            us or not.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="loadmore-button">
+                        <div class="universal-anchor">
+                            <a href="javascript:void(0)" class="link-button"
+                                >Load more</a
+                            >
+                        </div>
+                    </div>
+                </faq-wrapper>
+            </div>
+        </section>
+
+        <Footer />
+
+        <script
+            is:inline
+            src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"
+            defer></script>
+
+        <script is:inline>
+            // Performance Optimized Swiper Initialization
+            window.addEventListener("DOMContentLoaded", () => {
+                const initSwiper = () => {
+                    if (typeof Swiper !== "undefined") {
+                        new Swiper(".mySwipersclientsays", {
+                            slidesPerView: 1,
+                            spaceBetween: 30,
+                            speed: 1000,
+                            loop: true,
+                            pagination: {
+                                el: ".swiper-pagination",
+                                clickable: true,
+                            },
+                            breakpoints: {
+                                768: { slidesPerView: 2 },
+                                992: { slidesPerView: 3 },
+                            },
+                        });
+                    }
+                };
+
+                // If Swiper script is already loaded
+                if (window.Swiper) initSwiper();
+                else window.addEventListener("load", initSwiper);
+            });
+
+            // Optimized FAQ Logic - Using original tags/classes
+            class FaqWrapper extends HTMLElement {
+                connectedCallback() {
+                    const holders = this.querySelectorAll(".faq-holders");
+                    const loadMoreBtn = this.querySelector(
+                        ".loadmore-button .link-button",
+                    );
+                    const container = this.querySelector(".faq-container");
+                    let currentVisible = 4;
+
+                    // 1. Accordion Toggle Logic
+                    container?.addEventListener("click", (e) => {
+                        const header = e.target.closest(".grid-faq");
+                        if (!header) return;
+
+                        const content = header.nextElementSibling;
+                        const isActive = header.classList.contains("active");
+
+                        // Close others
+                        this.querySelectorAll(".grid-faq").forEach((h) =>
+                            h.classList.remove("active"),
+                        );
+                        this.querySelectorAll(".bootm-data").forEach((c) =>
+                            c.classList.remove("active"),
+                        );
+
+                        if (!isActive) {
+                            header.classList.add("active");
+                            content.classList.add("active");
+                        }
+                    });
+
+                    // 2. Load More Logic
+                    const updateVisibility = () => {
+                        holders.forEach(
+                            (h, i) =>
+                                (h.style.display =
+                                    i < currentVisible ? "" : "none"),
+                        );
+                        if (currentVisible >= holders.length && loadMoreBtn) {
+                            loadMoreBtn.closest(
+                                ".loadmore-button",
+                            ).style.display = "none";
+                        }
+                    };
+
+                    loadMoreBtn?.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        currentVisible += 4;
+                        updateVisibility();
+                    });
+
+                    updateVisibility();
+                }
+            }
+            if (!customElements.get("faq-wrapper"))
+                customElements.define("faq-wrapper", FaqWrapper);
+        </script>
+
+        <style>
+            .image-devlopments {
+                display: flex;
+                justify-content: center;
+                background: linear-gradient(45deg, #f2f2f2, #e9e9e9);
+                border-radius: 20px;
+                margin-top: 70px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .image-devlopments img {
+                margin-bottom: -13px;
+            }
+
+            .pargarph-holders .universal-anchor {
+                padding-top: 30px;
+            }
+
+            .pargarph-holders {
+                max-width: 90%;
+                margin-left: auto;
+                width: 100%;
+            }
+
+            /* .table-data .fs-30 {
+    font-weight: 500;
+}
+.table-data {
+    padding-top: 40px;
+}
+.table-data td {
+    font-size: 18px;
+    font-weight: 400;
+} */
+
+            .website-do li {
+                list-style: disc;
+                padding-bottom: 10px;
+                font-size: 18px;
+            }
+
+            .website-do ul {
+                padding-left: 20px;
+            }
+
+            .website-do .fs-30 {
+                font-weight: 500;
+            }
+
+            .imagehand-app {
+                max-width: fit-content;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            section.websiteapp-sec {
+                position: relative;
+                overflow: hidden;
+            }
+
+            section.statics-sec {
+                background: var(--color-blue);
+                color: var(--color-white);
+            }
+
+            .grid-statics {
+                display: grid;
+                gap: 30px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .grid-works {
+                display: grid;
+                gap: 30px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                padding: 60px 0px;
+            }
+
+            .grid-inside {
+                display: flex;
+                /* align-items: center; */
+                gap: 20px;
+            }
+
+            .icon-imagess {
+                max-width: 55px;
+                background: #e5e3fd;
+                padding: 10px;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+
+            .workholders {
+                border: 2px solid #e5e5e5;
+                border-radius: 20px;
+                padding: 20px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .content-data .fs-20 {
+                font-weight: 500;
+            }
+
+            ul.list-heres {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 20px;
+            }
+
+            ul.list-heres li {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .mini-image {
+                /* max-width: 200px;
+    width: 100%;
+    position: relative;
+    z-index: 1; */
+                max-width: 182px;
+                width: 100%;
+                position: relative;
+                z-index: 1;
+                position: absolute;
+                right: 2%;
+                z-index: -1;
+                top: 4%;
+            }
+
+            .circle-design {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                background: #e5e3fd;
+                border-radius: 50%;
+                z-index: -1;
+                right: -26%;
+                top: 14%;
+                /* animation */
+                animation: pulseCircle 2s infinite;
+            }
+
+            /* outer ripple effect */
+            .circle-design::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                top: 0;
+                left: 0;
+                background: rgba(229, 227, 253, 0.6);
+                animation: ripple 2s infinite;
+            }
+
+            /* @keyframes pulseCircle {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+} */
+
+            @keyframes ripple {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.6;
+                }
+                100% {
+                    transform: scale(1.6);
+                    opacity: 0;
+                }
+            }
+
+            .work-type :global(p),
+            ul.list-heres li {
+                font-size: 16px;
+                font-weight: 500;
+            }
+
+            span.image-check {
+                background: var(--color-blue);
+                height: 20px;
+                width: 20px;
+                display: flex;
+                align-items: center;
+                padding: 4px;
+                border-radius: 22px;
+            }
+
+            .image-check img {
+                margin-top: 3px;
+            }
+
+            .grid-works .workholders:nth-child(even) .image-check {
+                background: #fc640e;
+            }
+
+            .grid-works .workholders:nth-child(even) .circle-design {
+                background: #ffefe8;
+            }
+
+            .grid-works .workholders:nth-child(even) .circle-design::after {
+                background: #ffefe8;
+            }
+
+            .grid-works .workholders:nth-child(even) .icon-imagess {
+                background: #ffefe8;
+            }
+
+            .content-data {
+                max-width: 65%;
+                width: 100%;
+                position: relative;
+                z-index: 11;
+            }
+
+            section.wework-sec .universal-anchor {
+                max-width: fit-content;
+                margin: 0 auto;
+            }
+
+            .grid-onerrof {
+                display: flex;
+                align-items: start;
+                justify-content: space-between;
+                gap: 40px;
+                padding-top: 60px;
+            }
+
+            .heremobile-image {
+                max-width: 400px;
+                width: 100%;
+                position: sticky;
+                top: 12%;
+            }
+
+            .detailholders-data .fs-30 {
+                text-transform: capitalize;
+                font-weight: 600;
+            }
+
+            .alldetail-roof {
+                display: flex;
+                flex-wrap: wrap;
+                max-width: 70%;
+                width: 100%;
+                gap: 30px;
+            }
+
+            .detailholders-data {
+                /* text-align: center; */
+                border: 1px solid #e7e6e6;
+                max-width: 100%;
+                width: 100%;
+                /* margin: 0 auto; */
+                border-radius: 10px;
+                padding: 20px;
+                background: var(--color-white);
+                /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+            }
+
+            .detailholders-data :global(p) {
+                font-size: 18px;
+            }
+
+            section.oneroof-sec {
+                background: var(--color-ededed52);
+            }
+
+            .diffrence-holders {
+                padding-top: 50px;
+            }
+
+            .grid-diffrence {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .workh-holders .fs-30 {
+                font-weight: 500;
+                text-transform: capitalize;
+            }
+
+            .workh-holdersprocess {
+                max-width: 500px;
+                width: 100%;
+                margin: 0 auto;
+                border: 1px solid #e4e4e4;
+                padding: 20px;
+                border-radius: 10px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .work-grids {
+                display: grid;
+                gap: 30px;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                padding-top: 60px;
+            }
+
+            .workh-holdersprocess :global(p) {
+                font-size: 16px;
+            }
+
+            .icon-work {
+                max-width: 50px;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .workh-holdersprocess .fs-20 {
+                font-weight: 500;
+                text-transform: capitalize;
+                color: var(--color-black);
+            }
+            section.featuredwork-sec .universal-anchor {
+                max-width: fit-content;
+                margin: 0 auto;
+                padding-top: 50px;
+            }
+            span.list-daata {
+                max-width: fit-content;
+                width: 100%;
+            }
+
+            /* MEDIA QUERIES FOR OTHER SECTIONS */
+            @media (max-width: 1600px) {
+                .imagehand-app {
+                    max-width: 300px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .website-do li {
+                    font-size: 14px;
+                }
+
+                .work-type :global(p),
+                ul.list-heres li {
+                    font-size: 12px;
+                    font-weight: 500;
+                }
+
+                .mini-image {
+                    max-width: 165px;
+                }
+
+                .heremobile-image {
+                    max-width: 300px;
+                }
+
+                .detailholders-data :global(p) {
+                    font-size: 15px;
+                }
+
+                .workh-holdersprocess :global(p) {
+                    font-size: 14px;
+                }
+
+                .work-grids {
+                    gap: 20px;
+                }
+            }
+
+            @media (max-width: 1400px) {
+                .grid-works {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .workholders {
+                    max-width: 550px;
+                }
+
+                .mini-image {
+                    position: static;
+                    max-width: 129px;
+                }
+
+                .content-data {
+                    max-width: 100%;
+                }
+
+                .alldetail-roof {
+                    gap: 20px;
+                }
+
+                .work-grids {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    padding-top: 30px;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                .grid-diffrence {
+                    max-width: fit-content;
+                    /* margin: 0 auto; */
+                    justify-content: center;
+                }
+
+                .website-do {
+                    max-width: 100%;
+                    width: 100%;
+                }
+
+                .imagehand-app {
+                    max-width: 100%;
+                }
+
+                .work-grids {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+
+                section.featuredwork-sec .universal-anchor {
+                    padding-top: 30px;
+                }
+            }
+
+            @media (max-width: 991px) {
+                .imagehand-app {
+                    max-width: 400px;
+                }
+
+                .imagehand-app img {
+                    max-width: fit-content;
+                    width: 100%;
+                    margin: 0 auto;
+                }
+
+                .grid-diffrence {
+                    flex-direction: column;
+                    gap: 20px;
+                    justify-content: center;
+                    margin: 0 auto;
+                }
+
+                .pargarph-holders {
+                    max-width: 100%;
+                    padding-top: 20px;
+                }
+
+                .workholders {
+                    max-width: 478px;
+                    width: 100%;
+                }
+
+                .grid-works {
+                    padding-bottom: 30px;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .diffrence-holders .row {
+                    gap: 30px;
+                }
+
+                .grid-statics {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .grid-onerrof {
+                    flex-direction: column;
+                }
+
+                .heremobile-image {
+                    position: static;
+                    margin: 0 auto;
+                }
+
+                .alldetail-roof {
+                    justify-content: center;
+                    max-width: 100%;
+                }
+
+                .detailholders-data {
+                    margin: 0 auto;
+                }
+
+                .work-grids {
+                    grid-template-columns: repeat(1, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 575px) {
+                .grid-inside {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .grid-works .workholders .circle-design::after {
+                    display: none !important;
+                }
+            }
+        </style>
+    </body>
+</html>

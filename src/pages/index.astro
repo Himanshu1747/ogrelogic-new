@@ -1,0 +1,2464 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Faq from "../components/Faq.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Mobileapphand from "../components/Mobileapphand.astro";
+import Websiteportfolio from "../components/Websiteportfolio.astro";
+import Testimonial from "../components/Testimonial.astro";
+
+// Static array data for the interactive client:visible component
+const mobileAppListsData = [
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-1.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-10.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/trans.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-4.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-3.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-14.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-13.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/trans.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-8.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-11.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-5.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-12.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/trans.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-15.webp",
+			},
+		},
+	},
+	{
+		appImage: {
+			node: {
+				sourceUrl:
+					"/app-2.webp",
+			},
+		},
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead/>
+		<title>home - ogrelogic.com</title>
+
+
+
+		<link
+			rel="preload"
+			href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+			as="style"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+			media="print"
+			onload="this.media='all'"
+		/>
+	</head>
+	<body>
+		<Header />
+		<section class="homebanner">
+			<video
+				poster="/poster.webp"
+				autoplay
+				muted
+				loop
+				playsinline
+				preload="metadata"
+				fetchpriority="high"
+				class="banner-video"
+			>
+				<source
+					src="/bannervideo.mp4"
+					type="video/mp4"
+				/>
+			</video>
+
+			<div class="container-fluid">
+				<div class="content-holders">
+					<span class="webuild">We Build</span>
+
+					<div class="grid-headings">
+						<span class="whatapp-icon">
+							<a href="#wedo">
+								<img
+									loading="eager"
+									decoding="async"
+									height="50"
+									width="50"
+									src="/arrow.png"
+									alt="Arrow"
+								/>
+							</a>
+						</span>
+						<h1 class="main-title">AI-powered</h1>
+					</div>
+
+					<p class="main-title">Applications</p>
+					<span class="border-lines"></span>
+
+					<div class="rating-holderss">
+						<div class="trust-by">
+							<p>Trusted by</p>
+						</div>
+
+						<div class="swiper homeSwiperating">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://clutch.co/profile/ogrelogic-solutions#reviews"
+											target="_blank"
+										>
+											<img
+												src="/clutchrating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://www.trustpilot.com/review/ogrelogic.com"
+											target="_blank"
+										>
+											<img
+												src="/trustpilotnewimg.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://www.glassdoor.co.in/Overview/Working-at-Ogrelogic-EI_IE1323306.11,20.htm"
+											target="_blank"
+										>
+											<img
+												src="/glassrating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://goo.gl/maps/uFNtBZgqXkSDEmY39"
+											target="_blank"
+										>
+											<img
+												src="/googlerating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://www.designrush.com/agency/profile/ogrelogic-solutions"
+											target="_blank"
+										>
+											<img
+												src="/verfiedrating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a
+											href="https://www.google.com/partners/agency?id=4390038400"
+											target="_blank"
+										>
+											<img
+												src="/gpartnerrating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a href="#" target="_self">
+											<img
+												src="/mailchamprating.webp"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="swiper_items">
+										<a href="#" target="_self">
+											<img
+												src="/gcertirating.png"
+												alt="platform"
+												width="103"
+												height="50"
+												loading="lazy"
+												decoding="async"
+											/>
+										</a>
+									</div>
+								</div>
+							</div>
+							<span
+								class="swiper-notification"
+								aria-live="assertive"
+								aria-atomic="true"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="slidingtext-sec">
+			<div class="tetslide-holsers" style="overflow:hidden">
+				<div class="marquee-track">
+					<p class="sliding-text">
+						10+ years in business 1,000+ clients served US-focused
+						website, app, and marketing solutions 10+ years in
+						business 1,000+ clients served US-focused website, app,
+						and marketing solutions
+					</p>
+				</div>
+			</div>
+		</section>
+		<section class="ourservice-sec section-padding" id="wedo">
+			<div class="container">
+				<div class="topdata-holders">
+					<h2 class="sub-title text-lightgrey">01 — What we do</h2>
+					<p>
+						We build custom apps, websites, and software for
+						startups and businesses.
+					</p>
+				</div>
+				<div class="gridwe-do">
+					<a href="/mobile-app-development" target="_self">
+						<div class="holderworks" style="background: #e4e3df;">
+							<img
+								src="/Group-8449-1.webp"
+								alt="Apps Automation"
+								width="522"
+								height="575"
+								loading="lazy"
+								decoding="async"
+								class="tech-related-image-here"
+							/>
+							<div class="grid-inside">
+								<div class="work-title">
+									<h3 class="fs-50">Apps Automation</h3>
+								</div>
+								<div class="boootm-datatech">
+									<div class="destilabout-works">
+										<p>
+											Mobile apps, business tools, and
+											automation systems that improve
+											efficiency and customer experience.
+										</p>
+									</div>
+									<div class="techwe-use">
+										<ul class="tech-list">
+											<li>mobile apps</li>
+											<li>web apps / MVPs</li>
+											<li>internal workflow tools</li>
+											<li>
+												booking or scheduling systems
+											</li>
+											<li>
+												chatbot / automation support
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+
+					<a href="#" target="_self">
+						<div class="holderworks" style="background: #e4e3df;">
+							<img
+								src="/Group-8450-1.webp"
+								alt="Marketing"
+								width="522"
+								height="575"
+								loading="lazy"
+								decoding="async"
+								class="tech-related-image-here"
+							/>
+							<div class="grid-inside">
+								<div class="work-title">
+									<h3 class="fs-50">Marketing</h3>
+								</div>
+								<div class="boootm-datatech">
+									<div class="destilabout-works">
+										<p>
+											SEO, ads, and digital growth support
+											designed to increase visibility and
+											generate leads.
+										</p>
+									</div>
+									<div class="techwe-use">
+										<ul class="tech-list">
+											<li>SEO</li>
+											<li>Google Ads</li>
+											<li>content support</li>
+											<li>local visibility</li>
+											<li>social media support</li>
+											<li>conversion recommendations</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+
+					<a href="/web-development/" target="_self">
+						<div class="holderworks" style="background: #e4e3df;">
+							<img
+								src="/Group-8451.webp"
+								alt="Websites"
+								width="522"
+								height="575"
+								loading="lazy"
+								decoding="async"
+								class="tech-related-image-here"
+							/>
+							<div class="grid-inside">
+								<div class="work-title">
+									<h3 class="fs-50">Websites</h3>
+								</div>
+								<div class="boootm-datatech">
+									<div class="destilabout-works">
+										<p>
+											Custom websites designed to look
+											better, load faster, and convert
+											better.
+										</p>
+									</div>
+									<div class="techwe-use">
+										<ul class="tech-list">
+											<li>redesign</li>
+											<li>mobile optimization</li>
+											<li>speed improvements</li>
+											<li>
+												conversion-focused structure
+											</li>
+											<li>AI-ready website setup</li>
+											<li>
+												WordPress / Shopify / custom
+												websites
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section class="whythismatter-sec section-padding border-section">
+			<div class="container">
+				<div class="center-data">
+					<p class="sub-title text-lightgrey">02 — AI Optimized</p>
+					<h2 class="fs-60">
+						Your website now needs to work for Google and AI-driven
+						search
+					</h2>
+					<p class="intro-centerdata">
+						People are no longer only discovering businesses through
+						Google. They are also searching and researching through
+						tools like ChatGPT, Gemini, Claude, and Grok. Because of
+						that, websites need to be better structured, easier to
+						understand, and more conversion-focused.
+					</p>
+				</div>
+				<div class="dataimage-heres">
+					<div class="grid-puprose">
+						<div class="purpose-holders">
+							<div class="line-colorholders">
+								<div class="line-data">
+									<div class="alldata-maintitle">
+										<h5 class="visble-text">
+											Search Visibility
+										</h5>
+									</div>
+									<span class="color-line"></span>
+								</div>
+								<div class="allabout-purpose">
+									<ul class="point-lists">
+										<li>Optimized Site Structure</li>
+										<li>Smart Metadata Setup</li>
+										<li>Strong Internal Linking</li>
+										<li>Better Search Indexing</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="purpose-holders">
+							<div class="line-colorholders">
+								<div class="line-data">
+									<div class="alldata-maintitle">
+										<h5 class="visble-text">
+											AI Readiness
+										</h5>
+									</div>
+									<span class="color-line"></span>
+								</div>
+								<div class="allabout-purpose">
+									<ul class="point-lists">
+										<li>Clear Content Structure</li>
+										<li>AI-Friendly Formatting</li>
+										<li>Smart Structure</li>
+										<li>Structured Content Layout</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="purpose-holders">
+							<div class="line-colorholders">
+								<div class="line-data">
+									<div class="alldata-maintitle">
+										<h5 class="visble-text">
+											Lead Conversion
+										</h5>
+									</div>
+									<span class="color-line"></span>
+								</div>
+								<div class="allabout-purpose">
+									<ul class="point-lists">
+										<li>Strategic CTAs</li>
+										<li>Easy Forms</li>
+										<li>Credibility Elements</li>
+										<li>Guided User Journey</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<img
+						src="/wave.png"
+						alt=""
+						class="overlay-wave"
+						width="1575"
+						height="260"
+						loading="lazy"
+						decoding="async"
+					/>
+				</div>
+			</div>
+		</section>
+		<section class="whychooseus-sec section-padding">
+			<div class="container">
+				<div class="center-data">
+					<p class="sub-title text-lightgrey">03 — Our Advantage</p>
+					<h2 class="fs-60">Why businesses choose Ogrelogic</h2>
+				</div>
+				<div class="choose-parent">
+					<div class="row align-items-center">
+						<div class="col-lg-4">
+							<div class="choose-usgrid">
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">
+										Practical AI Integration
+									</h5>
+									<p>
+										We focus on useful AI and
+										search-readiness improvements, not empty
+										buzzwords.
+									</p>
+								</div>
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">
+										Custom, Not Cookie-Cutter
+									</h5>
+									<p>
+										Solutions are tailored to business
+										goals, not forced into generic
+										templates.
+									</p>
+								</div>
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">Built for Real Growth</h5>
+									<p>
+										We create solutions focused on long-term
+										performance, helping businesses scale
+										and generate consistent results.
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="image-choose">
+								<img
+									src="/laptop-stone.webp"
+									alt=""
+									width="509"
+									height="520"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="choose-usgrid">
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">
+										Web, Marketing, and Apps Under One Roof
+									</h5>
+									<p>
+										Clients do not need separate teams for
+										every part of growth.
+									</p>
+								</div>
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">
+										Built for Growth, Not Just Launch
+									</h5>
+									<p>
+										We do not just launch projects; we help
+										businesses improve lead flow and
+										long-term performance.
+									</p>
+								</div>
+								<div class="choose-details">
+									<img
+										src="/tickarrow.svg"
+										alt=""
+										height="18"
+										width="18"
+										class="mb-2"
+										loading="lazy"
+										decoding="async"
+									/>
+									<h5 class="fs-20">
+										Scalable & Future-Ready
+									</h5>
+									<p>
+										Our solutions are designed to grow with
+										your business and adapt to changing
+										technologies and market needs.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="process-sec section-padding border-section">
+			<div class="container">
+				<div class="row process-row">
+					<div class="col-lg-5">
+						<div class="process-holders">
+							<p class="sub-title text-lightgrey">
+								04 — Our Process
+							</p>
+							<h3 class="fs-60">How we work</h3>
+							<p>
+								We follow a clear and simple 4-step process to
+								make everything easy to understand. First, we
+								learn about your business, goals, and
+								challenges. Then, we plan and design the right
+								structure and experience. Next, we build and
+								optimize for performance, usability, and
+								visibility. Finally, we launch and continue to
+								support your growth with updates and
+								improvements.
+							</p>
+							<div class="universal-anchor">
+								<a href="#" class="link-button" target="_self"
+									>Tell Us About Your Project</a
+								>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="process-grids">
+							<div class="grid-numberprocess">
+								<div class="process-step">
+									<p class="fs-100">01.</p>
+								</div>
+								<div class="process-data">
+									<h5 class="fs-30">Strategy & Discovery</h5>
+									<p>
+										We understand the business, goals, and
+										current challenges.
+									</p>
+								</div>
+							</div>
+							<div class="grid-numberprocess">
+								<div class="process-step">
+									<p class="fs-100">02.</p>
+								</div>
+								<div class="process-data">
+									<h5 class="fs-30">Planning & Design</h5>
+									<p>
+										We map out the right structure, design,
+										and conversion path.
+									</p>
+								</div>
+							</div>
+							<div class="grid-numberprocess">
+								<div class="process-step">
+									<p class="fs-100">03.</p>
+								</div>
+								<div class="process-data">
+									<h5 class="fs-30">Build & Optimization</h5>
+									<p>
+										We develop the solution and improve
+										speed, usability, and visibility.
+									</p>
+								</div>
+							</div>
+							<div class="grid-numberprocess">
+								<div class="process-step">
+									<p class="fs-100">04.</p>
+								</div>
+								<div class="process-data">
+									<h5 class="fs-30">
+										Launch & Growth Support
+									</h5>
+									<p>
+										We launch properly and support future
+										growth through updates, marketing, or
+										optimization.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="wecanhelp-sec section-padding">
+			<img
+				src="/bg-image.webp"
+				alt=""
+				class="lines-image"
+				width="1920"
+				height="1120"
+				loading="lazy"
+				decoding="async"
+			/>
+			<div class="marquee-track">
+				<p class="sliding-text">
+					Professional Services Healthcare & Wellness Local Service
+					Businesses Fitness, Coaching & Education Ecommerce &
+					Specialty Retail &nbsp; Professional Services Healthcare &
+					Wellness Local Service Businesses Fitness, Coaching &
+					Education Ecommerce & Specialty Retail &nbsp;
+				</p>
+				<p class="sliding-text" aria-hidden="true">
+					Professional Services Healthcare & Wellness Local Service
+					Businesses Fitness, Coaching & Education Ecommerce &
+					Specialty Retail &nbsp; Professional Services Healthcare &
+					Wellness Local Service Businesses Fitness, Coaching &
+					Education Ecommerce & Specialty Retail &nbsp;
+				</p>
+			</div>
+			<div class="container">
+				<div class="wehelp-holders">
+					<h4 class="fs-100">who we work with</h4>
+				</div>
+				<div class="grid-mobiles">
+					<div class="mobile-imageholders one">
+						<img
+							src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/06/image-123.webp"
+							alt="mobile"
+							width="320"
+							height="521"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+					<div class="mobile-imageholders two">
+						<img
+							src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/06/phone-02-1.webp"
+							alt="mobile"
+							width="320"
+							height="521"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+				</div>
+				<div class="work-withlist">
+					<ul class="work-lists">
+						<li>Professional Services</li>
+						<li>Healthcare & Wellness</li>
+						<li>Local Service Businesses</li>
+						<li>Fitness, Coaching & Education</li>
+						<li>Ecommerce & Specialty Retail</li>
+						<li>Growing SMBs</li>
+					</ul>
+					<div class="button-grids">
+						<div class="universal-anchor">
+							<a href="#" class="link-button">View Portfolio</a>
+						</div>
+						<div class="universal-anchor">
+							<a href="#" class="link-button orange">Contact Us</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Mobileapphand
+			client:visible
+			handImg="/hand.webp"
+			videoUrl="/videomob.mp4"
+			appList={mobileAppListsData}
+		/>
+
+		<section class="portfolio-sec section-padding">
+			<div class="container">
+				<div class="gridportfolio-top">
+					<div class="row">
+						<div class="col-md-5">
+							<div class="onlydeatils-here">
+								<p class="sub-title text-lightgrey">
+									05 — Our Portfolio
+								</p>
+								<h5 class="fs-50 text-lightgrey">
+									Work that delivers real business value
+								</h5>
+							</div>
+						</div>
+						<div class="col-md-7">
+							<div class="maindetsil-heading">
+								<h4 class="fs-60">
+									Designed around users to drive efficiency
+									and increase revenue.
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				<Websiteportfolio />
+			</div>
+		</section>
+		<section class="cta-sec section-padding border-section">
+			<div class="container">
+				<div class="cta-holders">
+					<h5 class="fs-100">
+						Transform Your Business with Our Expert Solutions
+					</h5>
+					<p>
+						Partner with us to leverage our expertise in mobile app
+						development, web solutions, and digital marketing to
+						drive your business growth.
+					</p>
+					<div class="universal-anchor">
+						<a href="#" target="_self" class="link-button white"
+							>Get a Free Consultation</a
+						>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="testimonial-sec section-padding">
+			<div class="container">
+				<div class="alldat-videohere">
+					<div class="center-data testimonials">
+						<p class="sub-title text-lightgrey">
+							06 — Testimonials
+						</p>
+						<h5 class="fs-100">What our clients say</h5>
+					</div>
+					<Testimonial client:visible />
+				</div>
+			</div>
+		</section>
+		<section class="improve-sec section-padding">
+			<div class="container">
+				<div class="row process-row align-items-center">
+					<div class="col-lg-6">
+						<div class="image-improve">
+							<img
+								src="/pcimage.webp"
+								alt="improve"
+								width="775"
+								height="641"
+								loading="lazy"
+								decoding="async"
+							/>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="content-improves">
+							<p class="sub-title text-lightgrey">
+								07 — Optimize
+							</p>
+							<h5 class="fs-60">
+								Already have a website? We can improve it too
+							</h5>
+							<ul>
+								<li>One-time website updates</li>
+								<li>SEO setup</li>
+								<li>AI search readiness improvements</li>
+								<li>ADA/accessibility setup</li>
+								<li>
+									Conversion and lead-flow recommendations
+								</li>
+							</ul>
+							<div class="universal-anchor">
+								<a href="#" class="link-button"
+									>Website Upgrade</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="faq-sec section-padding border-section">
+			<div class="container">
+				<div class="grid-faq-tops">
+					<div class="faq-holdersmain">
+						<img
+							src="/question-marks.png"
+							alt="faq"
+							height="100"
+							width="100"
+							loading="lazy"
+							decoding="async"
+							class="faq-icons"
+						/>
+						<h4 class="fs-60">Frequently Asked Questions</h4>
+						<p>
+							Find answers to the most common questions about our
+							services. If you still need help, feel free to reach
+							out we’re here for you.
+						</p>
+						<div class="universal-anchor">
+							<a href="#" class="link-button">Contact us</a>
+						</div>
+					</div>
+					<div class="robot-images">
+						<img
+							src="/robot.png"
+							alt="robot"
+							class="robot-image"
+							width="399"
+							height="484"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+				</div>
+				<Faq />
+			</div>
+		</section>
+		<section class="brand-sec section-padding">
+			<div class="container">
+				<div class="center-data">
+					<h4 class="fs-100">1000+ Satisfied Customers</h4>
+				</div>
+				<div class="brandwe-have">
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-6.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-7.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-8.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-9.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-10.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-11.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-12.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-13.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-14.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-15.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-16.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-17.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-18.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-19.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="https://web.ogrelogicsolutions.com/ogrelogic-wp/uploads/2026/04/brandlogo-20.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-21.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-22.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-1.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-2.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+					<div class="brand-logo-holders">
+						<img
+							src="/brandlogo-3.png"
+							width="150"
+							loading="lazy"
+							decoding="async"
+							alt="brand logo"
+						/>
+					</div>
+				</div>
+			</div>
+		</section>
+		<Footer />
+
+		<script
+			is:inline
+			src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"
+			defer></script>
+		<script is:inline>
+			document.addEventListener("DOMContentLoaded", () => {
+				/* ---------------- HELPERS ---------------- */
+				const runWhenIdle = (cb) => {
+					if ("requestIdleCallback" in window) {
+						requestIdleCallback(cb, { timeout: 2000 });
+					} else {
+						setTimeout(cb, 300);
+					}
+				};
+
+				const runOnVisible = (el, cb, rootMargin = "0px") => {
+					if (!el) return;
+					const obs = new IntersectionObserver(
+						(entries, observer) => {
+							if (entries[0].isIntersecting) {
+								cb();
+								observer.disconnect();
+							}
+						},
+						{ rootMargin },
+					);
+					obs.observe(el);
+				};
+
+				/* ---------------- VIDEO LAZY LOAD 🚨 ---------------- */
+				const video = document.querySelector(".banner-video");
+
+				if (video) {
+					const loadVideo = () => {
+						if (video.querySelector("source")) return;
+
+						const source = document.createElement("source");
+						source.src = video.dataset.src;
+						source.type = "video/mp4";
+						video.appendChild(source);
+
+						video.load();
+						video.play().catch(() => {});
+					};
+
+					runOnVisible(video, loadVideo, "300px");
+				}
+
+				/* ---------------- MARQUEE ---------------- */
+				const tracks = document.querySelectorAll(".marquee-track");
+
+				tracks.forEach((track) => {
+					let pos = 0;
+					const speed = 1.2;
+					let width = track.scrollWidth;
+					let rafId;
+
+					track.style.willChange = "transform";
+
+					const updateWidth = () => (width = track.scrollWidth);
+
+					window.addEventListener(
+						"resize",
+						() => {
+							clearTimeout(track._resizeTimer);
+							track._resizeTimer = setTimeout(updateWidth, 200);
+						},
+						{ passive: true },
+					);
+
+					const animate = () => {
+						pos -= speed;
+						if (Math.abs(pos) > width / 2) pos = 0;
+						track.style.transform = `translate3d(${pos}px,0,0)`;
+						rafId = requestAnimationFrame(animate);
+					};
+
+					runOnVisible(
+						track,
+						() => {
+							rafId = requestAnimationFrame(animate);
+						},
+						"200px",
+					);
+
+					// pause when tab inactive
+					document.addEventListener("visibilitychange", () => {
+						if (document.hidden) cancelAnimationFrame(rafId);
+						else rafId = requestAnimationFrame(animate);
+					});
+				});
+
+				/* ---------------- SWIPER ---------------- */
+				const swiperEl = document.querySelector(".homeSwiperating");
+
+				runOnVisible(
+					swiperEl,
+					() => {
+						const initSwiper = () => {
+							new Swiper(".homeSwiperating", {
+								slidesPerView: 2,
+								spaceBetween: 10,
+								loop: true,
+								speed: 2500,
+								autoplay: {
+									delay: 0,
+									disableOnInteraction: false,
+								},
+								allowTouchMove: false,
+								freeMode: {
+									enabled: true,
+									momentum: false,
+								},
+								breakpoints: {
+									576: { slidesPerView: 3 },
+									768: { slidesPerView: 4 },
+									992: { slidesPerView: 5 },
+								},
+							});
+						};
+
+						runWhenIdle(initSwiper);
+					},
+					"300px",
+				);
+
+				/* ---------------- SCROLL ANIMATIONS ---------------- */
+				runWhenIdle(() => {
+					if (window.innerWidth < 1200) return;
+
+					const section = document.querySelector(".grid-puprose");
+					if (!section) return;
+
+					const items = section.querySelectorAll(".purpose-holders");
+
+					items.forEach((el) => {
+						el.style.opacity = "0";
+						el.style.transform = "translateY(40px)";
+					});
+
+					runOnVisible(
+						section,
+						() => {
+							items.forEach((el, i) => {
+								el.animate(
+									[
+										{
+											transform: "translateY(40px)",
+											opacity: 0,
+										},
+										{
+											transform: "translateY(0)",
+											opacity: 1,
+										},
+									],
+									{
+										duration: 700,
+										delay: i * 120,
+										easing: "ease-out",
+										fill: "forwards",
+									},
+								);
+							});
+						},
+						"100px",
+					);
+				});
+			});
+		</script>
+
+		<style>
+			section.homebanner {
+				min-height: 97.5vh;
+				overflow: hidden;
+				position: relative;
+				padding: 40px 0px 0px 0px;
+				display: flex;
+				align-items: end;
+				border-radius: 33px;
+				margin: 12px;
+				background: #f5f5f0;
+			}
+			video.banner-video {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				object-position: right bottom;
+			}
+
+			.content-holders {
+				position: relative;
+				z-index: 1;
+				max-width: 60%;
+				width: 100%;
+				color: var(--color-black);
+				margin-left: 1.2%;
+				padding-bottom: 20px;
+				padding-top: 10%;
+			}
+
+			.content-holders .fs-60 {
+				text-transform: capitalize;
+			}
+			.homeSwiperating .swiper-wrapper {
+				align-items: center;
+			}
+
+			span.webuild {
+				display: block;
+				font-size: 150px;
+				font-weight: 500;
+				padding-bottom: 15px;
+				line-height: normal;
+				text-transform: uppercase;
+			}
+
+			span.border-lines {
+				display: block;
+				width: 100%;
+				height: 1px;
+				background: var(--color-black);
+				margin-top: 30px;
+				opacity: 0.2;
+			}
+
+			a.button-godown {
+				height: 100px;
+				width: 100px;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				background: var(--color-white);
+				border: 2px solid var(--color-white);
+				border-radius: 50%;
+				text-align: center;
+				position: relative;
+			}
+
+			a.button-godown::after {
+				content: "";
+				display: block;
+				width: 105%;
+				height: 105%;
+				background: rgba(0, 0, 0, 0);
+				border: 2px solid hsla(0, 0%, 100%, 0.5);
+				border-radius: 50%;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+
+			.whatapp-icon {
+				right: 3.5%;
+				bottom: 10%;
+				max-width: 100%;
+				transform: translatey(0);
+				animation: 1.5s infinite pulse;
+				box-shadow: 0 0 0 0 var(--color-orange);
+				background: var(--color-orange);
+				-webkit-animation: 1.25s cubic-bezier(0.66, 0, 0, 1) infinite
+					pulsing;
+				-moz-animation: 1.25s cubic-bezier(0.66, 0, 0, 1) infinite
+					pulsing;
+				-ms-animation: pulsing 1.25s infinite
+					cubic-bezier(0.66, 0, 0, 1);
+				animation: 1.25s cubic-bezier(0.66, 0, 0, 1) infinite pulsing;
+				border-radius: 50%;
+				z-index: 11;
+				width: 100px;
+				height: 100px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+			}
+
+			@keyframes pulsing {
+				to {
+					box-shadow: 0 0 0 30px rgba(232, 76, 61, 0);
+				}
+			}
+
+			.whatapp-icon a {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.home-slioder .swiper-button-next:after,
+			.swiper-button-prev:after {
+				color: #00aeef;
+			}
+
+			.button-godown img {
+				max-width: 54px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				margin: 0 auto;
+			}
+
+			.grid-headings {
+				display: flex;
+				align-items: center;
+				margin-left: 2%;
+				gap: 20px;
+			}
+
+			.main-title {
+				font-size: 125px;
+				font-weight: 700;
+				text-transform: uppercase;
+				line-height: 110%;
+			}
+
+			.logo-dataterust {
+				max-width: fit-content;
+				width: 100%;
+				border-radius: 47px;
+				padding: 5px 10px;
+				display: flex;
+				align-items: center;
+				gap: 30px;
+			}
+
+			.gridreview-heres p {
+				font-size: 14px;
+				font-weight: 400;
+			}
+
+			.gridreview-heres {
+				display: flex;
+				align-items: center;
+				gap: 30px;
+				margin-top: 40px;
+				background: transparent;
+				border-radius: 86px;
+				padding: 0px 10px;
+				transition: 0.3s ease-in;
+				background: var(--color-white);
+				color: var(--color-black);
+			}
+
+			ul.satrlist {
+				display: flex;
+				align-items: center;
+				margin-top: -5px;
+			}
+
+			.rating-data {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				background: var(--color-white);
+				padding: 5px 10px;
+				border-radius: 73px;
+				overflow: hidden;
+			}
+
+			.rating-data p {
+				color: var(--color-black);
+				font-weight: 700 !important;
+			}
+
+			.sliding-text {
+				font-size: 200px;
+				font-weight: 600;
+				text-transform: capitalize;
+				white-space: nowrap;
+				margin: 0;
+				padding-right: 50px;
+				color: var(--color-skyblue);
+				line-height: normal;
+			}
+
+			.tetslide-holsers {
+				overflow: hidden;
+				width: 100%;
+				position: relative;
+			}
+
+			.marquee-track {
+				display: flex;
+				width: max-content;
+			}
+
+			.holderworks {
+				max-width: 532px;
+				width: 100%;
+				position: relative;
+				overflow: hidden;
+				border-radius: 10px;
+			}
+			.holderworks {
+				position: relative;
+				overflow: hidden;
+				display: block;
+			}
+
+			.tech-related-image-here {
+				position: absolute;
+				inset: 0;
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+				z-index: 0;
+				filter: brightness(0.9);
+				pointer-events: none;
+				will-change: transform;
+				animation: services-scaler 4s infinite alternate ease-in-out;
+			}
+			@keyframes services-scaler {
+				0% {
+					transform: scale(1);
+				}
+				100% {
+					transform: scale(1.15);
+				}
+			}
+
+			.grid-inside {
+				position: relative;
+				z-index: 2;
+			}
+
+			.grid-inside {
+				min-height: 575px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				gap: 30px;
+				position: relative;
+				z-index: 1;
+				padding: 25px;
+			}
+
+			ul.tech-list li {
+				margin: 2px;
+				font-size: 12px;
+				color: var(--color-white);
+				letter-spacing: -0.03em;
+				padding: 2px 14.5px 3px;
+				border-radius: 40px;
+				background: hsla(0, 0%, 100%, 0.4);
+				max-width: fit-content;
+				text-transform: capitalize;
+			}
+
+			ul.tech-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 5px;
+			}
+
+			.destilabout-works :global(p) {
+				font-size: 16px;
+				font-weight: 400;
+				color: hsla(0, 0%, 100%, 0.85);
+			}
+
+			.grid-inside .fs-50 {
+				color: var(--color-white);
+			}
+
+			.destilabout-works {
+				max-width: 85%;
+				width: 100%;
+				border-bottom: 1px solid var(--color-white);
+				padding-bottom: 20px;
+				margin-bottom: 20px;
+			}
+
+			.gridwe-do {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 5px;
+				padding-top: 50px;
+			}
+
+			.topdata-holders {
+				max-width: 82%;
+				width: 100%;
+			}
+
+			span.color-line {
+				display: block;
+				background-image: linear-gradient(
+					180deg,
+					#1c4eff,
+					#fe881b 0%,
+					#ac24ff 25%,
+					#f79fff 50%,
+					#ffd600 66%,
+					#fe881b 84%,
+					#fe881b00 102%
+				);
+				height: 100%;
+				width: 1px;
+			}
+
+			span.color-line,
+			.line-colorholders {
+				min-height: 300px;
+			}
+
+			.line-colorholders {
+				display: flex;
+				align-items: center;
+				max-width: fit-content;
+			}
+
+			.alldata-maintitle {
+				display: flex;
+				align-items: center;
+				max-width: fit-content;
+				width: 100%;
+				gap: 5px;
+				background: var(--color-white);
+				padding: 15px 20px;
+				border-radius: 21px;
+				box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			}
+
+			.line-data {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.visble-text {
+				font-size: 16px;
+				font-weight: 500;
+				text-transform: uppercase;
+				color: var(--color-black);
+			}
+
+			ul.point-lists {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			ul.point-lists li {
+				font-size: 16px;
+				font-weight: 500;
+			}
+
+			.dataimage-heres {
+				position: relative;
+				z-index: 1;
+				padding-top: 200px;
+			}
+
+			.overlay-wave {
+				margin-top: -10%;
+			}
+
+			section.whythismatter-sec.section-padding {
+				background: #ededed52;
+			}
+
+			.grid-puprose {
+				display: flex;
+				justify-content: center;
+				gap: 50px;
+				width: 100%;
+			}
+
+			.purpose-holders {
+				max-width: 400px;
+				width: 100%;
+			}
+
+			.grid-puprose .purpose-holders:nth-child(2) {
+				margin-top: -76px;
+			}
+
+			.grid-puprose .purpose-holders:nth-child(3) {
+				margin-top: -160px;
+			}
+
+			/* CHOOSE US */
+
+			.choose-usgrid {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			.choose-details .fs-30 {
+				font-weight: 500;
+			}
+
+			.image-choose {
+				position: relative;
+				max-width: 510px;
+				width: 100%;
+				margin: 0 auto;
+			}
+
+			img.gradient-bg {
+				position: absolute;
+				inset: 0;
+				z-index: -1;
+				scale: 1.3;
+			}
+
+			.choose-details {
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 16px;
+				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				border: 1px solid rgba(255, 255, 255, 0.3);
+				padding: 20px;
+			}
+
+			section.whychooseus-sec {
+				position: relative;
+				overflow: hidden;
+			}
+
+			img.image-absloute {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				opacity: 0.5;
+				z-index: -1;
+			}
+
+			.choose-parent {
+				padding-top: 50px;
+			}
+
+			section.ourservice-sec {
+				position: relative;
+			}
+
+			.grid-numberprocess {
+				display: flex;
+				align-items: start;
+				gap: 40px;
+				padding-bottom: 20px;
+				padding: 20px;
+				border-bottom: 1px solid var(--color-black);
+			}
+
+			.process-data {
+				margin-top: 15px;
+			}
+
+			.process-step .fs-100 {
+				font-family: "Inter", sans-serif;
+				font-size: 100px;
+				line-height: normal;
+				padding: 0;
+				font-weight: 700;
+				color: var(--color-black);
+			}
+
+			.process-grids {
+				display: flex;
+				flex-direction: column;
+				gap: 30px;
+				max-width: 90%;
+				margin-left: auto;
+			}
+
+			.grid-numberprocess .fs-30 {
+				font-weight: 600;
+				text-transform: capitalize;
+			}
+
+			.process-holders .fs-50 {
+				padding-bottom: 20px;
+			}
+
+			.process-holders .universal-anchor {
+				padding-top: 20px;
+			}
+
+			section.process-sec {
+				background: var(--color-ededed52);
+			}
+
+			.process-data p:last-child {
+				padding-bottom: 0;
+			}
+
+			.process-holders {
+				position: sticky;
+				top: 10%;
+			}
+
+			.wehelp-holders .fs-100 {
+				font-weight: 500;
+				color: var(--color-black);
+			}
+
+			.grid-mobiles {
+				display: flex;
+				justify-content: center;
+			}
+			.process-holders .fs-60 {
+				padding-bottom: 15px;
+			}
+
+			section.wecanhelp-sec {
+				overflow: hidden;
+				background: linear-gradient(135deg, #f3f6ff, #fef3f3);
+				position: relative;
+				z-index: 1;
+				margin-top: 50px;
+			}
+
+			section.wecanhelp-sec .marquee-track {
+				position: absolute;
+				top: 40%;
+				transform: translateY(-50%);
+				opacity: 0.3;
+			}
+
+			.mobile-imageholders {
+				position: relative;
+				transition: transform 0.3s ease;
+				max-width: 320px;
+				width: 100%;
+			}
+
+			/* ONE → moves top to bottom */
+			.mobile-imageholders.one {
+				animation: moveDown 4s ease-in-out infinite alternate;
+			}
+
+			/* TWO → moves bottom to top */
+			.mobile-imageholders.two {
+				margin-left: -7%;
+				animation: moveUp 4s ease-in-out infinite alternate;
+			}
+
+			/* Keyframes */
+			@keyframes moveDown {
+				0% {
+					transform: translateY(-20px);
+				}
+				100% {
+					transform: translateY(20px);
+				}
+			}
+
+			@keyframes moveUp {
+				0% {
+					transform: translateY(20px);
+				}
+				100% {
+					transform: translateY(-20px);
+				}
+			}
+
+			ul.work-lists li {
+				font-size: 18px;
+				font-weight: 500;
+				background: rgb(255 255 255 / 27%);
+				border-radius: 16px;
+				box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+				backdrop-filter: blur(5px);
+				-webkit-backdrop-filter: blur(5px);
+				padding: 5px 20px;
+				text-align: center;
+			}
+
+			ul.work-lists {
+				display: flex;
+				gap: 30px;
+				flex-wrap: wrap;
+				max-width: 50%;
+				width: 100%;
+				padding-top: 40px;
+			}
+
+			section.wecanhelp-sec .sliding-text {
+				color: #000000;
+				text-transform: uppercase;
+				font-weight: 700;
+				opacity: 0.2;
+			}
+
+			.work-withlist {
+				display: flex;
+				justify-content: space-between;
+				gap: 30px;
+				align-items: center;
+				padding-top: 50px;
+				margin-top: -11%;
+			}
+
+			.button-grids {
+				display: flex;
+				gap: 30px;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+
+			.lines-image {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				object-fit: cover;
+				object-position: center;
+				opacity: 0.1;
+				z-index: -1;
+			}
+
+			/* laptop */
+
+			.content-improves ul li {
+				list-style: disc;
+				font-weight: 500;
+			}
+
+			.content-improves ul {
+				padding-left: 20px;
+				padding-top: 30px;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+			}
+
+			.image-improve {
+				max-width: 776px;
+				width: 100%;
+				position: relative;
+			}
+
+			.content-improves {
+				max-width: 95%;
+				margin-left: auto;
+			}
+
+			.image-improve img {
+				will-change: transform;
+			}
+
+			@keyframes imageflow {
+				from {
+					transform: translateY(0) scale(1);
+					filter: brightness(100%);
+				}
+				to {
+					transform: translateY(-10px) scale(1.01);
+					filter: brightness(110%);
+				}
+			}
+
+			.content-improves .universal-anchor {
+				padding-top: 40px;
+			}
+
+			.tetslide-holsers .fs-100 {
+				text-transform: uppercase;
+			}
+
+			.brandwe-have {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				column-gap: 80px;
+				row-gap: 32px;
+				padding-top: 80px;
+			}
+			.brand-logo-holders {
+				max-width: 150px;
+				width: 100%;
+			}
+
+			section.slidingtext-sec {
+				overflow: hidden;
+			}
+			.trust-by p {
+				font-size: 22px;
+				font-weight: 600;
+			}
+			.choose-details :global(p) {
+				font-size: 16px;
+				line-height: 145%;
+				font-weight: 400;
+			}
+
+			.onlydeatils-here .fs-50 {
+				font-weight: 400;
+			}
+
+			.onlydeatils-here {
+				display: flex;
+				flex-direction: column;
+				gap: 30px;
+			}
+			section.testimonial-sec {
+				position: relative;
+				background-size: cover;
+				overflow: hidden;
+				background: linear-gradient(25deg, #eee6f7, #4541f11a);
+			}
+			.center-data.testimonials .fs-100 {
+				font-weight: 600;
+			}
+
+			.center-data.testimonials {
+				max-width: fit-content;
+				margin: 0;
+				text-align: start;
+			}
+
+			.center-data.testimonials .fs-100 {
+				text-transform: capitalize;
+			}
+			section.faq-sec {
+				background: linear-gradient(45deg, #4541f161, #ebebfd);
+				margin-bottom: 0;
+			}
+
+			.grid-faq-tops {
+				position: relative;
+				display: flex;
+				align-items: center;
+				gap: 40px;
+			}
+
+			.faq-holdersmain {
+				max-width: 60%;
+				width: 100%;
+			}
+
+			/* Typography & Spacing */
+			.faq-holdersmain .fs-60 {
+				padding-bottom: 20px;
+			}
+
+			.faq-holdersmain .universal-anchor {
+				padding-top: 30px;
+			}
+
+			/* Image Styling */
+			.robot-images {
+				max-width: 400px;
+				position: relative;
+				margin-left: auto;
+			}
+			.homeSwipertestimonials .swiper-wrapper {
+				align-items: center;
+			}
+			.swiper_items {
+				max-width: 118px;
+				width: 100%;
+				margin: 0 auto;
+			}
+
+			.rating-holderss {
+				display: flex;
+				align-items: center;
+				max-width: 90%;
+				width: 100%;
+				padding-top: 10px;
+			}
+
+			.trust-by {
+				max-width: fit-content;
+				width: 100%;
+				background: linear-gradient(
+					87deg,
+					#f38e1878 0%,
+					rgb(245 245 240) 91.16%
+				);
+				padding: 18px 20px;
+				color: #000;
+				border-radius: 5px;
+			}
+
+			.mySwipertestimonials .swiper-wrapper {
+				transition-timing-function: linear !important;
+			}
+
+			.maindetsil-heading .universal-anchor {
+				padding-top: 20px;
+			}
+			.process-step {
+				max-width: fit-content;
+				width: 100%;
+			}
+
+			@media (max-width: 1600px) {
+				span.webuild,
+				.main-title {
+					font-size: 100px;
+				}
+				.whatapp-icon {
+					width: 80px;
+					height: 80px;
+				}
+				.whatapp-icon img {
+					max-width: 35px;
+				}
+				.swiper_items {
+					max-width: 75px;
+				}
+				.sliding-text {
+					font-size: 160px;
+				}
+				header.custom-header {
+					top: 25px;
+				}
+				.grid-inside {
+					min-height: 480px;
+				}
+				.visble-text,
+				ul.point-lists li {
+					font-size: 14px;
+				}
+				.alldata-maintitle {
+					padding: 10px 15px;
+				}
+				span.color-line,
+				.line-colorholders {
+					min-height: 250px;
+				}
+				ul.point-lists {
+					gap: 15px;
+				}
+				.mobile-imageholders {
+					max-width: 265px;
+				}
+				ul.work-lists li {
+					font-size: 16px;
+					padding: 5px 15px;
+				}
+				ul.work-lists {
+					gap: 15px;
+				}
+				.onlydeatils-here {
+					gap: 20px;
+				}
+				.robot-images {
+					max-width: 322px;
+				}
+			}
+			@media (max-width: 1400px) {
+				section.homebanner {
+					border-radius: 20px;
+					margin: 8px;
+				}
+				span.webuild,
+				.main-title {
+					font-size: 80px;
+				}
+				.whatapp-icon {
+					width: 70px;
+					height: 70px;
+				}
+				.sliding-text {
+					font-size: 140px;
+				}
+				.destilabout-works :global(p) {
+					font-size: 14px;
+				}
+				ul.tech-list li {
+					font-size: 12px;
+				}
+				.grid-inside {
+					min-height: 400px;
+				}
+				.destilabout-works {
+					padding-bottom: 10px;
+					margin-bottom: 10px;
+				}
+				.choose-details :global(p) {
+					font-size: 15px;
+				}
+				.process-step .fs-100 {
+					font-size: 80px;
+				}
+				.brandwe-have {
+					column-gap: 60px;
+					row-gap: 20px;
+					padding-top: 40px;
+				}
+				.process-data {
+					margin-top: 10px;
+				}
+				.robot-images {
+					max-width: 270px;
+				}
+				.grid-faq-tops {
+					padding-bottom: 40px;
+				}
+				.swiper_items {
+					max-width: 90px;
+				}
+			}
+			@media (max-width: 1199px) {
+				section.homebanner {
+					border-radius: 0;
+					margin: 0;
+					min-height: 700px;
+					padding: 100px 0px 20px 0px;
+				}
+				.content-holders {
+					padding: 0;
+				}
+
+				.gridwe-do {
+					grid-template-columns: repeat(1, minmax(0, 1fr));
+					gap: 20px;
+					padding-top: 30px;
+				}
+				.holderworks {
+					margin: 0 auto;
+				}
+				.grid-inside {
+					min-height: 525px;
+					padding: 15px;
+				}
+				.topdata-holders {
+					max-width: 100%;
+				}
+				.grid-puprose {
+					gap: 8px;
+				}
+				.brand-logo-holders {
+					max-width: 130px;
+				}
+			}
+			@media (max-width: 991px) {
+				.content-holders {
+					max-width: 100%;
+				}
+				.grid-puprose {
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 0;
+				}
+
+				.purpose-holders {
+					margin-top: 0 !important;
+				}
+				.choose-parent .row {
+					gap: 40px;
+				}
+				.process-grids {
+					max-width: 100%;
+				}
+				.process-row {
+					gap: 30px;
+				}
+				.dataimage-heres {
+					padding-top: 50px;
+				}
+				.content-improves {
+					max-width: 100%;
+				}
+			}
+			@media (max-width: 767px) {
+				span.webuild,
+				.main-title {
+					font-size: 70px;
+				}
+				.work-withlist {
+					flex-direction: column;
+					justify-content: center;
+				}
+
+				ul.work-lists {
+					max-width: 100%;
+					justify-content: center;
+				}
+				.sliding-text {
+					font-size: 100px;
+				}
+				.grid-faq-tops {
+					flex-direction: column-reverse;
+				}
+				.faq-holdersmain {
+					max-width: 100%;
+				}
+				.robot-images {
+					margin: 0 auto;
+				}
+			}
+			@media (max-width: 575px) {
+				.grid-headings {
+					flex-wrap: wrap;
+				}
+				.sliding-text {
+					font-size: 60px;
+				}
+				.choose-parent {
+					padding-top: 30px;
+				}
+
+				.grid-numberprocess {
+					padding: 10px;
+				}
+				span.webuild,
+				.main-title {
+					font-size: 60px;
+				}
+				.whatapp-icon {
+					display: none;
+				}
+				section.homebanner {
+					min-height: 600px;
+				}
+				.process-step .fs-100 {
+					font-size: 60px;
+				}
+				.grid-numberprocess {
+					gap: 20px;
+				}
+
+				.trust-by {
+					display: none;
+				}
+			}
+		</style>
+	</body>
+</html>

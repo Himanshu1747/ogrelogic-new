@@ -1,0 +1,2087 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { queryWordPress } from "../lib/wordpress";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead />
+    </head>
+    <body>
+        <Header />
+
+        <section class="banner-sec banner-radius">
+            <div class="banner-space"></div>
+            <div class="container">
+                <div class="tect-holderbanner">
+                    <span class="badge-data">
+                        Website hosting & maintenance · Austin, Texas</span
+                    >
+                    <h1 class="fs-60">
+                        Hosting and maintenance from people you can actually
+                        call.
+                    </h1>
+                    <p>
+                        From our studio in Austin, we host, maintain, secure,
+                        and look after websites for businesses across Texas and
+                        beyond — for owners who'd rather pay for peace of mind
+                        than spend their weekends in a Bluehost support queue.
+                    </p>
+                    <div class="grid-buttons">
+                        <div class="universal-anchor">
+                            <a
+                                href="#"
+                                class="link-button"
+                                title="See plans & pricing"
+                                >See plans & pricing</a
+                            >
+                        </div>
+                        <div class="universal-anchor">
+                            <a
+                                href="#"
+                                class="link-button orange"
+                                title="Book a free site audit"
+                                >Book a free site audit</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div class="image-here mobile">
+                    <img src="/hosting.webp" alt="" width="979" height="532" />
+                </div>
+                <div class="trsuststrip-grids">
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img src="/austin.png" alt="" />
+                            </div>
+                            <p>Austin HQ</p>
+                        </a>
+                    </div>
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img
+                                    src="/uptime.png"
+                                    alt=""
+                                    height="64"
+                                    width="64"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <p>99.9% uptime</p>
+                        </a>
+                    </div>
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img
+                                    src="/ten.png"
+                                    alt=""
+                                    height="64"
+                                    width="64"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <p>10+ years</p>
+                        </a>
+                    </div>
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img
+                                    src="/manage.png"
+                                    alt=""
+                                    height="64"
+                                    width="64"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <p>1000+ sites managed</p>
+                        </a>
+                    </div>
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img
+                                    src="/human.png"
+                                    alt=""
+                                    height="64"
+                                    width="64"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <p>Real humans ·</p>
+                        </a>
+                    </div>
+                    <div class="truststrip-data">
+                        <a href="#">
+                            <div class="icon-heres">
+                                <img
+                                    src="/clutch.png"
+                                    alt=""
+                                    height="64"
+                                    width="64"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <p>Clutch 4.9 ★</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="realcost-sec section-padding">
+            <div class="container">
+                <div class="sectioton-intro">
+                    <h2 class="fs-60">
+                        $5-a-month hosting isn't cheap when something breaks.
+                    </h2>
+                    <p>
+                        Hosting and maintenance stay invisible until something
+                        breaks. A site crash during launch, a bad plugin update,
+                        hacked redirects, or emails hitting spam can cost far
+                        more than cheap hosting ever saves. That’s the
+                        difference between basic hosting and properly managed
+                        hosting with real maintenance.
+                    </p>
+                </div>
+
+                <div class="list-tablesgrids">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="alldata-tabless">
+                                <div class="only-titlehere titless">
+                                    <h3 class="fs-30">
+                                        What cheap hosting gives you
+                                    </h3>
+                                </div>
+
+                                <div class="grid-alldetails">
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            99% uptime "guarantee" — that's 87
+                                            hours of downtime a year
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            A help desk in another time zone
+                                            with a 24-hour ticket queue
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Plugins that auto-update and break
+                                            things on a Tuesday
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Backups you have to set up and
+                                            remember to test yourself
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Security after the fact, when you're
+                                            already hacked
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Email that lands in customer spam
+                                            folders
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            You handling DNS, SSL, redirects on
+                                            Christmas Eve
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/closee.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            A login to a control panel that may
+                                            or may not still work
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="alldata-tabless">
+                                <div class="only-titlehere titless">
+                                    <h3 class="fs-30">
+                                        What proper hosting + maintenance gives
+                                        you
+                                    </h3>
+                                </div>
+
+                                <div class="grid-alldetails">
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            99.9% real uptime, with monitoring
+                                            you can watch live
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            A direct line to a developer who
+                                            knows your specific site
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Updates tested in staging before
+                                            they touch your live site
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Daily backups taken automatically,
+                                            kept for 30 days, tested monthly
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Active monitoring before anything
+                                            goes wrong
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Properly configured email with full
+                                            deliverability
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            Us handling DNS, SSL, redirects on
+                                            Christmas Eve
+                                        </p>
+                                    </div>
+
+                                    <div class="only-titlehere">
+                                        <div class="icon-imagestitle">
+                                            <img
+                                                src="/rights.png"
+                                                alt=""
+                                                width="30"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                        </div>
+                                        <p>
+                                            A team that already knows your stack
+                                            and who to call
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grids-pricelistss">
+                    <div class="price-holders">
+                        <h4 class="fs-30">$137 to $427</h4>
+                        <p>
+                            per minute. That's the average cost of website
+                            downtime for a small business, depending on how
+                            revenue-dependent the site is. An hour of downtime
+                            can erase a month of hosting savings.
+                        </p>
+                    </div>
+                    <div class="price-holders">
+                        <h4 class="fs-30">60%</h4>
+                        <p>
+                            of small businesses that suffer a serious
+                            cyberattack go out of business within six months.
+                            Most started with cheap, unmaintained hosting. (US
+                            National Cyber Security Alliance.)
+                        </p>
+                    </div>
+                    <div class="price-holders">
+                        <h4 class="fs-30">90,000+</h4>
+                        <p>
+                            attempted hacks per minute — that's the global rate
+                            of attacks on WordPress sites alone. Your site is
+                            being probed right now. The only question is whether
+                            anyone's watching.
+                        </p>
+                    </div>
+                </div>
+                <div class="closing-holders">
+                    <p>
+                        <strong
+                            ><i
+                                >(Source notes: Gartner / IBM downtime studies,
+                                US NCSA, Wordfence/Sucuri threat intelligence
+                                reports.)</i
+                            ></strong
+                        >
+                    </p>
+                    <p>
+                        Proper hosting and maintenance cost more than $4.99 a
+                        month. They cost a lot less than a major outage, a
+                        security breach, or a website that just quietly stops
+                        bringing in business.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="typeofsite-sec section-padding pt-0">
+            <div class="container">
+                <div class="sectioton-intro">
+                    <p class="text-lightgrey">Who we look after</p>
+                    <h3 class="fs-60">
+                        We look after three kinds of websites.
+                    </h3>
+                </div>
+
+                <div class="grid-ss">
+                    <div class="info-">
+                        <h3 class="fs-30">The site we built for you</h3>
+
+                        <p><strong>The situation</strong></p>
+
+                        <p>
+                            “OgreLogic just launched our site. We want it in
+                            good hands going forward.”
+                        </p>
+
+                        <p><strong>What we do</strong></p>
+
+                        <p>
+                            We already know the stack, integrations, and design.
+                            We keep everything secure, fast, and updated long
+                            after launch.
+                        </p>
+                    </div>
+
+                    <div class="info-">
+                        <h3 class="fs-30">The site you've outgrown</h3>
+
+                        <p><strong> The situation </strong></p>
+
+                        <p>
+                            “Our hosting was fine when we launched. Now support
+                            is slow and the site struggles.”
+                        </p>
+
+                        <p><strong> What we do </strong></p>
+
+                        <p>
+                            We migrate everything with zero downtime and improve
+                            performance immediately.
+                        </p>
+                    </div>
+
+                    <div class="info-">
+                        <h3 class="fs-30">The site you inherited</h3>
+
+                        <p><strong>The situation</strong></p>
+
+                        <p>
+                            “Our previous developer disappeared and we have no
+                            idea what's going on.”
+                        </p>
+
+                        <p>
+                            <strong>What we do</strong><p>
+                                <p>
+                                    We audit everything, regain access, and give
+                                    you back control of your infrastructure.
+                                </p>
+                            </p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="everything-sec section-padding">
+            <div class="container">
+                <div class="sectioton-intro">
+                    <p class="text-lightgrey">Everything we handle</p>
+                    <h3 class="fs-60">One team. Your entire web stack.</h3>
+                    <p>
+                        Domains, hosting, email, performance, security, backups,
+                        migrations, and ongoing care — all handled under one
+                        roof.
+                    </p>
+                </div>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/global.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Domains & Email</h3>
+                        </div>
+
+                        <ul>
+                            <li>Domain registration & renewals</li>
+                            <li>DNS management</li>
+                            <li>SSL certificates</li>
+                            <li>Email hosting</li>
+                            <li>Email deliverability</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/security.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Security</h3>
+                        </div>
+
+                        <ul>
+                            <li>Active security monitoring</li>
+                            <li>Web application firewall</li>
+                            <li>Brute-force protection</li>
+                            <li>Malware cleanup</li>
+                            <li>Two-factor authentication</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/time.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Performance</h3>
+                        </div>
+
+                        <ul>
+                            <li>CDN setup</li>
+                            <li>Caching optimization</li>
+                            <li>Image optimization</li>
+                            <li>Core Web Vitals monitoring</li>
+                            <li>Database optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/update.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Updates & Backups</h3>
+                        </div>
+
+                        <ul>
+                            <li>CMS updates</li>
+                            <li>Plugin & theme updates</li>
+                            <li>Daily automated backups</li>
+                            <li>Disaster recovery</li>
+                            <li>Staging environments</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/upload.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Migrations</h3>
+                        </div>
+
+                        <ul>
+                            <li>Site migrations</li>
+                            <li>Email migrations</li>
+                            <li>DNS cutover planning</li>
+                            <li>SEO preservation</li>
+                            <li>Infrastructure setup</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="icon-title">
+                            <img
+                                src="/call.png"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                            />
+                            <h3 class="fs-30">Ongoing Care</h3>
+                        </div>
+
+                        <ul>
+                            <li>24/7 uptime monitoring</li>
+                            <li>Bug fixes</li>
+                            <li>Content updates</li>
+                            <li>Monthly reports</li>
+                            <li>Priority support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="plan-sec section-padding">
+            <div class="container">
+                <div class="grid-pricingdata">
+                    <div class="pricing-holderss">
+                        <div class="sectioton-intros">
+                            <p class="text-lightgrey">Plans & pricing</p>
+
+                            <h4 class="fs-60">
+                                Hosting that actually performs.
+                            </h4>
+                        </div>
+                        <div class="pricing-grid">
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <h3 class="fs-30">Starter</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$39</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <p>
+                                        Best for small business websites and
+                                        portfolios.
+                                    </p>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>20 GB SSD storage</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>100 GB bandwidth</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Free SSL certificate</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Daily backups</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Cloudflare CDN</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Email support</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Get started</a
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <span class="badge-data price-badge"
+                                        >Most popular</span
+                                    >
+                                    <h3 class="fs-30">Business</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$99</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <p>
+                                        Best for growing businesses and
+                                        ecommerce sites.
+                                    </p>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>100 GB SSD storage</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>500 GB bandwidth</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>WAF protection</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>25 email accounts</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>3 staging environments</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Phone support</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Get started</a
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <h3 class="fs-30">Enterprise</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$249</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <p>
+                                        Best for large, high traffic,
+                                        mission-critical websites.
+                                    </p>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>500 GB SSD storage</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Unlimited bandwidth</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>DDoS protection</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Unlimited staging</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>24/7 support</span>
+                                        </li>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="30"
+                                                loading="lazy"
+                                            />
+                                            <span>Dedicated resources</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Talk to us</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pricing-holderss">
+                        <div class="sectioton-intro">
+                            <h4 class="fs-60">
+                                Maintenance that prevents problems.
+                            </h4>
+                        </div>
+
+                        <div class="pricing-grid">
+                            <!-- Essential -->
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <h3 class="fs-30">Essential</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$99</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Monthly updates</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Security monitoring</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>24/7 uptime monitoring</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Backup verification</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>30 mins small fixes</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Get started</a
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Advanced -->
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <span class="badge-data price-badge"
+                                        >Most Popular</span
+                                    >
+
+                                    <h3 class="fs-30">Advanced</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$249</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Weekly updates</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Performance monitoring</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>2 hours content updates</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Same-day response</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Security reports</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Get started</a
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Premium -->
+                            <div class="price-card">
+                                <div class="caradtop-data">
+                                    <h3 class="fs-30">Premium</h3>
+
+                                    <div class="price-monthly">
+                                        <h5 class="price-amount fs-60">$499</h5>
+                                        <p class="month-data">/month</p>
+                                    </div>
+
+                                    <ul>
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Daily optimization</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Malware cleanup included</span
+                                            >
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>4 hours content updates</span>
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>Senior developer support</span
+                                            >
+                                        </li>
+
+                                        <li>
+                                            <img
+                                                src="/right-2.png"
+                                                alt=""
+                                                width="20"
+                                                height="20"
+                                                loading="lazy"
+                                            />
+                                            <span>1-hour response SLA</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="universal-button">
+                                    <a href="#" class="link-button"
+                                        >Talk to us</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-sec section-padding border-section">
+            <div class="container">
+                <div class="cta-holders">
+                    <h5 class="fs-100">
+                        Bundle hosting + maintenance and save 10%
+                    </h5>
+
+                    <p>
+                        Pair any hosting plan with maintenance and get one team,
+                        one bill, and one place to call whenever something needs
+                        attention.
+                    </p>
+
+                    <div class="universal-anchor">
+                        <a href="#" class="link-button white"
+                            >Build your bundle
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="compare-sec section-padding">
+            <div class="container">
+                <div class="sectioton-intro">
+                    <h5 class="fs-60">Compare features before you commit.</h5>
+                    <p>
+                        Compare every hosting plan side by side and see exactly
+                        what’s included at each level. From storage and
+                        bandwidth to security, backups, staging environments,
+                        and support — this detailed comparison helps you choose
+                        the right plan with confidence as your website grows.
+                    </p>
+                    <div class="universal-anchor">
+                        <a href="#" class="link-button">Get started</a>
+                    </div>
+                </div>
+                <div class="compare-table table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Starter</th>
+                                <th>Business</th>
+                                <th>Enterprise</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th>Storage</th>
+                                <td>20 GB</td>
+                                <td>100 GB</td>
+                                <td>500 GB+</td>
+                            </tr>
+
+                            <tr>
+                                <th>Bandwidth</th>
+                                <td>100 GB/mo</td>
+                                <td>500 GB/mo</td>
+                                <td>Unlimited</td>
+                            </tr>
+
+                            <tr>
+                                <th>Uptime SLA</th>
+                                <td>99.9%</td>
+                                <td>99.9%</td>
+                                <td>99.99%</td>
+                            </tr>
+
+                            <tr>
+                                <th>SSL</th>
+                                <td>Free</td>
+                                <td>Free + WAF</td>
+                                <td>Free + WAF + DDoS</td>
+                            </tr>
+
+                            <tr>
+                                <th>Backups</th>
+                                <td>Daily, 30 days</td>
+                                <td>Daily, 30 days</td>
+                                <td>2× daily, 60 days</td>
+                            </tr>
+
+                            <tr>
+                                <th>Email accounts</th>
+                                <td>5</td>
+                                <td>25</td>
+                                <td>Unlimited</td>
+                            </tr>
+
+                            <tr>
+                                <th>Staging</th>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>Unlimited</td>
+                            </tr>
+
+                            <tr>
+                                <th>Support</th>
+                                <td>Business hours</td>
+                                <td>Extended hours</td>
+                                <td>24/7</td>
+                            </tr>
+
+                            <tr>
+                                <th>Free migration</th>
+                                <td>Annual only</td>
+                                <td>Yes</td>
+                                <td>Yes, priority</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section
+            class="faq-sec section-padding border-section faq-custom-scope"
+        >
+            <div class="container">
+                <div class="grid-faq-tops">
+                    <div class="faq-holdersmain">
+                        <h4 class="fs-60">Frequently Asked Questions</h4>
+
+                        <div>
+                            <p>
+                                Find answers to the most common questions about
+                                our services. If you still need help, feel free
+                                to reach out — we’re here for you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <faq-wrapper>
+                    <div class="faq-container">
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">01</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What's your actual uptime, not the
+                                            marketing number?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Across all sites we managed last
+                                            year, we delivered 99.94% real
+                                            uptime — about 30 minutes of
+                                            unplanned downtime per site per
+                                            year, including maintenance windows.
+                                            Our SLA is 99.9% on Starter and
+                                            Business hosting, and 99.99% on
+                                            Enterprise. We continuously monitor
+                                            uptime and share the real data with
+                                            you.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">02</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Do I have to sign a long-term
+                                            contract?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            No. All plans are month-to-month.
+                                            Annual plans save about two months
+                                            of fees but are never required. You
+                                            can cancel anytime with 30 days’
+                                            notice. We’d rather earn your
+                                            business every month than lock you
+                                            into a contract.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">03</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What happens if I want to leave?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            You take everything with you. We
+                                            provide a complete export of your
+                                            site, database, email, DNS records,
+                                            and credentials within five business
+                                            days of cancellation. No exit fees,
+                                            no hostage-taking.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">04</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            How do migrations work? Will my site
+                                            go down?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            No. We stage everything on the new
+                                            infrastructure, test thoroughly, and
+                                            switch DNS during off-peak hours
+                                            only after verification. Your old
+                                            site stays live as a fallback for
+                                            the first week. Most migrations have
+                                            zero noticeable downtime.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">05</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What about my email during
+                                            migration?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            We migrate every inbox, contact,
+                                            calendar, and folder carefully
+                                            before switching MX records.
+                                            Cutovers happen during off-hours,
+                                            and we verify everything before
+                                            going live. We commonly migrate to
+                                            Google Workspace and Microsoft 365.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">06</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What if my site gets hacked?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            On Essential maintenance, cleanup is
+                                            billed at our standard hourly rate.
+                                            On Advanced, malware cleanup is
+                                            included up to 2 hours per incident.
+                                            On Premium, cleanup is fully
+                                            included with no extra charge.
+                                            Either way, we handle the issue fast
+                                            and usually spot problems before
+                                            clients do.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">07</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What hosting infrastructure do you
+                                            use?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Most managed WordPress sites run on
+                                            custom cloud infrastructure using
+                                            AWS and Cloudflare. For high-traffic
+                                            projects, we deploy dedicated
+                                            environments. We also manage
+                                            Webflow, Shopify, React/Next.js,
+                                            Drupal, Joomla, and custom PHP
+                                            hosting setups.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">08</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Do you handle small website tasks
+                                            too?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Yes. Domain renewals, email
+                                            forwarding, image swaps, broken
+                                            links, and small updates are all
+                                            part of the managed experience. You
+                                            send the request — we handle it.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">09</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            Does location matter if I'm in
+                                            Texas?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Texas clients can schedule in-person
+                                            workshops and meetings in Dallas,
+                                            Houston, or Austin. For everyone
+                                            else, we work remotely with video
+                                            calls, shared docs, and 24/7
+                                            monitoring. The experience and
+                                            outcomes stay the same.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">10</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            What CMS platforms do you support?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            WordPress is the most common, but we
+                                            also support Webflow, Shopify,
+                                            Drupal, Joomla, React/Next.js,
+                                            custom PHP sites, and more. If your
+                                            stack isn’t listed, ask — chances
+                                            are we’ve worked with it.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-holders">
+                            <div class="number-dats">
+                                <p class="faq-no">11</p>
+                            </div>
+
+                            <div class="alladat-hersss">
+                                <div class="grid-faq">
+                                    <div class="title-faq">
+                                        <h6 class="faq-title">
+                                            I'm not sure which plan I need. Can
+                                            you help?
+                                        </h6>
+                                    </div>
+
+                                    <div class="faq-icon">
+                                        <span class="faq-symbol"></span>
+                                    </div>
+                                </div>
+
+                                <div class="bootm-data">
+                                    <div class="faqy-deschere">
+                                        <p>
+                                            Yes. That’s what the free audit is
+                                            for. We review your site, traffic,
+                                            integrations, and goals, then
+                                            recommend the right plan — even if
+                                            it’s the cheapest option. Long-term
+                                            fit matters more than upselling.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="loadmore-button">
+                        <div class="universal-anchor">
+                            <a href="javascript:void(0)" class="link-button">
+                                Load more
+                            </a>
+                        </div>
+                    </div>
+                </faq-wrapper>
+            </div>
+        </section>
+
+        <Footer />
+        <script is:inline>
+            // Optimized FAQ Logic - Using original tags/classes
+            class FaqWrapper extends HTMLElement {
+                connectedCallback() {
+                    const holders = this.querySelectorAll(".faq-holders");
+                    const loadMoreBtn = this.querySelector(
+                        ".loadmore-button .link-button",
+                    );
+                    const container = this.querySelector(".faq-container");
+                    let currentVisible = 4;
+
+                    // 1. Accordion Toggle Logic
+                    container?.addEventListener("click", (e) => {
+                        const header = e.target.closest(".grid-faq");
+                        if (!header) return;
+
+                        const content = header.nextElementSibling;
+                        const isActive = header.classList.contains("active");
+
+                        // Close others
+                        this.querySelectorAll(".grid-faq").forEach((h) =>
+                            h.classList.remove("active"),
+                        );
+                        this.querySelectorAll(".bootm-data").forEach((c) =>
+                            c.classList.remove("active"),
+                        );
+
+                        if (!isActive) {
+                            header.classList.add("active");
+                            content.classList.add("active");
+                        }
+                    });
+
+                    // 2. Load More Logic
+                    const updateVisibility = () => {
+                        holders.forEach(
+                            (h, i) =>
+                                (h.style.display =
+                                    i < currentVisible ? "" : "none"),
+                        );
+                        if (currentVisible >= holders.length && loadMoreBtn) {
+                            loadMoreBtn.closest(
+                                ".loadmore-button",
+                            ).style.display = "none";
+                        }
+                    };
+
+                    loadMoreBtn?.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        currentVisible += 4;
+                        updateVisibility();
+                    });
+
+                    updateVisibility();
+                }
+            }
+            if (!customElements.get("faq-wrapper"))
+                customElements.define("faq-wrapper", FaqWrapper);
+        </script>
+        <style>
+            .trsuststrip-grids {
+                display: flex;
+                gap: 30px;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .truststrip-data a {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: fit-content;
+                width: 100%;
+                border: 1px solid #e5e5e1;
+                padding: 10px 30px;
+                border-radius: 10px;
+                overflow: hidden;
+                background: var(--color-white);
+            }
+
+            .truststrip-data p {
+                font-weight: 500;
+                padding: 0;
+            }
+
+            .only-titlehere {
+                display: flex;
+                align-items: start;
+                gap: 15px;
+                padding: 10px 0px;
+                border-bottom: 1px solid #e1e1e1;
+            }
+            .icon-imagestitle {
+                max-width: 30px;
+                width: 100%;
+            }
+
+            .only-titlehere p,
+            .price-holders p,
+            .closing-holders p,
+            .info- p {
+                font-size: 17px;
+                font-weight: 400;
+            }
+
+            .only-titlehere p {
+                padding-bottom: 0;
+            }
+
+            .only-titlehere .fs-30 {
+                font-weight: 500;
+                padding: 0;
+            }
+
+            .alldata-tabless {
+                max-width: 90%;
+                width: 100%;
+                padding-top: 60px;
+            }
+
+            .sectioton-intro {
+                max-width: 80%;
+                width: 100%;
+            }
+
+            .only-titlehere.titless {
+                padding: 0px 0px 15px;
+            }
+
+            .grids-pricelistss {
+                display: flex;
+                justify-content: center;
+                column-gap: 50px;
+                row-gap: 50px;
+                padding: 80px 0px;
+            }
+
+            .price-holders .fs-30 {
+                font-weight: 500;
+                color: var(--color-blue);
+            }
+
+            .price-holders {
+                max-width: 515px;
+                width: 100%;
+                box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+                padding: 20px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .info- .fs-30 {
+                font-weight: 500;
+            }
+
+            .grid-ss {
+                display: flex;
+                gap: 20px;
+                padding-top: 50px;
+                justify-content: space-between;
+            }
+
+            .info- {
+                overflow: hidden;
+                max-width: 455px;
+                width: 100%;
+            }
+
+            .service-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 50px;
+                width: 100%;
+                padding-top: 50px;
+            }
+
+            .service-card .fs-30 {
+                font-weight: 500;
+                padding-bottom: 0;
+                position: relative;
+            }
+
+            .service-card .fs-30::after {
+                position: absolute;
+                content: "";
+                width: 100px;
+                height: 2px;
+                background: #4541f1;
+                left: 0;
+                bottom: -8px;
+            }
+
+            .service-card ul {
+                padding-left: 25px;
+            }
+
+            .service-card ul li {
+                font-size: 20px;
+                font-weight: 400;
+                padding: 10px 0px;
+                border-bottom: 1px solid #dbdbdb;
+                list-style: disc;
+            }
+
+            .everything-sec {
+                background: var(--color-f5f5f0);
+            }
+
+            .popular {
+                border: 1px solid #2f7cff;
+                transform: scale(1.03);
+            }
+
+            .badge {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: #2f7cff;
+                color: #fff;
+                padding: 8px 14px;
+                border-radius: 100px;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            .price {
+                font-size: 58px;
+                margin: 20px 0;
+            }
+
+            .compare-table th,
+            .compare-table td {
+                padding: 18px;
+                border: 1px solid #dddddd;
+                text-align: left;
+                vertical-align: top;
+                font-size: 17px;
+                line-height: normal;
+            }
+
+            .compare-table {
+                padding-top: 50px;
+            }
+
+            .compare-table thead tr th {
+                background: var(--color-blue);
+                color: var(--color-white);
+                font-size: var(--fs-20);
+            }
+
+            .sectioton-intro .universal-anchor {
+                padding-top: 30px;
+            }
+            .icon-title {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                width: 100%;
+                padding-bottom: 15px;
+            }
+            @media (max-width: 1600px) {
+                .service-card ul li {
+                    font-size: 18px;
+                }
+            }
+            @media (max-width: 1400px) {
+                .only-titlehere p,
+                .price-holders p,
+                .closing-holders p,
+                .info- p {
+                    font-size: 15px;
+                    font-weight: 400;
+                }
+                .truststrip-data a {
+                    padding: 5px 20px;
+                }
+                .grids-pricelistss {
+                    padding: 30px 0px;
+                }
+                .service-card ul li {
+                    font-size: 15px;
+                }
+                .icon-title {
+                    padding-bottom: 10px;
+                }
+                .compare-table th,
+                .compare-table td {
+                    font-size: 15px;
+                    padding: 10px;
+                }
+            }
+            @media (max-width: 991px) {
+                .sectioton-intro {
+                    max-width: 100%;
+                }
+                .service-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    padding-top: 50px;
+                }
+                .grid-ss {
+                    flex-direction: column;
+                    gap: 30px;
+                }
+                .info- {
+                    max-width: 100%;
+                }
+                .grids-pricelistss {
+                    gap: 30px;
+                    flex-wrap: wrap;
+                }
+                .price-holders {
+                    max-width: 100%;
+                }
+            }
+            @media(max-width:767px){
+                .alldata-tabless{
+                    padding-top: 30px;
+                }
+                .grid-ss{
+                    padding-top: 20px;
+                }
+                .compare-table{
+                    padding-top: 30px;
+                }
+                .sectioton-intro .universal-anchor{
+                    padding-top: 10px;
+                }
+                    .compare-table th, .compare-table td {
+        font-size: 15px;
+        padding: 10px;
+        min-width: 150px;
+    }
+            }
+            @media(max-width:575px){
+                    .service-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        padding-top: 20px;
+        gap: 30px;
+    }
+            }
+        </style>
+    </body>
+</html>

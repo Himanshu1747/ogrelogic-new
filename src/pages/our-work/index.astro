@@ -1,0 +1,1026 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { queryWordPress } from "../../lib/wordpress";
+
+const PORTFOLIO_QUERY = `
+query GetPortfolioData {
+  portfolios(first: 20) {
+    nodes {
+      title
+      slug
+      featuredImage { node { sourceUrl altText } }
+      excerpt
+      portfolioCategories { nodes { slug } }
+      portfoliomain {
+        toLive
+        catTypes { typesName }
+        projcetUrl {
+          liveUrl { title url target }
+          techImage { node { sourceUrl } }
+        }
+      }
+    }
+  }
+}
+`;
+
+const OURWORKSS = `
+query OurWorks {
+  page(id: "/our-work", idType: URI) {
+    seo { canonical cornerstone focuskw fullHead }
+    title
+    content
+    featuredImage {
+      node {
+        sourceUrl
+        altText
+        mediaDetails {
+          width
+          height
+        }
+      }
+    }
+    ourWorks{
+      portfolioTitle
+      portfolioDesc
+    }
+  }
+}
+`;
+
+// Optimization: Fetching both queries in parallel to reduce server response time
+const [portfolioRes, pageRes] = await Promise.all([
+    queryWordPress(PORTFOLIO_QUERY),
+    queryWordPress(OURWORKSS),
+]);
+
+const allNodes = portfolioRes?.data?.portfolios?.nodes || [];
+const displayedNodes = allNodes;
+
+const finalaaldata = pageRes?.data?.page;
+const finalaaldataseo = pageRes?.data?.page?.seo;
+
+// Preload the Featured Image URL if it exists
+const lcpImage = finalaaldata?.featuredImage?.node?.sourceUrl;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+        {/* High Speed: Preload the LCP (Banner) Image */}
+        {
+            lcpImage && (
+                <link
+                    rel="preload"
+                    as="image"
+                    href={lcpImage}
+                    fetchpriority="high"
+                />
+            )
+        }
+
+        {/* High Speed: Load Swiper CSS without blocking the main thread */}
+        <link
+            rel="preload"
+            href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+            />
+        </noscript>
+
+        <BaseHead
+            useYoast={true}
+            canonical={finalaaldataseo?.canonical || ""}
+            focuskw={finalaaldataseo?.focuskw || ""}
+        />
+        {
+            finalaaldataseo?.fullHead && (
+                <Fragment set:html={finalaaldataseo.fullHead} />
+            )
+        }
+    </head>
+    <body>
+        <Header />
+        <section class="banner-sec banner-radius">
+            <div class="banner-space"></div>
+            <div class="container">
+                <div class="tect-holderbanner">
+                    <h1 class="fs-60">Our Innovative Creations</h1>
+                    <p>
+                        Discover our portfolio of innovative, high-impact
+                        projects that reflect our creativity and technical
+                        expertise.
+                    </p>
+                    <div class="grid-buttons">
+                        <div class="universal-anchor">
+                            <a
+                                class="link-button"
+                                href="#"
+                                title="Get Started Today">Get Started Today</a
+                            >
+                        </div>
+                        <div class="universal-anchor">
+                            <a
+                                class="link-button orange"
+                                href="#"
+                                title="Contact Us">Contact Us</a
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-here mobile">
+                    <img
+                        src="/Group-8816.webp"
+                        alt="Our Innovative Creations"
+                        width="1354"
+                        height="535"
+                        fetchpriority="high"
+                        decoding="async"
+                        loading="eager"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="allworks-sec section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="onlydeatils-here">
+                            <h2 class="fs-60">Our Portfolio</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="maindetsil-heading">
+                            <p>
+                                Discover our portfolio of innovative,
+                                high-impact projects that reflect our creativity
+                                and technical expertise across multiple
+                                industries.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filtesrgrid">
+                    <ul class="filter-lists">
+                        <li class="active">
+                            <a href="javascript:void(0)" data-filter="all"
+                                >All</a
+                            >
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-filter="website"
+                                >Website Design</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="mobile-app">Mobile App</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="healthcare">Healthcare</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="travel-hospitality"
+                                >Travel & Hospitality</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="food-beverages">Food & Beverages</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="fashion-beauty">Fashion & Beauty</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="finance-consulting"
+                                >Finance & Consulting</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="coaching-wellness"
+                                >Coaching & Wellness</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                data-filter="e-commerce">E-Commerce</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="gridsall-workss">
+                    <!-- Item 1: WA OT Association -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-97.webp"
+                                alt="WA OT Association"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">WA OT Association</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Healthcare</li>
+                                    <li>Association Management</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/wa-ot-association/id6468819515"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    The WA OT App helps occupational therapy
+                                    professionals manage memberships, register
+                                    for conferences, explore sessions, and stay
+                                    connected with the Washington OT community.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/wa-ot-association"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Rapagra -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-102.webp"
+                                alt="Rapagra"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">Rapagra</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>AgriTech</li>
+                                    <li>Crop Health</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/rapagra/id6504560528"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.orelogic.rapagraApp&hl=en"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    This smart farming app helps growers reduce
+                                    crop protection costs, detect plant disease
+                                    risks early, and improve yields through
+                                    data-driven crop monitoring and precision
+                                    agriculture technology.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/rapagra"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: PowerThinking Corp -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-101.webp"
+                                alt="PowerThinking Corp"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">PowerThinking Corp</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Mental Wellness</li>
+                                    <li>Positive Thinking</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/powerthinkingcorp/id6472655350"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.ogrelogic.powerthinkingcorp&hl=en"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    PowerThinking helps improve mental
+                                    well-being through positive thinking,
+                                    resilience tools, and confidence-building
+                                    strategies inspired by positive psychology.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/powerthinking-corp"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Goodwin Academy -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-100.webp"
+                                alt="Goodwin Academy"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">Goodwin Academy</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Childcare</li>
+                                    <li>Learning Center</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/goodwin-academy/id6755599268"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.goodwin.academy&hl=en"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    Goodwin Academy is a licensed childcare
+                                    center offering safe, screen-free early
+                                    learning with extended hours, caring staff,
+                                    and a nurturing environment for children to
+                                    grow and thrive.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/goodwin-academy"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: PLATE by Prime Women -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-99.webp"
+                                alt="PLATE by Prime Women"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">
+                                PLATE by Prime Women
+                            </h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Health & Fitness</li>
+                                    <li>Women’s Wellness</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.ogrelogic.primewomen&hl=en"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    PLATE by Prime Women helps women 50+ manage
+                                    weight through intermittent fasting,
+                                    hormone-focused wellness, and expert
+                                    guidance for healthier, sustainable results.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/plate-by-prime-women"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: DiCE Step App -->
+                    <div class="works-holderss" data-categories="mobile-app">
+                        <div class="work-imagess">
+                            <img
+                                src="/image-98.webp"
+                                alt="DiCE Step App"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">DiCE Step App</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>Health & Fitnes</li>
+                                    <li>Lifestyle</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://apps.apple.com/in/app/dice-stepapp/id1665136522"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/apple-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                        <a
+                                            href="https://play.google.com/store/apps/details?id=com.ogrelogic.stepapp&hl=en"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/social-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    StepApp is a fitness and step-tracking app
+                                    that motivates users to stay active while
+                                    raising awareness for digestive cancer
+                                    prevention across Europe.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/dice-step-app"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 7: J.Pierce -->
+                    <div
+                        class="works-holderss"
+                        data-categories="video-portfolio website"
+                    >
+                        <div class="work-imagess">
+                            <img
+                                src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/04/jpierce-mob-1.webp"
+                                alt="J.Pierce"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">J.Pierce</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>ui ux</li>
+                                    <li>Art</li>
+                                    <li>Artist eCommerce Store</li>
+                                    <li>Visual Arts Portfolio</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://jpierce.com/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/web-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    Bold contemporary art platform designed for
+                                    showcasing paintings, apparel, and creative
+                                    collaborations.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/j-pierce-art"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 8: soup4change -->
+                    <div
+                        class="works-holderss"
+                        data-categories="image-portfolio website"
+                    >
+                        <div class="work-imagess">
+                            <img
+                                src="/pcimage-1.webp"
+                                alt="soup4change"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">soup4change</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>ui ux</li>
+                                    <li>Campaign</li>
+                                    <li>Leadership</li>
+                                    <li>Political</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://www.soup4change.com/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/web-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    Modern political campaign website built for
+                                    fundraising, voter outreach, and grassroots
+                                    engagement.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions"></div>
+                        </div>
+                    </div>
+
+                    <!-- Item 9: TallowJena -->
+                    <div
+                        class="works-holderss"
+                        data-categories="image-portfolio website"
+                    >
+                        <div class="work-imagess">
+                            <img
+                                src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/04/tellowjena-mob-1.webp"
+                                alt="TallowJena"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">TallowJena</h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>ui ux</li>
+                                    <li>Organic</li>
+                                    <li>Skincare</li>
+                                    <li>Health & Beauty</li>
+                                    <li>Skincare</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://tallowjena.com/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/web-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    Organic wellness brand website featuring
+                                    Shopify integration, blogs, and
+                                    conversion-focused product pages.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions">
+                                <a
+                                    href="/our-work/tallowjena"
+                                    class="learn-more-link"
+                                >
+                                    <p class="learn-more">
+                                        Case study <span> → </span>
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 10: Upperroom 3 Productions -->
+                    <div
+                        class="works-holderss"
+                        data-categories="video-portfolio website"
+                    >
+                        <div class="work-imagess">
+                            <img
+                                src="https://web.ogrelogicsolutions.com/ogrelogic-wp/wp-content/uploads/2026/04/upper-room-mob-2.webp"
+                                alt="Upperroom 3 Productions"
+                                width="500"
+                                height="370"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <div class="work-details">
+                            <h3 class="fs-20 work-title">
+                                Upperroom 3 Productions
+                            </h3>
+                            <div class="gridicons-lists">
+                                <ul class="badge-grids work-tags">
+                                    <li>ui ux</li>
+                                    <li>Studio</li>
+                                    <li>Videography</li>
+                                    <li>Media</li>
+                                </ul>
+                                <div class="icon-dataurl">
+                                    <div class="imageicons">
+                                        <a
+                                            href="https://upperroom3productions.com/"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src="/web-1.png"
+                                                alt="icon"
+                                                height="30"
+                                                width="30"
+                                                loading="lazy"
+                                            />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-excerpt">
+                                <p>
+                                    Photography and videography website with
+                                    portfolio, booking, blog, and print store
+                                    integration.
+                                </p>
+                            </div>
+                            <div class="grid-urls work-actions"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="universal-anchor">
+                    <a
+                        href="javascript:void(0)"
+                        id="loadMoreBtn"
+                        class="link-button">Load more</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <Footer />
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const filterLinks =
+                    document.querySelectorAll(".filter-lists li a");
+                const workItems = Array.from(
+                    document.querySelectorAll(".works-holderss"),
+                );
+                const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+                const ITEMS_PER_PAGE = 6;
+                let currentVisibleLimit = ITEMS_PER_PAGE;
+                let currentActiveFilter = "all";
+
+                function updateGrid() {
+                    let matchingItems = [];
+                    workItems.forEach((item) => {
+                        const itemCategories =
+                            item.getAttribute("data-categories") || "";
+                        const htmlItem = item as HTMLElement;
+
+                        if (
+                            currentActiveFilter === "all" ||
+                            itemCategories
+                                .toLowerCase()
+                                .includes(currentActiveFilter)
+                        ) {
+                            matchingItems.push(htmlItem);
+                        } else {
+                            htmlItem.style.display = "none";
+                        }
+                    });
+
+                    matchingItems.forEach((item, index) => {
+                        item.style.display =
+                            index < currentVisibleLimit ? "" : "none";
+                    });
+
+                    if (loadMoreBtn) {
+                        loadMoreBtn.style.display =
+                            matchingItems.length > currentVisibleLimit
+                                ? "inline-block"
+                                : "none";
+                    }
+                }
+
+                filterLinks.forEach((link) => {
+                    link.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const target = e.currentTarget as HTMLElement;
+                        document
+                            .querySelectorAll(".filter-lists li")
+                            .forEach((li) => li.classList.remove("active"));
+                        target.parentElement?.classList.add("active");
+                        currentActiveFilter =
+                            target.getAttribute("data-filter")?.toLowerCase() ||
+                            "all";
+                        currentVisibleLimit = ITEMS_PER_PAGE;
+                        updateGrid();
+                    });
+                });
+
+                loadMoreBtn?.addEventListener("click", () => {
+                    currentVisibleLimit += ITEMS_PER_PAGE;
+                    updateGrid();
+                });
+
+                updateGrid();
+            });
+        </script>
+
+        <style>
+            .gridsall-workss,
+            section.allworks-sec.section-padding .universal-anchor {
+                padding-top: 80px;
+            }
+            section.allworks-sec.section-padding .universal-anchor {
+                max-width: fit-content;
+                margin: 0 auto;
+                width: 100%;
+            }
+            ul.filter-lists {
+                display: flex;
+                row-gap: 20px;
+                flex-wrap: wrap;
+                column-gap: 10px;
+                padding-top: 50px;
+                list-style: none;
+            }
+            ul.filter-lists li a {
+                background: #ffffff;
+                font-size: 16px;
+                font-weight: 500;
+                display: block;
+                padding: 10px 25px;
+                border-radius: 31px;
+                border: 1px solid #dddddd;
+                text-decoration: none;
+                color: #333;
+            }
+            ul.filter-lists li.active a,
+            ul.filter-lists li a:hover {
+                color: #fff;
+                background: var(--color-blue, #007bff);
+                border-color: var(--color-blue, #007bff);
+            }
+
+            .learn-more {
+                color: var(--color-blue, #007bff);
+                font-weight: 500;
+            }
+            @media (max-width: 1600px) {
+                .gridsall-workss,
+                section.allworks-sec.section-padding .universal-anchor {
+                    padding-top: 60px;
+                }
+            }
+            @media (max-width: 1400px) {
+                .gridsall-workss,
+                section.allworks-sec.section-padding .universal-anchor {
+                    padding-top: 40px;
+                }
+            }
+            @media (max-width: 767px) {
+                ul.filter-lists {
+                    gap: 10px;
+                    justify-content: center;
+                }
+                ul.filter-lists {
+                    padding-top: 30px;
+                }
+            }
+        </style>
+    </body>
+</html>

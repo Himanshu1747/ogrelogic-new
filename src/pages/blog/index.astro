@@ -1,0 +1,846 @@
+---
+import { queryWordPress } from "../../lib/wordpress";
+import { getCollection } from "astro:content";
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const MAIN_BLOGDATA = `
+query MainBlog {
+  posts(first: 100) {
+    nodes {
+      title
+      slug
+      excerpt
+      date
+      featuredImage {
+        node {
+          imgThumbnail: sourceUrl(size: THUMBNAIL)
+          imgMedium: sourceUrl(size: MEDIUM)
+          imgMediumLarge: sourceUrl(size: MEDIUM_LARGE)
+          imgFull: sourceUrl
+        }
+      }
+      categories {
+        nodes {
+          id
+          name
+          slug
+        }
+      }
+
+    }
+  }
+}
+`;
+const blogdatares = await queryWordPress(MAIN_BLOGDATA);
+
+// Sort the fetched data strictly by date descending to ensure chronological order
+const finaldata = (blogdatares?.data?.posts?.nodes || []).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+);
+
+const BLOGPAGE = `
+query blogpage{
+   page(id: "blog", idType: URI){
+    title
+    content
+    featuredImage {
+      node {
+        mediaItemUrl
+        altText
+        mediaDetails {
+          height
+          width
+        }
+      }
+    }
+    blogPage{
+      latestArticles
+    }
+    seo {
+      canonical
+      cornerstone
+      focuskw
+      fullHead
+    }
+  }
+}
+`;
+const blogpagedata = await queryWordPress(BLOGPAGE);
+const finalpagedata = blogpagedata.data.page;
+const seodata = finalpagedata?.seo;
+const latestPost = finaldata?.[0];
+const sidePosts = finaldata?.slice(1, 5) || [];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            useYoast={true}
+            canonical={seodata?.canonical || ""}
+            focuskw={seodata?.focuskw || ""}
+        />
+        {seodata?.fullHead && <Fragment set:html={seodata.fullHead} />}
+    </head>
+    <body>
+        <Header />
+        <section class="banner-sec banner-radius">
+            <div class="banner-space"></div>
+            <div class="container">
+                <div
+                    class="tect-holderbanner"
+                    set:html={finalpagedata?.content || "error"}
+                />
+                <div class="image-here mobile">
+                    <img
+                        src={finalpagedata?.featuredImage?.node?.mediaItemUrl ||
+                            "error"}
+                        height={finalpagedata?.featuredImage?.node?.mediaDetails
+                            ?.height || "error"}
+                        width={finalpagedata?.featuredImage?.node?.mediaDetails
+                            ?.width || "error"}
+                        title={finalpagedata?.title || "error"}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="bloginmain-sec section-padding">
+            <div class="container">
+                <div
+                    class="alltop-data"
+                    set:html={finalpagedata?.blogPage?.latestArticles ||
+                        "error"}
+                />
+                <div class="rowdata-holders">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {
+                                latestPost && (
+                                    <a
+                                        href={`/blog/${latestPost.slug}/`}
+                                        title={latestPost.title}
+                                    >
+                                        <div class="blog-latestholders">
+                                            <div class="image-blogs">
+                                                <span class="latestblogs">
+                                                    Latest Blog
+                                                </span>
+                                                <img
+                                                    src={
+                                                        latestPost.featuredImage
+                                                            ?.node
+                                                            ?.imgMediumLarge ||
+                                                        "/blog-3.webp"
+                                                    }
+                                                    alt={latestPost.title}
+                                                    width="776"
+                                                    height="776"
+                                                />
+                                            </div>
+                                            <div class="short-data">
+                                                <span class="type-blogs">
+                                                    {latestPost?.categories?.nodes?.[0]?.name || "error"}
+                                                </span>
+                                                <h5 class="fs-35">
+                                                    {latestPost.title}
+                                                </h5>
+                                                <Fragment
+                                                    set:html={
+                                                        latestPost.excerpt || ""
+                                                    }
+                                                />
+                                                <div class="readmoress">
+                                                    <p class="learn-more">
+                                                        Read more
+                                                        <span> → </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                )
+                            }
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="grid-bloslists">
+                                {
+                                    sidePosts.map((post) => (
+                                        <a
+                                            href={`/blog/${post.slug}/`}
+                                            title={post.title}
+                                        >
+                                            <div class="flex-blogss">
+                                                <div class="blog-thumbnails">
+                                                    <img
+                                                        src={
+                                                            post.featuredImage
+                                                                ?.node
+                                                                ?.imgMedium ||
+                                                            "/blog-3.webp"
+                                                        }
+                                                        alt={post.title}
+                                                        width="200"
+                                                        height="200"
+                                                    />
+                                                </div>
+                                                <div class="alldata-here">
+                                                    <span class="type-blogs">
+                                                       {latestPost?.categories?.nodes?.[0]?.name || "error"}
+                                                    </span>
+                                                    <h5 class="fs-20">
+                                                        {post.title}
+                                                    </h5>
+                                                    <p class="date-here">
+                                                        {post.date
+                                                            ? new Date(
+                                                                  post.date,
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      month: "short",
+                                                                      day: "numeric",
+                                                                      year: "numeric",
+                                                                  },
+                                                              )
+                                                            : ""}
+                                                    </p>
+                                                    <div class="readmoress">
+                                                        <p class="learn-more">
+                                                            Read more
+                                                            <span> → </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-filterblogs">
+                    <ul class="filter-lists">
+                        <li class="active">
+                            <a
+                                href="javascript:void(0)"
+                                title="All Blogs"
+                                data-filter="all"
+                            >
+                                All Blogs
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Content Marketing"
+                                data-filter="content-marketing"
+                            >
+                                Content Marketing
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Digital Marketing"
+                                data-filter="digital-marketing"
+                            >
+                                Digital Marketing
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Mobile App"
+                                data-filter="mobile-app"
+                            >
+                                Mobile App
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Mobile Marketing"
+                                data-filter="mobile-marketing"
+                            >
+                                Mobile Marketing
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Online Marketing"
+                                data-filter="online-marketing"
+                            >
+                                Online Marketing
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="SEO Services"
+                                data-filter="seo-services"
+                            >
+                                Seo Services
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Social Media"
+                                data-filter="social-media"
+                            >
+                                Social Media
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Video Marketing"
+                                data-filter="video-marketing"
+                            >
+                                Video Marketing
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="javascript:void(0)"
+                                title="Website Development"
+                                data-filter="website-development"
+                            >
+                                Website Development
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="allblogsnow-here">
+                        {
+                            finaldata.map((blogitems, index) => (
+                                <a
+                                    href={`/blog/${blogitems.slug}/`}
+                                    title={blogitems?.title || "error"}
+                                    CatTypes={
+                                        blogitems?.categories?.nodes[0]?.slug ||
+                                        "error"
+                                    }
+                                    style={index < 5 ? "display: none;" : ""}
+                                >
+                                    <div class="flex-blogss">
+                                        <div class="blog-thumbnails">
+                                            <img
+                                                src={
+                                                    blogitems?.featuredImage
+                                                        ?.node?.imgMedium ||
+                                                    "/blog-3.webp"
+                                                }
+                                                alt={
+                                                    blogitems?.title || "error"
+                                                }
+                                                width="345"
+                                                height="345"
+                                            />
+                                        </div>
+                                        <div class="alldata-here">
+                                            <span class="type-blogs">
+                                               {latestPost?.categories?.nodes?.[0]?.name || "error"}
+                                            </span>
+                                            <h5 class="fs-20">
+                                                {blogitems?.title || "error"}
+                                            </h5>
+                                            <p class="date-here">
+                                                {blogitems?.date
+                                                    ? new Date(
+                                                          blogitems.date,
+                                                      ).toLocaleDateString(
+                                                          "en-US",
+                                                          {
+                                                              month: "short",
+                                                              day: "numeric",
+                                                              year: "numeric",
+                                                          },
+                                                      )
+                                                    : "error"}
+                                            </p>
+
+                                            <div class="readmoress">
+                                                <p class="learn-more">
+                                                    Read more<span> → </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div
+                    id="noResults"
+                    style="display: none; text-align: center; padding: 50px;"
+                >
+                    <p>No blogs found matching your selection.</p>
+                </div>
+                <div class="pagination-data">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            </ul>
+                    </nav>
+                </div>
+            </div>
+        </section>
+        <Footer />
+        <script>
+            function initBlogFilters() {
+                const filterLinks = document.querySelectorAll(".filter-lists li a");
+                const blogCards = document.querySelectorAll(".allblogsnow-here > a");
+                const noResults = document.getElementById("noResults");
+                const paginationUl = document.querySelector(".pagination");
+
+                let currentPage = 1;
+                const itemsPerPage = 8;
+                let currentFilter = "all";
+
+                // Read structural values directly from URL on initialization
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has("page")) {
+                    currentPage = parseInt(urlParams.get("page") || "1", 10) || 1;
+                }
+                if (urlParams.has("filter")) {
+                    currentFilter = urlParams.get("filter") || "all";
+                    document.querySelectorAll(".filter-lists li").forEach((li) => li.classList.remove("active"));
+                    const targetLink = document.querySelector(`.filter-lists li a[data-filter="${currentFilter}"]`);
+                    targetLink?.parentElement?.classList.add("active");
+                }
+
+                function updateDisplay(shouldPushState = true) {
+                    let filteredCards: HTMLElement[] = [];
+
+                    // 1. Filter elements according to current active category selection criteria
+                    blogCards.forEach((element, index) => {
+                        const anchor = element as HTMLElement;
+                        const itemCategorySlug = anchor.getAttribute("CatTypes") || "";
+
+                        if (currentFilter === "all") {
+                            if (index >= 5) {
+                                filteredCards.push(anchor);
+                            } else {
+                                anchor.style.display = "none";
+                            }
+                        } else {
+                            if (itemCategorySlug === currentFilter) {
+                                filteredCards.push(anchor);
+                            } else {
+                                anchor.style.display = "none";
+                            }
+                        }
+                    });
+
+                    // 2. Setup standard metric pagination ranges
+                    const totalItems = filteredCards.length;
+                    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+                    if (currentPage > totalPages) currentPage = totalPages;
+                    if (currentPage < 1) currentPage = 1;
+
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+
+                    // 3. Render items bounded within calculated active window limits
+                    filteredCards.forEach((anchor, idx) => {
+                        if (idx >= startIndex && idx < endIndex) {
+                            anchor.style.display = "block";
+                        } else {
+                            anchor.style.display = "none";
+                        }
+                    });
+
+                    if (noResults) {
+                        noResults.style.display = totalItems === 0 ? "block" : "none";
+                    }
+
+                    // 4. Update the URL dynamically with query strings to support direct link deep-sharing
+                    if (shouldPushState) {
+                        const newParams = new URLSearchParams();
+                        if (currentPage > 1) {
+                            newParams.set("page", currentPage.toString());
+                        }
+                        if (currentFilter !== "all") {
+                            newParams.set("filter", currentFilter);
+                        }
+                        
+                        const paramString = newParams.toString();
+                        const dynamicUrl = paramString ? `/blog/?${paramString}` : '/blog/';
+                        window.history.pushState({ page: currentPage, filter: currentFilter }, "", dynamicUrl);
+                    }
+
+                    // 5. Build full pagination element trees
+                    if (paginationUl) {
+                        paginationUl.innerHTML = "";
+
+                        if (totalItems > 0) {
+                            // Previous Control Link Element
+                            const prevLi = document.createElement("li");
+                            prevLi.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
+                            prevLi.innerHTML = `<a class="page-link" href="javascript:void(0)">Previous</a>`;
+                            if (currentPage > 1) {
+                                prevLi.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    currentPage--;
+                                    updateDisplay(true);
+                                    document.querySelector('.grid-filterblogs')?.scrollIntoView({ behavior: 'smooth' });
+                                });
+                            }
+                            paginationUl.appendChild(prevLi);
+
+                            // Numerical Grid Button Loop Generation
+                            for (let i = 1; i <= totalPages; i++) {
+                                const pageLi = document.createElement("li");
+                                pageLi.className = `page-item ${i === currentPage ? "active" : ""}`;
+                                pageLi.innerHTML = `<a class="page-link" href="javascript:void(0)">${i}</a>`;
+                                pageLi.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    currentPage = i;
+                                    updateDisplay(true);
+                                    document.querySelector('.grid-filterblogs')?.scrollIntoView({ behavior: 'smooth' });
+                                });
+                                paginationUl.appendChild(pageLi);
+                            }
+
+                            // Next Control Link Element
+                            const nextLi = document.createElement("li");
+                            nextLi.className = `page-item ${currentPage === totalPages ? "disabled" : ""}`;
+                            nextLi.innerHTML = `<a class="page-link" href="javascript:void(0)">Next</a>`;
+                            if (currentPage < totalPages) {
+                                nextLi.addEventListener("click", (e) => {
+                                    e.preventDefault();
+                                    currentPage++;
+                                    updateDisplay(true);
+                                    document.querySelector('.grid-filterblogs')?.scrollIntoView({ behavior: 'smooth' });
+                                });
+                            }
+                            paginationUl.appendChild(nextLi);
+                        }
+                    }
+                }
+
+                // Register event attachments for the category links
+                filterLinks.forEach((link) => {
+                    link.addEventListener("click", (e) => {
+                        e.preventDefault();
+
+                        document.querySelectorAll(".filter-lists li").forEach((li) => li.classList.remove("active"));
+                        link.parentElement?.classList.add("active");
+
+                        currentFilter = link.getAttribute("data-filter") || "all";
+                        currentPage = 1; 
+                        updateDisplay(true);
+                    });
+                });
+
+                // Listen to native browser forward/backward actions seamlessly
+                window.addEventListener("popstate", (e) => {
+                    if (e.state) {
+                        currentPage = e.state.page || 1;
+                        currentFilter = e.state.filter || "all";
+
+                        document.querySelectorAll(".filter-lists li").forEach((li) => li.classList.remove("active"));
+                        const targetLink = document.querySelector(`.filter-lists li a[data-filter="${currentFilter}"]`);
+                        targetLink?.parentElement?.classList.add("active");
+
+                        updateDisplay(false);
+                    }
+                });
+
+                // Initial Execution layout build step
+                updateDisplay(false);
+            }
+
+            initBlogFilters();
+            document.addEventListener("astro:page-load", initBlogFilters);
+        </script>
+        <style>
+            ul.filter-lists li a {
+                background: var(--color-white);
+                max-width: fit-content;
+                font-size: 16px;
+                font-weight: 500;
+                display: block;
+                padding: 10px 25px;
+                border-radius: 31px;
+                border: 1px solid #dddddd;
+                text-decoration: none;
+                color: #333;
+            }
+
+            ul.filter-lists li a:hover {
+                background: var(--color-blue);
+                color: var(--color-white);
+                border-color: var(--color-blue);
+            }
+
+            ul.filter-lists li.active a {
+                background: var(--color-blue);
+                color: var(--color-white);
+                border-color: var(--color-blue);
+            }
+            ul.filter-lists {
+                display: flex;
+                row-gap: 20px;
+                flex-wrap: wrap;
+                column-gap: 10px;
+                list-style: none;
+            }
+
+            .image-blogs {
+                max-width: 785px;
+                width: 100%;
+                overflow: hidden;
+                border-radius: 20px;
+                height: 776px;
+                position: relative;
+                background: #f5f5f0;
+            }
+
+            .blog-thumbnails img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+            .image-blogs img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .type-blogs {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--color-blue);
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .blog-latestholders p {
+                font-size: 17px;
+                }
+
+            .rowdata-holders {
+                padding-top: 70px;
+            }
+            .short-data {
+                padding-top: 30px;
+            }
+
+            .blog-thumbnails {
+                max-width: 200px;
+                height: 200px;
+                width: 100%;
+                overflow: hidden;
+                border-radius: 10px;
+            }
+            .readmoress .learn-more {
+                font-size: 17px;
+                font-weight: 400 !important;
+            }
+
+            .date-here {
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--color-light-grey);
+            }
+
+            .flex-blogss {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                width: 100%;
+                max-width: 95%;
+                margin-left: auto;
+            }
+
+            .grid-bloslists {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+                width: 100%;
+            }
+
+            .allblogsnow-here .flex-blogss {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .allblogsnow-here {
+                display: grid;
+                gap: 40px;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .allblogsnow-here .blog-thumbnails {
+                max-width: 100%;
+                height: 345px;
+            }
+
+            span.latestblogs {
+                position: absolute;
+                background: var(--color-blue);
+                top: 1%;
+                left: 3%;
+                color: var(--color-white);
+                padding: 3px 30px;
+                border-radius: 4px;
+                font-size: 15px;
+                font-weight: 400;
+            }
+
+            .pagination-data {
+                max-width: fit-content;
+                margin: 0 auto;
+                padding-top: 70px;
+            }
+            .pagination-data ul li a {
+                color: var(--color-white);
+                font-size: 16px;
+                font-weight: 400;
+                background: var(--color-blue);
+                padding: 10px 20px;
+                text-decoration: none;
+                display: block;
+            }
+            .pagination-data ul li a:hover {
+                background: var(--color-orange);
+            }
+            .pagination-data ul li.active a {
+                background: var(--color-orange) !important;
+            }
+            .pagination-data ul li.disabled {
+                opacity: 0.45;
+                pointer-events: none;
+            }
+            .pagination-data ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .grid-filterblogs {
+                display: flex;
+                flex-direction: column;
+                gap: 70px;
+                padding-top: 100px;
+            }
+            .allblogsnow-here .flex-blogss {
+                margin: 0 auto;
+            }
+            @media (max-width: 1600px) {
+                .image-blogs {
+                    height: 636px;
+                }
+                .blog-thumbnails {
+                    max-width: 156px;
+                    height: 156px;
+                }
+                .allblogsnow-here .blog-thumbnails {
+                    height: 265px;
+                }
+                .type-blogs {
+                    font-size: 11px;
+                }
+                .readmoress .learn-more {
+                    font-size: 14px;
+                }
+            }
+            @media (max-width: 1400px) {
+                .image-blogs {
+                    height: 546px;
+                }
+                .allblogsnow-here .blog-thumbnails {
+                    height: 225px;
+                }
+                .pagination-data {
+                    padding-top: 50px;
+                }
+                .grid-filterblogs {
+                    padding-top: 60px;
+                    gap: 50px;
+                }
+            }
+            @media (max-width: 1199px) {
+                .allblogsnow-here .blog-thumbnails {
+                    height: 195px;
+                }
+                .image-blogs {
+                    height: 456px;
+                }
+            }
+            @media (max-width: 991px) {
+                .blog-latestholders {
+                    margin-bottom: 30px;
+                }
+                .flex-blogss {
+                    max-width: 100%;
+                }
+                .allblogsnow-here {
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 30px;
+                }
+                .grid-filterblogs {
+                    padding-top: 50px;
+                    gap: 40px;
+                }
+
+                .image-blogs {
+                    height: auto;
+                }
+            }
+            @media (max-width: 767px) {
+                .rowdata-holders {
+                    padding-top: 40px;
+                }
+                .allblogsnow-here {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+                .allblogsnow-here .blog-thumbnails {
+                    height: 245px;
+                }
+                span.latestblogs {
+                    padding: 3px 10px;
+                    font-size: 12px;
+                }
+                ul.filter-lists {
+                    gap: 10px;
+                    justify-content: center;
+                }
+                .grid-filterblogs {
+                    padding-top: 40px;
+                    gap: 30px;
+                }
+                .flex-blogss {
+                    gap: 10px;
+                }
+            }
+            @media (max-width: 425px) {
+                .allblogsnow-here {
+                    grid-template-columns: repeat(1, minmax(0, 1fr));
+                }
+
+                .allblogsnow-here .blog-thumbnails {
+                    height: auto;
+                }
+            }
+        </style>
+    </body>
+</html>

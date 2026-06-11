@@ -1,0 +1,88 @@
+---
+import { queryWordPress } from "../lib/wordpress";
+
+// ADDED 'slug' to portfolioCategories so we can filter safely
+const APPPORTFOLIO = `
+query GetPortfolioData {
+  portfolios {
+    nodes {
+      title
+      content
+      slug
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      excerpt
+      portfolioCategories {
+        nodes {
+          name
+          slug
+        }
+      }
+      portfoliomain {
+        customSlug
+        portfolioVideo {
+          node {
+            mediaItemUrl
+          }
+        }
+        homeImage {
+          node {
+            mediaItemUrl
+          }
+        }
+        toLive
+      }
+    }
+  }
+}
+`;
+const Allresponse = await queryWordPress(APPPORTFOLIO);
+const finalresponse = Allresponse?.data?.portfolios?.nodes || [];
+// console.log("mydata",finalresponse)
+console.log("mydataNew",finalresponse)
+
+---
+
+<div class="gridsall-workss">
+    {
+        finalresponse?.map((itemsdata)=>(
+            <div class="works-holderss" >
+       
+            <div class="work-imagess">
+                <img
+                    src={itemsdata?.featuredImage?.node?.sourceUrl || "error"}
+                    width="470"
+                    height="370"
+                    alt={itemsdata?.title || "error"}
+                    loading="lazy"
+                />
+            </div>
+
+            <div class="work-details">
+                <h5 class="fs-20">{itemsdata?.title || "error"}</h5>
+
+                <ul class="badge-grids">
+                    <li><a href="#">Mobile App</a></li>
+                    <li><a href="#">Healthcare</a></li>
+                    <li><a href="#">Fashion</a></li>
+                    <li><a href="#">site url</a></li>
+                    <li><a href="#">Android url</a></li>
+                    <li><a href="#">ios url</a></li>
+                </ul>
+
+               <Fragment set:html={itemsdata?.excerpt || "error"}/>
+
+                <p class="learn-more"><a href={`/our-work/${itemsdata.slug}`} title={itemsdata?.title || "error"}>Case study</a></p>
+            </div>
+       
+    </div>
+        ))
+    }
+    
+
+ 
+</div>

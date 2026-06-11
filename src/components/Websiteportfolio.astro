@@ -1,0 +1,348 @@
+---
+// Static component entry
+---
+
+<div class="portfolio-grids">
+    <div class="grids-portfolio-inside">
+        <div class="laptop-dataholders" type-portfolio="video-portfolio">
+            <div class="video-portfolio">
+                <video
+                    src="/jpierce.mp4"
+                    autoplay={true}
+                    muted={true}
+                    loop={true}
+                    playsinline={true}
+                    width="960"
+                    height="540"
+                    preload="auto"
+                    onclick="this.paused ? this.play() : this.pause()"
+                    style="cursor: pointer;"
+                />
+            </div>
+
+            <a href="/our-work">
+                <div class="grid-buttonpotfolio">
+                    <div class="sitenamme">
+                        <p>J.Pierce</p>
+                    </div>
+                    <div class="icon-redircets">
+                        <img
+                            src="/arrow.png"
+                            alt=""
+                            height="30"
+                            width="30"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="laptop-dataholders" type-portfolio="image-portfolio">
+            <img
+                src="/cmpbell-ogrelgic-img2.webp"
+                alt="soup4change"
+                width="635"
+                height="740"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+                class="portfolio-image"
+            />
+
+            <a href="/our-work">
+                <div class="grid-buttonpotfolio">
+                    <div class="sitenamme">
+                        <p>soup4change</p>
+                    </div>
+                    <div class="icon-redircets">
+                        <img
+                            src="/arrow.png"
+                            alt=""
+                            height="30"
+                            width="30"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="laptop-dataholders" type-portfolio="image-portfolio">
+            <img
+                src="/tellojena.webp"
+                alt="TallowJena"
+                width="635"
+                height="740"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                class="portfolio-image"
+            />
+
+            <a href="/our-work">
+                <div class="grid-buttonpotfolio">
+                    <div class="sitenamme">
+                        <p>TallowJena</p>
+                    </div>
+                    <div class="icon-redircets">
+                        <img
+                            src="/arrow.png"
+                            alt=""
+                            height="30"
+                            width="30"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="laptop-dataholders" type-portfolio="video-portfolio">
+            <div class="video-portfolio">
+                <video
+                    src="/uperroom2.mp4"
+                    autoplay={true}
+                    muted={true}
+                    loop={true}
+                    playsinline={true}
+                    width="960"
+                    height="540"
+                    preload="metadata"
+                    onclick="this.paused ? this.play() : this.pause()"
+                    style="cursor: pointer;"
+                />
+            </div>
+
+            <a href="/our-work">
+                <div class="grid-buttonpotfolio">
+                    <div class="sitenamme">
+                        <p>Upperroom 3 Productions</p>
+                    </div>
+                    <div class="icon-redircets">
+                        <img
+                            src="/arrow.png"
+                            alt=""
+                            height="30"
+                            width="30"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .maindetsil-heading .fs-60 {
+        font-weight: 400;
+    }
+
+    .grid-buttonpotfolio {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        justify-content: space-between;
+        background: var(--color-white);
+        padding: 20px 30px;
+        border-radius: 30px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+    }
+
+    .icon-redircets {
+        height: 52px;
+        max-width: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d9d9d9;
+        border-radius: 50%;
+        padding: 10px;
+        transition: 0.3s linear;
+        width: 100%;
+    }
+
+    .laptop-dataholders:hover .icon-redircets {
+        transform: rotate(360deg);
+    }
+
+    .grids-portfolio-inside {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .laptop-dataholders[type-portfolio="image-portfolio"] {
+        width: calc(39% - 5px);
+    }
+
+    .laptop-dataholders[type-portfolio="image-portfolio"]
+        .video-portfolio
+        video,
+    .laptop-dataholders[type-portfolio="video-portfolio"] .portfolio-image {
+        display: none;
+    }
+
+    .laptop-dataholders[type-portfolio="video-portfolio"] {
+        width: calc(59% - 5px);
+    }
+
+    .laptop-dataholders {
+        padding: 90px 10px 10px 10px;
+        border-radius: 37px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        gap: 2px;
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(270deg, #e2e2e4, #d9d9d933);
+    }
+
+    .video-portfolio {
+        padding: 0px 25px;
+        transition: 0.5s linear;
+    }
+
+    .video-portfolio:hover {
+        scale: 1.05;
+    }
+
+    .video-portfolio video {
+        width: 100%;
+        height: 540px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .portfolio-image {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: 0.5s ease-in;
+    }
+
+    .laptop-dataholders:hover .portfolio-image {
+        scale: 1.05;
+    }
+
+    .laptop-dataholders::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0%;
+        width: 100%;
+        border-radius: 20%;
+        filter: blur(90px);
+        background: #5f8cfe;
+        transition: 0.5s ease-in-out;
+    }
+
+    .laptop-dataholders:hover::after {
+        height: 40%;
+    }
+
+    .sitenamme p {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 122%;
+    }
+
+    .icon-redircets img {
+        transform: rotate(-140deg);
+        max-width: 22px;
+    }
+
+    .portfolio-grids {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 80px;
+    }
+
+    .portfolio-grids .grids-portfolio-inside:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .sitenamme {
+        max-width: fit-content;
+        width: 100%;
+    }
+
+    @media (max-width: 1600px) {
+        .video-portfolio video {
+            height: 460px;
+        }
+        .laptop-dataholders {
+            padding: 50px 10px 10px 10px;
+        }
+        .sitenamme p {
+            font-size: 18px;
+        }
+        .grid-buttonpotfolio {
+            padding: 15px 20px;
+            border-radius: 23px;
+        }
+        .icon-redircets {
+            height: 42px;
+            max-width: 42px;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .video-portfolio video {
+            height: 380px;
+        }
+        .sitenamme p {
+            font-size: 15px;
+        }
+        .icon-redircets {
+            height: 35px;
+            max-width: 35px;
+        }
+        .grid-buttonpotfolio {
+            padding: 10px 15px;
+            border-radius: 12px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .grids-portfolio-inside {
+            flex-direction: column;
+        }
+
+        .video-portfolio {
+            padding: 0px 10px;
+        }
+
+        .laptop-dataholders {
+            gap: 10px;
+            width: 100% !important;
+            padding: 30px 10px 10px 10px;
+            border-radius: 15px;
+        }
+        .portfolio-image {
+            position: static;
+            height: auto;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .laptop-dataholders {
+            border-radius: 20px;
+        }
+    }
+</style>

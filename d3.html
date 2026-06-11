@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Website Hosting & Maintenance Services in Austin, Dallas & Houston | OgreLogic</title>
+
+    <meta name="description"
+        content="Managed website hosting, maintenance, security, domains, email, and migrations for Texas businesses and beyond. Real human support. Transparent monthly pricing.">
+
+    <style>
+        :root {
+            --primary: #155EEF;
+            --dark: #0f172a;
+            --text: #475467;
+            --light: #f8fafc;
+            --border: #e5e7eb;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, sans-serif;
+            background: #fff;
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(1200px, 92%);
+            margin: auto;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(44px, 7vw, 74px);
+        }
+
+        h2 {
+            font-size: clamp(34px, 5vw, 54px);
+        }
+
+        h3 {
+            font-size: 28px;
+        }
+
+        p {
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn-wrap {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--dark);
+            background: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .hero {
+            background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 100%);
+            padding-top: 120px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .06);
+        }
+
+        .kicker {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .trust-strip {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+            font-size: 14px;
+            color: #667085;
+        }
+
+        .section-intro {
+            max-width: 900px;
+            margin-bottom: 50px;
+        }
+
+        .cards-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            background: #fff;
+        }
+
+        .light-bg {
+            background: var(--light);
+        }
+
+        .compare-table {
+            overflow: auto;
+            margin-top: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 18px;
+            border: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table th {
+            background: #f8fafc;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .stat {
+            padding: 35px;
+            border-radius: 24px;
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-box {
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .price-card {
+            position: relative;
+            padding: 40px;
+            border-radius: 26px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .popular {
+            border: 2px solid var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 999px;
+        }
+
+        .price {
+            font-size: 56px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .price-card ul li {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .bundle {
+            margin-top: 70px;
+            padding: 60px;
+            border-radius: 32px;
+            background: #0f172a;
+            color: #fff;
+        }
+
+        .bundle p {
+            color: #d0d5dd;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .step {
+            padding: 35px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 50px;
+        }
+
+        .testimonial {
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .faq {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .faq-item {
+            padding: 35px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cta {
+            padding: 90px 50px;
+            background: #0f172a;
+            color: #fff;
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .cta p {
+            color: #d0d5dd;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #667085;
+        }
+
+        @media(max-width:991px) {
+
+            .hero-grid,
+            .cards-3,
+            .feature-grid,
+            .pricing-grid,
+            .steps,
+            .stats,
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="hero-grid">
+
+                <div>
+
+                    <span class="kicker">
+                        Website hosting & maintenance · Austin, Texas
+                    </span>
+
+                    <h1>
+                        Hosting and maintenance from people you can actually call.
+                    </h1>
+
+                    <p>
+                        From our studio in Austin, we host, maintain, secure, and look after websites for businesses
+                        across Texas and beyond — for owners who'd rather pay for peace of mind than spend their
+                        weekends in a Bluehost support queue.
+                    </p>
+
+                    <div class="btn-wrap">
+                        <a href="#" class="btn btn-primary">See plans & pricing</a>
+                        <a href="#" class="btn btn-secondary">Book a free site audit</a>
+                    </div>
+
+                    <div class="trust-strip">
+                        <span>Austin HQ</span>
+                        <span>99.9% uptime</span>
+                        <span>10+ years</span>
+                        <span>1000+ sites managed</span>
+                        <span>Real humans</span>
+                        <span>Clutch 4.9 ★</span>
+                    </div>
+
+                </div>
+
+                <div class="hero-card">
+
+                    <h3>Website Health Dashboard</h3>
+
+                    <p>Real-time uptime monitoring, security scanning, CDN delivery, SSL protection, and performance
+                        optimization — all handled by one team.</p>
+
+                    <div class="trust-strip">
+                        <span>✔ Uptime: 99.94%</span>
+                        <span>✔ SSL Active</span>
+                        <span>✔ CDN Connected</span>
+                        <span>✔ Malware Protection</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 2 -->
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                $5-a-month hosting isn't cheap when something breaks.
+            </h2>
+
+            <div class="section-intro">
+                <p>
+                    Hosting and maintenance are invisible until they fail. When they do — when your site goes down
+                    during a product launch, when a plugin update breaks checkout, when a hacked redirect points your
+                    customers to a pharmacy site, when your email starts landing in spam — the cost shows up fast and
+                    unplanned.
+                </p>
+
+                <p>
+                    Here's what's actually different between cheap hosting and proper managed hosting plus maintenance,
+                    and why most growing businesses eventually make the switch.
+                </p>
+            </div>
+
+            <div class="compare-table">
+
+                <table>
+
+                    <tr>
+                        <th>What cheap hosting gives you</th>
+                        <th>What proper hosting + maintenance gives you</th>
+                    </tr>
+
+                    <tr>
+                        <td>99% uptime guarantee — 87 hours downtime yearly</td>
+                        <td>99.9% uptime with live monitoring</td>
+                    </tr>
+
+                    <tr>
+                        <td>24-hour ticket queues</td>
+                        <td>Direct access to developers</td>
+                    </tr>
+
+                    <tr>
+                        <td>Plugins auto-update and break sites</td>
+                        <td>Updates tested in staging</td>
+                    </tr>
+
+                    <tr>
+                        <td>Manual backups</td>
+                        <td>Daily automated backups</td>
+                    </tr>
+
+                    <tr>
+                        <td>Reactive security</td>
+                        <td>Proactive monitoring</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email spam issues</td>
+                        <td>Full email deliverability setup</td>
+                    </tr>
+
+                    <tr>
+                        <td>You manage DNS and SSL</td>
+                        <td>We handle everything</td>
+                    </tr>
+
+                    <tr>
+                        <td>Control panel confusion</td>
+                        <td>A team that already knows your stack</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>$137–$427/min</h3>
+                    <p>
+                        Average cost of website downtime for small businesses.
+                    </p>
+                </div>
+
+                <div class="stat">
+                    <h3>60%</h3>
+                    <p>
+                        Small businesses hit by serious cyberattacks close within six months.
+                    </p>
+                </div>
+
+                <div class="stat">
+                    <h3>90,000+</h3>
+                    <p>
+                        Attempted WordPress hacks every minute globally.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 3 -->
+
+    <section class="light-bg">
+
+        <div class="container">
+
+            <h2>
+                We look after three kinds of websites.
+            </h2>
+
+            <div class="cards-3">
+
+                <div class="card">
+
+                    <h3>The site we built for you</h3>
+
+                    <p>
+                        “OgreLogic just launched our site. We want it in good hands going forward.”
+                    </p>
+
+                    <p>
+                        We're already familiar with the stack, the design, and the integrations — we built them. We keep
+                        your site secure, fast, and current long after launch.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>The site you've outgrown</h3>
+
+                    <p>
+                        “Our $9.99/month hosting isn't cutting it anymore.”
+                    </p>
+
+                    <p>
+                        We migrate your site with zero downtime, configure email, SSL, and DNS properly, and move you to
+                        infrastructure that can actually handle growth.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>The site you inherited</h3>
+
+                    <p>
+                        “Our previous developer disappeared.”
+                    </p>
+
+                    <p>
+                        We audit your setup, recover credentials, stabilize your infrastructure, and give you a
+                        realistic path forward.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 4 -->
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                One team. Your entire web stack.
+            </h2>
+
+            <p class="section-intro">
+                The list below is what most clients pay separate vendors for. We do all of it under one roof, on one
+                bill.
+            </p>
+
+            <div class="feature-grid">
+
+                <div class="feature-box">
+                    <h3>Domains & Email</h3>
+                    <p>Domain registration, DNS management, SSL certificates, email hosting, SPF, DKIM, and DMARC setup.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Security</h3>
+                    <p>Active monitoring, WAF protection, malware cleanup, brute-force protection, and two-factor
+                        authentication.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Performance</h3>
+                    <p>Cloudflare CDN setup, caching, image optimization, database cleanup, and Core Web Vitals
+                        monitoring.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Updates & Backups</h3>
+                    <p>CMS updates, plugin testing, daily automated backups, disaster recovery, and staging
+                        environments.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Migrations</h3>
+                    <p>Website migrations, email migrations, DNS cutovers, SEO preservation, and onboarding support.</p>
+                </div>
+
+                <div class="feature-box">
+                    <h3>Ongoing Care</h3>
+                    <p>Uptime monitoring, bug fixes, content updates, monthly reports, and priority developer support.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 5 -->
+
+    <section class="light-bg">
+
+        <div class="container">
+
+            <h2>
+                Plans & pricing.
+            </h2>
+
+            <p class="section-intro">
+                Two products: hosting and maintenance. Get either, get both, or bundle and save.
+            </p>
+
+            <h3>
+                Hosting that actually performs.
+            </h3>
+
+            <div class="pricing-grid">
+
+                <div class="price-card">
+
+                    <h3>Hosting · Starter</h3>
+
+                    <div class="price">
+                        $39 <span>/month</span>
+                    </div>
+
+                    <p>(or $390/year — save $78)</p>
+
+                    <ul>
+                        <li>20 GB SSD storage</li>
+                        <li>100 GB monthly bandwidth</li>
+                        <li>99.9% uptime SLA</li>
+                        <li>Free SSL certificate</li>
+                        <li>Daily backups</li>
+                        <li>5 professional email accounts</li>
+                        <li>1 staging environment</li>
+                        <li>Cloudflare CDN included</li>
+                        <li>Free migration (annual plans)</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Get started</a>
+
+                </div>
+
+                <div class="price-card popular">
+
+                    <div class="badge">
+                        Most Popular
+                    </div>
+
+                    <h3>Hosting · Business</h3>
+
+                    <div class="price">
+                        $99 <span>/month</span>
+                    </div>
+
+                    <p>(or $990/year — save $198)</p>
+
+                    <ul>
+                        <li>100 GB SSD storage</li>
+                        <li>500 GB bandwidth</li>
+                        <li>Free SSL + WAF</li>
+                        <li>25 email accounts</li>
+                        <li>3 staging environments</li>
+                        <li>Quarterly performance review</li>
+                        <li>Cloudflare CDN with custom rules</li>
+                        <li>Phone, email & chat support</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Get started</a>
+
+                </div>
+
+                <div class="price-card">
+
+                    <h3>Hosting · Enterprise</h3>
+
+                    <div class="price">
+                        $249 <span>/month</span>
+                    </div>
+
+                    <p>(or $2,490/year — save $498)</p>
+
+                    <ul>
+                        <li>500 GB SSD storage</li>
+                        <li>Unlimited bandwidth</li>
+                        <li>DDoS protection</li>
+                        <li>Unlimited email accounts</li>
+                        <li>Unlimited staging</li>
+                        <li>24/7 support</li>
+                        <li>Dedicated resources available</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Talk to us</a>
+
+                </div>
+
+            </div>
+
+            <!-- MAINTENANCE -->
+
+            <h3 style="margin-top:80px;">
+                Maintenance that prevents problems instead of waiting for them.
+            </h3>
+
+            <div class="pricing-grid">
+
+                <div class="price-card">
+
+                    <h3>Maintenance · Essential</h3>
+
+                    <div class="price">
+                        $99 <span>/month</span>
+                    </div>
+
+                    <ul>
+                        <li>Monthly updates</li>
+                        <li>Security monitoring</li>
+                        <li>24/7 uptime monitoring</li>
+                        <li>Backup verification</li>
+                        <li>30 mins small fixes</li>
+                        <li>Monthly summary email</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Get started</a>
+
+                </div>
+
+                <div class="price-card popular">
+
+                    <div class="badge">
+                        Most Popular
+                    </div>
+
+                    <h3>Maintenance · Advanced</h3>
+
+                    <div class="price">
+                        $249 <span>/month</span>
+                    </div>
+
+                    <ul>
+                        <li>Weekly updates</li>
+                        <li>WAF rule tuning</li>
+                        <li>Core Web Vitals monitoring</li>
+                        <li>2 hours content updates</li>
+                        <li>Monthly reports</li>
+                        <li>Same-day response</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Get started</a>
+
+                </div>
+
+                <div class="price-card">
+
+                    <h3>Maintenance · Premium</h3>
+
+                    <div class="price">
+                        $499 <span>/month</span>
+                    </div>
+
+                    <ul>
+                        <li>Daily monitoring</li>
+                        <li>Malware cleanup included</li>
+                        <li>4 hours content updates</li>
+                        <li>Senior developer access</li>
+                        <li>1-hour response SLA</li>
+                        <li>SEO monitoring available</li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary">Talk to us</a>
+
+                </div>
+
+            </div>
+
+            <div class="bundle">
+
+                <h2>
+                    Bundle hosting + maintenance and save 10%.
+                </h2>
+
+                <p>
+                    Pair any hosting plan with any maintenance plan and the maintenance fee drops by 10% for as long as
+                    you stay on both.
+                </p>
+
+                <div class="btn-wrap">
+                    <a href="#" class="btn btn-primary">Build your bundle</a>
+                </div>
+
+            </div>
+
+            <!-- PLAN TABLE -->
+
+            <div class="compare-table" style="margin-top:70px;">
+
+                <table>
+
+                    <tr>
+                        <th>Feature</th>
+                        <th>Starter</th>
+                        <th>Business</th>
+                        <th>Enterprise</th>
+                    </tr>
+
+                    <tr>
+                        <td>Storage</td>
+                        <td>20 GB</td>
+                        <td>100 GB</td>
+                        <td>500 GB+</td>
+                    </tr>
+
+                    <tr>
+                        <td>Bandwidth</td>
+                        <td>100 GB/mo</td>
+                        <td>500 GB/mo</td>
+                        <td>Unlimited</td>
+                    </tr>
+
+                    <tr>
+                        <td>Uptime SLA</td>
+                        <td>99.9%</td>
+                        <td>99.9%</td>
+                        <td>99.99%</td>
+                    </tr>
+
+                    <tr>
+                        <td>SSL</td>
+                        <td>Free</td>
+                        <td>Free + WAF</td>
+                        <td>Free + WAF + DDoS</td>
+                    </tr>
+
+                    <tr>
+                        <td>Backups</td>
+                        <td>Daily</td>
+                        <td>Daily</td>
+                        <td>2× daily</td>
+                    </tr>
+
+                    <tr>
+                        <td>Email Accounts</td>
+                        <td>5</td>
+                        <td>25</td>
+                        <td>Unlimited</td>
+                    </tr>
+
+                    <tr>
+                        <td>Support</td>
+                        <td>Business Hours</td>
+                        <td>Extended Hours</td>
+                        <td>24/7</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 6 -->
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                Switching is easier than you think.
+            </h2>
+
+            <p class="section-intro">
+                The biggest reason businesses stay on bad hosting is fear of switching. Here's how we make sure nothing
+                breaks.
+            </p>
+
+            <div class="steps">
+
+                <div class="step">
+                    <h3>1. Free Audit</h3>
+                    <p>We review your current hosting, plugins, email setup, DNS, and integrations.</p>
+                </div>
+
+                <div class="step">
+                    <h3>2. Migration Plan</h3>
+                    <p>You get a detailed one-page migration roadmap before anything changes.</p>
+                </div>
+
+                <div class="step">
+                    <h3>3. Stage Setup</h3>
+                    <p>We build the new environment without touching your live website.</p>
+                </div>
+
+                <div class="step">
+                    <h3>4. Full Testing</h3>
+                    <p>Every page, form, checkout flow, and integration gets tested.</p>
+                </div>
+
+                <div class="step">
+                    <h3>5. DNS Cutover</h3>
+                    <p>Traffic switches during off-peak hours with fallback systems ready.</p>
+                </div>
+
+                <div class="step">
+                    <h3>6. Hyper Monitoring</h3>
+                    <p>We closely monitor uptime, SEO, and email deliverability for 7 days.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 7 -->
+
+    <section class="light-bg">
+
+        <div class="container">
+
+            <h2>
+                We're still here for the clients we started with a decade ago.
+            </h2>
+
+            <p class="section-intro">
+                Most agencies sell projects and disappear. We've spent years building long-term hosting and maintenance
+                relationships.
+            </p>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>70%+</h3>
+                    <p>Hosting clients stay with us for 3+ years.</p>
+                </div>
+
+                <div class="stat">
+                    <h3>99.94%</h3>
+                    <p>Average uptime across managed sites.</p>
+                </div>
+
+                <div class="stat">
+                    <h3>&lt;2 Hours</h3>
+                    <p>Average Premium support response time.</p>
+                </div>
+
+            </div>
+
+            <div class="testimonials">
+
+                <div class="testimonial">
+                    <p>
+                        “OgreLogic has provided the expertise we needed — along with a great deal of patience.”
+                    </p>
+
+                    <strong>— Jean Snowden</strong>
+                </div>
+
+                <div class="testimonial">
+                    <p>
+                        “I was very impressed with how seamlessly they worked with me.”
+                    </p>
+
+                    <strong>— Gerald J Joseph</strong>
+                </div>
+
+                <div class="testimonial">
+                    <p>
+                        “All of our requests had been addressed in a professional manner.”
+                    </p>
+
+                    <strong>— Cindy Reyes</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- SECTION 8 -->
+
+    <section>
+
+        <div class="container">
+
+            <h2>
+                Why owners trust us with their websites year after year.
+            </h2>
+
+            <div class="cards-3">
+
+                <div class="card">
+
+                    <h3>Real humans, real fast</h3>
+
+                    <p>
+                        You'll talk directly to developers who know your website by name.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Texas roots, global reach</h3>
+
+                    <p>
+                        Austin headquarters, Toronto office, and a delivery center in Noida.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>We don't disappear</h3>
+
+                    <p>
+                        We've been here for over a decade and continue supporting sites long after launch.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card" style="margin-top:40px;">
+
+                <h3>
+                    One company, your whole stack
+                </h3>
+
+                <p>
+                    Hosting, maintenance, domains, SSL, email, security, migrations, performance optimization — one
+                    team, one bill, one phone call.
+                </p>
+
+            </div>
+
+            <div class="card" style="margin-top:40px;">
+
+                <h3>
+                    Message from Gaurav Sharma
+                </h3>
+
+                <p>
+                    “Intellectuals solve problems. Geniuses prevent them.”
+                </p>
+
+                <p>
+                    The best-maintained websites aren't the ones fixed quickly after outages — they're the ones that
+                    don't go down in the first place.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="light-bg">
+
+        <div class="container faq">
+
+            <h2>
+                The questions everyone asks.
+            </h2>
+
+            <div class="faq-item">
+                <h3>What's your actual uptime?</h3>
+                <p>Across all sites we managed last year, we delivered 99.94% real uptime.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do I have to sign a long-term contract?</h3>
+                <p>No. Plans are month-to-month with optional annual savings.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What happens if I want to leave?</h3>
+                <p>You take everything with you — website files, email, DNS records, and credentials.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will my site go down during migration?</h3>
+                <p>No. We stage and test everything before switching traffic.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will I lose emails?</h3>
+                <p>No. Email migrations are handled separately and carefully verified.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What if my site gets hacked?</h3>
+                <p>We diagnose, clean, and harden the site depending on your maintenance tier.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What infrastructure do you use?</h3>
+                <p>AWS, Cloudflare, managed cloud servers, and platform-specific hosting.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do you handle small fixes?</h3>
+                <p>Yes. That's the whole point of managed maintenance.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do you support Texas businesses?</h3>
+                <p>Yes — Austin, Dallas, Houston, San Antonio, and beyond.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What CMS platforms do you support?</h3>
+                <p>WordPress, Webflow, Shopify, Drupal, React/Next.js, and more.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can you help choose the right plan?</h3>
+                <p>Yes — that's what the free audit is for.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FINAL CTA -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="cta">
+
+                <h2>
+                    Let's start with a free site audit.
+                </h2>
+
+                <p style="margin-top:20px;">
+                    Tell us your domain. We'll review hosting, performance, security, SSL, DNS, email setup, and SEO
+                    health — then send you a clear action plan.
+                </p>
+
+                <div class="btn-wrap" style="justify-content:center;">
+                    <a href="#" class="btn btn-primary">
+                        Book my free site audit
+                    </a>
+                </div>
+
+                <p style="margin-top:25px;">
+                    You'll talk directly to a human. No bots. No auto-replies. No obligation.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 OgreLogic. All rights reserved.
+    </footer>
+
+    <!-- JSON LD -->
+
+    <script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"Service",
+"serviceType":"Website Hosting and Maintenance",
+"provider":{
+"@type":"ProfessionalService",
+"name":"OgreLogic Solutions",
+"url":"https://ogrelogic.com"
+}
+}
+</script>
+
+</body>
+
+</html>
